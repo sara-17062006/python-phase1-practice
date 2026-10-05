@@ -1,1 +1,186 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Python Phase 1 Practice</title></head><body><h1>Python Phase 1 Practice</h1></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Python Phase 1 Placement Practice</title>
+<style>
+:root{--bg:#0a0f1e;--panel:#11192c;--text:#edf2ff;--muted:#98a6c5;--accent:#6f7ff5;--ok:#18a36f;--bad:#d95a69;--border:#2a395c}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#080d19,#111a31);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif}
+header{padding:18px 22px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,15,30,.96);z-index:5}
+h1{margin:0 0 5px;font-size:24px}.sub{color:var(--muted);font-size:13px}
+.layout{display:grid;grid-template-columns:290px 1fr;min-height:calc(100vh - 78px)}
+aside{padding:14px;border-right:1px solid var(--border);position:sticky;top:78px;height:calc(100vh - 78px);overflow:auto}
+.search,input,textarea,button{font:inherit}.search{width:100%;padding:10px;border:1px solid var(--border);background:#0b1222;color:var(--text);border-radius:9px}
+.progress{padding:11px;background:#0b1222;border:1px solid var(--border);border-radius:10px;margin:10px 0}.bar{height:7px;background:#202c49;border-radius:10px;margin-top:7px;overflow:hidden}.fill{height:100%;background:var(--accent);width:0}
+.list button{width:100%;margin:2px 0;text-align:left;padding:8px;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--muted);cursor:pointer}.list button.active{background:#1b2850;border-color:#4053a0;color:#fff}.list button.done{color:#73e7b6}
+main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(17,25,44,.94);border:1px solid var(--border);border-radius:15px;padding:18px}
+.badge{display:inline-block;background:#202b50;color:#b4bdfd;border-radius:16px;padding:5px 9px;font-size:12px}h2{margin:8px 0;font-size:23px}.question{line-height:1.6;color:#dce4f8}
+.section{font-weight:700;font-size:14px;margin:16px 0 7px}pre,.terminal{background:#060b14;border:1px solid #273656;border-radius:9px;padding:12px;white-space:pre-wrap;overflow:auto}.editor,.inputbox{width:100%;background:#070c16;color:#edf2ff;border:1px solid #334566;border-radius:10px;padding:13px;font:14px/1.55 Consolas,monospace;outline:none}.editor{min-height:300px;resize:vertical}.inputbox{min-height:72px;resize:vertical}.editor:focus,.inputbox:focus{border-color:#7281f4}.terminal{min-height:120px;color:#bdeecf;font:13px/1.5 Consolas,monospace}.terminal.err{color:#ff9aa5}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}button.action{border:0;border-radius:9px;padding:10px 13px;background:#29385f;color:#fff;cursor:pointer;font-weight:700}button.primary{background:#6576f2}button.good{background:var(--ok)}button.danger{background:#783244}
+.status{margin-top:10px;padding:10px;border-radius:8px;background:#0b1222;color:var(--muted);white-space:pre-wrap}.status.ok{border:1px solid #216b55;color:#8beec7}.status.bad{border:1px solid #703745;color:#ff9ba7}
+.nav{display:flex;gap:8px;margin-top:12px}.nav button{flex:1}.small{color:var(--muted);font-size:12px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;z-index:50;padding:20px;overflow:auto}.modalbox{max-width:1100px;margin:20px auto;background:#11192c;border:1px solid #334566;border-radius:15px;padding:18px}.review{white-space:pre-wrap;max-height:70vh;overflow:auto;background:#070c16;border:1px solid #334566;border-radius:10px;padding:14px;font:13px/1.55 Consolas,monospace}
+@media(max-width:850px){.layout{grid-template-columns:1fr}aside{position:relative;top:0;height:auto;max-height:280px;border-right:0;border-bottom:1px solid var(--border)}main{padding:12px}}
+</style>
+</head>
+<body>
+<header><h1>🐍 Python Phase 1 — Placement Practice</h1><div class="sub">54 problems • compiler-style execution • custom input • autosave • AI final review</div></header>
+<div class="layout">
+<aside>
+<input id="search" class="search" placeholder="Search problems" oninput="renderList()">
+<div class="progress"><b id="progressText">0 / 54 completed</b><div class="bar"><div id="fill" class="fill"></div></div><div class="small" style="margin-top:6px">Code, inputs and progress are saved in this browser.</div></div>
+<div class="actions"><button class="action" onclick="resetAll()">Reset</button><button class="action" onclick="copyProgress()">Copy Progress</button></div>
+<div class="actions"><button class="action primary" onclick="finalReview()">🤖 FINAL REVIEW — All 54</button></div>
+<div class="small" style="margin:7px 0">Final Review sends all 54 submissions to the secure Vercel review endpoint.</div>
+<div class="list" id="list"></div>
+</aside>
+<main><div class="card" id="card"></div></main>
+</div>
+
+<div class="modal" id="modal"><div class="modalbox">
+<div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><div><h2 style="margin:0">🤖 Phase 1 Final Review</h2><div class="small">All 54 solutions</div></div><div class="actions"><button class="action" onclick="copyReview()">Copy Review</button><button class="action danger" onclick="closeReview()">Close</button></div></div>
+<div id="loading" class="status" style="display:none"></div><pre id="review" class="review" style="display:none"></pre>
+</div></div>
+
+<script>
+const problems=[
+["Input & Output","Print Your Name","Read a name and print it.","Saraswathy","Saraswathy"],
+["Input & Output","Read and Print an Integer","Read an integer N and print the same value.","25","25"],
+["Input & Output","Add Two Numbers","Read two integers and print their sum.","12 8","20"],
+["Input & Output","Basic Arithmetic","Read A and B. Print sum, difference, product and integer quotient on separate lines.","20 5","25\n15\n100\n4"],
+["Input & Output","Area of a Rectangle","Read length and breadth and print the area.","10 6","60"],
+["Input & Output","Celsius to Fahrenheit","Convert Celsius using F=(C*9/5)+32.","25","77.0"],
+["Variables & Type Conversion","Average of Three Numbers","Read three integers and print their average.","10 20 30","20.0"],
+["Variables & Operators","Simple Interest","Read P, R, T. Print (P*R*T)/100.","10000 5 2","1000.0"],
+["Variables & Operators","Swap Two Numbers","Read two integers and print them after swapping.","10 20","20 10"],
+["Variables & Operators","Last Digit","Read an integer and print its last digit.","5837","7"],
+["Conditions","Even or Odd","Print EVEN for an even number, otherwise ODD.","14","EVEN"],
+["Conditions","Positive, Negative or Zero","Print POSITIVE, NEGATIVE or ZERO.","-8","NEGATIVE"],
+["Conditions","Largest of Two","Print the larger of two integers.","18 25","25"],
+["Conditions","Largest of Three","Print the largest of three integers.","12 45 27","45"],
+["Conditions","Smallest of Three","Print the smallest of three integers.","12 45 7","7"],
+["Conditions","Divisible by 5","Print YES if divisible by 5, otherwise NO.","35","YES"],
+["Conditions","Divisible by Both 3 and 5","Print YES if divisible by both 3 and 5, otherwise NO.","60","YES"],
+["Conditions","Leap Year","Print LEAP YEAR if the year is a leap year, otherwise NOT LEAP YEAR.","2024","LEAP YEAR"],
+["Conditions","Voting Eligibility","Print ELIGIBLE if age is at least 18, otherwise NOT ELIGIBLE.","19","ELIGIBLE"],
+["Conditions","Grade","Read marks. 90+ A, 75-89 B, 60-74 C, 40-59 D, below 40 F.","82","B"],
+["Conditions","Divisible by 2 and 3","Print YES if divisible by both 2 and 3, otherwise NO.","24","YES"],
+["Conditions","Absolute Value","Print the absolute value without using abs().","-17","17"],
+["Conditions","Valid Triangle","Given three sides, print VALID if they can form a triangle, else INVALID.","3 4 5","VALID"],
+["Conditions","Second Largest of Three","Read three different integers and print the second largest.","10 30 20","20"],
+["For Loop","Print 1 to N","Print numbers from 1 to N separated by spaces.","5","1 2 3 4 5"],
+["For Loop","Print N to 1","Print numbers from N down to 1 separated by spaces.","5","5 4 3 2 1"],
+["For Loop","Sum 1 to N","Print the sum of integers from 1 to N.","10","55"],
+["For Loop","Sum of Even Numbers","Print the sum of even numbers from 1 to N.","10","30"],
+["For Loop","Factorial","Print N factorial.","5","120"],
+["For Loop","Multiplication Table","Print the table of N from 1 to 10, one per line.","5","5\n10\n15\n20\n25\n30\n35\n40\n45\n50"],
+["Number Problems","Count Digits","Print the number of digits in a non-negative integer.","5837","4"],
+["Number Problems","Reverse a Number","Print the reverse of a positive integer.","12340","4321"],
+["Number Problems","Palindrome Number","Print PALINDROME if the number reads the same backwards, else NOT PALINDROME.","1221","PALINDROME"],
+["Number Problems","Sum of Digits","Print the sum of digits.","5837","23"],
+["Number Problems","Product of Digits","Print the product of digits.","1234","24"],
+["Number Problems","Count Even Digits","Print how many digits are even.","24681","4"],
+["Number Problems","Prime Check","Print PRIME if N is prime, otherwise NOT PRIME.","29","PRIME"],
+["Number Problems","Print Primes 1 to N","Print all prime numbers from 2 to N separated by spaces.","15","2 3 5 7 11 13"],
+["Number Problems","Fibonacci N Terms","Print the first N Fibonacci terms separated by spaces.","7","0 1 1 2 3 5 8"],
+["Number Problems","GCD","Print the greatest common divisor of two positive integers.","48 18","6"],
+["Number Problems","LCM","Print the least common multiple of two positive integers.","12 18","36"],
+["Nested Loops","Rectangle of Stars","Given rows and columns, print a rectangle of stars.","3 4","****\n****\n****"],
+["Nested Loops","Right Triangle Stars","Given N, print a right triangle of stars.","4","*\n**\n***\n****"],
+["Nested Loops","Number Triangle","Given N, print rows 1, then 1 2, then 1 2 3, etc.","4","1\n1 2\n1 2 3\n1 2 3 4"],
+["Functions","Greeting Function","Define greet(name) and print Hello <name>.","Saraswathy","Hello Saraswathy"],
+["Functions","Add Function","Define add(a,b), call it and print the sum.","7 9","16"],
+["Functions","Maximum Function","Define max_of_three(a,b,c) and print the largest.","8 17 12","17"],
+["Functions","Factorial Function","Define factorial(n) using a loop and print factorial(5).","5","120"],
+["Built-ins","Maximum with max()","Read three integers and print the maximum using max().","4 19 7","19"],
+["Built-ins","Minimum with min()","Read three integers and print the minimum using min().","4 19 7","4"],
+["Built-ins","Sum with sum()","Read five integers as a list and print their sum using sum().","1 2 3 4 5","15"],
+["Strings","Count Vowels","Read a word and count vowels using a loop.","education","5"],
+["Recursion","Recursive Countdown","Define countdown(n) and print n to 1 recursively.","4","4\n3\n2\n1"],
+["Recursion","Recursive Factorial","Define factorial(n) recursively and print factorial(5).","5","120"],
+["Recursion","Recursive Digit Sum","Define digit_sum(n) recursively and print the digit sum.","5837","23"]
+].map((x,i)=>({id:i+1,topic:x[0],title:x[1],question:x[2],input:x[3],output:x[4]}));
+
+let current=1;
+let saved=JSON.parse(localStorage.getItem("py_phase1_code")||"{}");
+let done=JSON.parse(localStorage.getItem("py_phase1_done")||"{}");
+
+function save(){localStorage.setItem("py_phase1_code",JSON.stringify(saved));localStorage.setItem("py_phase1_done",JSON.stringify(done))}
+function currentInput(){return localStorage.getItem("py_phase1_in_"+current) ?? problems[current-1].input}
+function saveCode(){const el=document.getElementById("code");if(el)saved[current]=el.value;const inp=document.getElementById("input");if(inp)localStorage.setItem("py_phase1_in_"+current,inp.value);save()}
+function renderList(){
+ const q=document.getElementById("search").value.toLowerCase();const box=document.getElementById("list");box.innerHTML="";
+ problems.filter(p=>(p.title+" "+p.topic).toLowerCase().includes(q)).forEach(p=>{
+  const b=document.createElement("button");b.textContent=(done[p.id]?"✓ ":"")+p.id+". "+p.title;b.className=(p.id===current?"active ":"")+(done[p.id]?"done":"");b.onclick=()=>{saveCode();current=p.id;render()};box.appendChild(b)
+ })
+ const n=Object.keys(done).length;document.getElementById("progressText").textContent=`${n} / 54 completed`;document.getElementById("fill").style.width=(n/54*100)+"%";
+}
+function render(){
+ const p=problems[current-1];const code=saved[current]||"";
+ document.getElementById("card").innerHTML=`
+ <span class="badge">${p.topic} • Problem ${p.id}/54</span><h2>${p.title}</h2><div class="question">${p.question}</div>
+ <div class="section">Sample Input</div><pre>${esc(p.input)}</pre>
+ <div class="section">Expected Output</div><pre>${esc(p.output)}</pre>
+ <div class="section">Program Input</div><textarea id="input" class="inputbox" spellcheck="false">${esc(currentInput())}</textarea>
+ <div class="section">Write Python Code <span class="small">(Ctrl+Enter = Run)</span></div>
+ <textarea id="code" class="editor" spellcheck="false" placeholder="# Write your Python code here...">${esc(code)}</textarea>
+ <div class="actions"><button class="action primary" onclick="runCode()">▶ Run Code</button><button class="action good" onclick="markDone()">✓ Mark Completed</button></div>
+ <div class="section">Console Output</div><pre id="console" class="terminal">${esc(localStorage.getItem("py_phase1_out_"+current)||"")}</pre>
+ <div id="status" class="status">Your code and input autosave while you work.</div>
+ <div class="nav"><button class="action" onclick="prev()">← Previous</button><button class="action" onclick="next()">Next →</button></div>
+ `;
+ document.getElementById("code").addEventListener("input",saveCode);document.getElementById("input").addEventListener("input",saveCode);
+ document.getElementById("code").addEventListener("keydown",e=>{if(e.ctrlKey&&e.key==="Enter"){e.preventDefault();runCode()}});
+ renderList()
+}
+function esc(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
+function markDone(){saveCode();done[current]=true;save();setStatus("✓ Marked completed.",true);renderList()}
+function prev(){saveCode();if(current>1){current--;render()}}
+function next(){saveCode();if(current<54){current++;render()}}
+function setStatus(t,ok=false){const s=document.getElementById("status");s.textContent=t;s.className="status "+(ok?"ok":"bad")}
+function setConsole(t,err=false){const c=document.getElementById("console");c.textContent=t;c.className="terminal"+(err?" err":"");localStorage.setItem("py_phase1_out_"+current,t)}
+let py=null;
+async function runtime(){if(!py)py=loadPyodide({indexURL:"https://cdn.jsdelivr.net/pyodide/v0.28.2/full/"});return py}
+async function runCode(){
+ saveCode();const code=document.getElementById("code").value,input=document.getElementById("input").value;if(!code.trim()){setStatus("Write your Python code first.");return}
+ setConsole("Running...");
+ try{
+  const rt=await runtime();rt.globals.set("USER_INPUT",input);rt.globals.set("USER_CODE",code);
+  await rt.runPythonAsync(`import sys,io,contextlib,traceback
+out=io.StringIO();err=io.StringIO();old=sys.stdin;sys.stdin=io.StringIO(USER_INPUT)
+try:
+    with contextlib.redirect_stdout(out),contextlib.redirect_stderr(err):
+        exec(USER_CODE,{})
+    RESULT=out.getvalue();ERR=err.getvalue()
+except Exception:
+    RESULT=out.getvalue();ERR=err.getvalue()+traceback.format_exc()
+finally:
+    sys.stdin=old`);
+  const actual=String(rt.globals.get("RESULT")).trimEnd(),error=String(rt.globals.get("ERR")).trim();
+  if(error){setConsole((actual?actual+"\n":"")+error,true);setStatus("Program error. Read the console and fix it.");return}
+  setConsole(actual||"(no output)");
+  const expected=problems[current-1].output.trimEnd();
+  if(actual.trim()===expected.trim()){done[current]=true;save();setStatus("✓ Correct — output matches.",true);renderList()}
+  else setStatus("Output does not match the expected sample.\n\nExpected:\n"+expected+"\n\nCheck your logic, input format and spacing.")
+ }catch(e){setConsole(String(e),true);setStatus("Python runtime could not start. Check internet access.")}
+}
+function resetAll(){if(confirm("Reset all code, inputs and completion status?")){saved={};done={};for(let i=1;i<=54;i++)localStorage.removeItem("py_phase1_in_"+i);save();current=1;render()}}
+function copyProgress(){const n=Object.keys(done).length;const t=`Python Phase 1 Progress: ${n}/54 (${Math.round(n/54*100)}%)`;navigator.clipboard?.writeText(t);alert(t)}
+async function finalReview(){
+ saveCode();const submissions=problems.map(p=>({id:p.id,topic:p.topic,title:p.title,question:p.question,expectedOutput:p.output,programInput:localStorage.getItem("py_phase1_in_"+p.id)??p.input,code:saved[p.id]||"",completed:!!done[p.id]}));
+ const modal=document.getElementById("modal"),load=document.getElementById("loading"),review=document.getElementById("review");modal.style.display="block";load.style.display="block";review.style.display="none";load.className="status";load.textContent="Reviewing all 54 solutions…";
+ try{
+  const r=await fetch("/api/review",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({submissions})});const data=await r.json();if(!r.ok)throw Error(data.error||"Review failed");
+  review.textContent=data.review||"No review returned.";load.style.display="none";review.style.display="block";localStorage.setItem("py_phase1_last_review",review.textContent)
+ }catch(e){load.className="status bad";load.textContent="Final review failed: "+e.message+"\n\nCheck Vercel environment variables OPENAI_API_KEY and OPENAI_MODEL."}
+}
+function closeReview(){document.getElementById("modal").style.display="none"}
+function copyReview(){const t=document.getElementById("review").textContent;if(t)navigator.clipboard?.writeText(t)}
+render();
+</script>
+<script type="module">
+import {loadPyodide} from "https://cdn.jsdelivr.net/pyodide/v0.28.2/full/pyodide.mjs";window.loadPyodide=loadPyodide;
+</script>
+</body>
+</html>

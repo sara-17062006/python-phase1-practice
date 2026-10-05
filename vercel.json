@@ -1,1 +1,3 @@
-PLACEHOLDER
+{
+  "functions":{"api/review.js":{"maxDuration":60}}
+}

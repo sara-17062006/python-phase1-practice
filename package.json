@@ -1,1 +1,8 @@
-PLACEHOLDER
+{
+  "name":"python-phase1-final-review",
+  "version":"1.0.0",
+  "private":true,
+  "description":"Python Phase 1 placement practice with autosave and AI final review.",
+  "scripts":{"dev":"vercel dev"},
+  "type":"module"
+}

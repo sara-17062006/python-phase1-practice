@@ -458,12 +458,16 @@ function downloadReviewJson(){
 function downloadFullReport(){
   if(!reviewData)return;
   var esc=function(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")};
+  var savedForExport=JSON.parse(localStorage.getItem("py_phase1_code")||"{}");
   var rows=(reviewData.problems||[]).map(function(p){
     var meta=problems[p.id-1]||{};
     var cls=p.status==="CORRECT"?"ok":p.status==="PARTIALLY_CORRECT"?"partial":"bad";
-    var code=p.correctedCode?'<pre>'+esc(p.correctedCode)+'</pre>':'<div class="muted">See logic below.</div>';
+    var yourCode=savedForExport[p.id]||"";
+    var yourOut=localStorage.getItem("py_phase1_out_"+p.id)||"";
+    var code=p.correctedCode?'<pre>'+esc(p.correctedCode)+'</pre>':'<div class="muted">No replacement code needed.</div>';
     return '<section class="problem '+cls+'"><div class="head"><h2>'+p.id+'. '+esc(meta.title||("Problem "+p.id))+'</h2><span class="pill">'+esc(p.status)+'</span></div>'+
       '<div class="grid"><div><h3>Problem</h3><p>'+esc(meta.question||"")+'</p></div><div><h3>Expected Output</h3><pre>'+esc(meta.output||"")+'</pre></div></div>'+
+      '<div class="grid"><div><h3>Your Submitted Code</h3><pre>'+esc(yourCode||"(no code saved)")+'</pre></div><div><h3>Your Actual Output</h3><pre>'+esc(yourOut||"(not run)")+'</pre></div></div>'+
       '<div class="grid"><div><h3>Why</h3><p>'+esc(p.why||p.summary||"")+'</p></div><div><h3>Correct Logic</h3><p>'+esc(p.correctLogic||"")+'</p></div></div>'+
       '<h3>How to Fix</h3><p>'+esc(p.howToFix||"")+'</p>'+
       '<h3>Edge Cases</h3><p>'+esc(p.edgeCases||"")+'</p>'+

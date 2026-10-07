@@ -5,18 +5,30 @@ export default async function handler(req, res) {
 
   try {
     const body = req.body || {};
-    if (!Array.isArray(body.submissions) || body.submissions.length !== 54) {
-      return res.status(400).json({ error: 'Expected all 54 Phase 1 submissions.' });
+    if (!Array.isArray(body.submissions) || ![54,55].includes(body.submissions.length)) {
+      return res.status(400).json({ error: 'Expected 54 core Phase 1 submissions, with an optional 1-problem bonus.' });
     }
 
-    const compact = body.submissions.map(s => ({
+    const bonus = body.submissions.filter(s => Number(s.id) === 55);
+    const core = body.submissions.filter(s => Number(s.id) !== 55);
+    if (core.length !== 54) {
+      return res.status(400).json({ error: 'Expected exactly 54 core Phase 1 submissions.' });
+    }
+
+    const compact = core.map(s => ({
       id:s.id, topic:s.topic, title:s.title, question:s.question,
       expectedOutput:s.expectedOutput, programInput:s.programInput,
       code:s.code, completed:!!s.completed
     }));
 
-    const instructions = `You are a strict but encouraging Python placement coding mentor. Review all 54 submitted beginner Python solutions as one Phase 1 assessment. Judge the student's ACTUAL code. For every problem classify it as CORRECT, PARTIALLY CORRECT, INCORRECT, or MISSING. Explain exact mistakes in simple language. Check input handling, operator precedence, conditions, loops, functions, built-ins, recursion and edge cases. Do not punish harmless formatting differences. Finish with score /100, topic-wise performance, recurring mistakes, concepts to relearn, and readiness for Phase 2 Strings. Do not invent test results. Teach reasoning, not memorization.`;
-    const input = `Review ALL 54 problems. Student submission:\n\n${JSON.stringify(compact, null, 2)}`;
+    const bonusCompact = bonus.map(s => ({
+      id:s.id, topic:s.topic, title:s.title, question:s.question,
+      expectedOutput:s.expectedOutput, programInput:s.programInput,
+      code:s.code, completed:!!s.completed
+    }));
+
+    const instructions = `You are a strict but encouraging Python placement coding mentor. Review 54 core beginner Python solutions as one Phase 1 assessment. Judge the student's ACTUAL code. For every core problem classify it as CORRECT, PARTIALLY CORRECT, INCORRECT, or MISSING. Explain exact mistakes in simple language. Check input handling, operator precedence, conditions, loops, functions, built-ins, recursion and edge cases. Do not punish harmless formatting differences, including trailing spaces in output. Finish with score /100 based ONLY on the 54 core problems, topic-wise performance, recurring mistakes, concepts to relearn, and readiness for Phase 2 Strings. Then separately review the optional bonus problem (problem 55) without changing the core score. Do not invent test results. Teach reasoning, not memorization.`;
+    const input = `Review the 54 CORE problems first. Optional BONUS submission follows separately. Student core submissions:\n\n${JSON.stringify(compact, null, 2)}\n\nBONUS submission:\n\n${JSON.stringify(bonusCompact, null, 2)}`;
 
     const response = await fetch('https://api.openai.com/v1/responses', {
       method:'POST',

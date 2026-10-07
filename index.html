@@ -175,7 +175,7 @@ async function finalReview(){
  saveCode();const submissions=problems.map(p=>({id:p.id,topic:p.topic,title:p.title,question:p.question,expectedOutput:p.output,programInput:localStorage.getItem("py_phase1_in_"+p.id)??p.input,code:saved[p.id]||"",completed:!!done[p.id],bonus:BONUS_PROBLEM_IDS.has(p.id)}));
  const modal=document.getElementById("modal"),load=document.getElementById("loading"),review=document.getElementById("review");modal.style.display="block";load.style.display="block";review.style.display="none";load.className="status";load.textContent="Reviewing 54 core solutions + 1 bonus…";
  try{
-  const r=await fetch("/api/review",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({submissions})});const data=await r.json();if(!r.ok)throw Error(data.error||"Review failed");
+  const r=await fetch("/api/review",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({submissions})});const raw=await r.text();let data;try{data=JSON.parse(raw)}catch{throw Error(raw.slice(0,800)||"Review endpoint returned a non-JSON error.")}if(!r.ok)throw Error(data.error||"Review failed");
   review.textContent=data.review||"No review returned.";load.style.display="none";review.style.display="block";localStorage.setItem("py_phase1_last_review",review.textContent)
  }catch(e){load.className="status bad";load.textContent="Final review failed: "+e.message+"\n\nCheck Vercel environment variables OPENAI_API_KEY and OPENAI_MODEL."}
 }

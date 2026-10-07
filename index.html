@@ -5,6 +5,36 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Python Phase 1 Placement Practice</title>
 <style>
+
+/* Placement Roadmap */
+.roadmap-modal{max-width:1250px!important;background:#0a1224!important}
+.roadmap-dashboard{color:#eef4ff}
+.roadmap-top{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:16px}
+.roadmap-top h2{margin:0;font-size:24px}.roadmap-sub{color:#93a5c5;font-size:12px;margin-top:5px}
+.roadmap-close{white-space:nowrap}
+.roadmap-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.roadmap-stat{padding:14px;border:1px solid #29406d;border-radius:13px;background:#0f1930}
+.roadmap-stat b{display:block;font-size:26px}.roadmap-stat span{font-size:11px;color:#91a3c2}
+.roadmap-levels{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:15px}
+.roadmap-level{padding:10px;border:1px solid #293c64;border-radius:11px;background:#0c162c;color:#aebddb;text-align:center;font-size:11px}
+.roadmap-level.active{border-color:#5f73ee;background:#16234a;color:#fff}.roadmap-level.done{border-color:#237253;background:#0e2a25;color:#87f0c4}
+.roadmap-list{display:flex;flex-direction:column;gap:10px}
+.roadmap-phase{display:grid;grid-template-columns:64px 1fr 190px;gap:14px;align-items:start;padding:15px;border:1px solid #26385f;border-radius:14px;background:#0f1930}
+.roadmap-phase.done{border-color:#24755a}.roadmap-phase.current{border-color:#6679ef;box-shadow:0 0 0 1px rgba(102,121,239,.18)}
+.phase-num{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:#1d2d50;font-weight:900;font-size:17px}
+.roadmap-phase.done .phase-num{background:#164536;color:#72efc0}.roadmap-phase.current .phase-num{background:#263b82}
+.phase-main h3{margin:0 0 5px;font-size:16px}.phase-meta{font-size:11px;color:#92a4c3;margin-bottom:8px}
+.phase-topics{display:flex;gap:6px;flex-wrap:wrap}.phase-chip{padding:5px 8px;border-radius:999px;background:#182744;color:#c7d5ee;font-size:10px;border:1px solid #29416c}
+.phase-side{display:flex;flex-direction:column;gap:7px;align-items:stretch}.phase-status{padding:7px 9px;border-radius:9px;text-align:center;font-size:11px;font-weight:800;background:#1a2742;color:#b7c8e6}
+.roadmap-phase.done .phase-status{background:#123a31;color:#71edbd}.roadmap-phase.current .phase-status{background:#233477;color:#c8d1ff}
+.phase-side small{color:#8295b6;text-align:center;font-size:10px}
+.roadmap-milestones{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}
+.roadmap-milestone{padding:13px;border:1px solid #26385f;border-radius:12px;background:#0f1930}
+.roadmap-milestone b{display:block;margin-bottom:5px}.roadmap-milestone span{display:block;color:#98a9c6;font-size:11px;line-height:1.5}
+.roadmap-note{margin-top:12px;padding:11px 13px;border:1px solid #283b62;border-radius:10px;background:#0b152b;color:#b9c9e4;font-size:11px;line-height:1.55}
+@media(max-width:950px){.roadmap-stats{grid-template-columns:repeat(2,1fr)}.roadmap-levels{grid-template-columns:repeat(3,1fr)}.roadmap-phase{grid-template-columns:58px 1fr}.phase-side{grid-column:2;display:grid;grid-template-columns:1fr 1fr}.roadmap-milestones{grid-template-columns:1fr}}
+@media(max-width:650px){.roadmap-levels{grid-template-columns:1fr 1fr}.roadmap-top{flex-direction:column}.roadmap-phase{grid-template-columns:1fr}.phase-side{grid-column:1}.roadmap-stats{grid-template-columns:1fr 1fr}}
+
 :root{--bg:#0a0f1e;--panel:#11192c;--text:#edf2ff;--muted:#98a6c5;--accent:#6f7ff5;--ok:#18a36f;--bad:#d95a69;--border:#2a395c}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#080d19,#111a31);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif}
 header{padding:18px 22px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,15,30,.96);z-index:5}
@@ -60,14 +90,14 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 </style>
 </head>
 <body>
-<header><h1>🐍 Python Phase 1 — Placement Practice</h1><div class="sub">54 core problems + 1 bonus • compiler-style execution • custom input • autosave • AI final review</div></header>
+<header><h1>🐍 Python Placement Practice</h1><div class="sub">Phase 1 foundation + full placement mastery roadmap • compiler-style execution • custom input • autosave • AI final review</div></header>
 <div class="layout">
 <aside>
 <input id="search" class="search" placeholder="Search problems" oninput="renderList()">
 <div class="progress"><b id="progressText">0 / 54 completed</b><div class="bar"><div id="fill" class="fill"></div></div><div class="small" style="margin-top:6px">Code, inputs and progress are saved in this browser.</div></div>
-<div class="actions"><button class="action" onclick="resetAll()">Reset</button><button class="action" onclick="copyProgress()">Copy Progress</button></div>
+<div class="actions"><button class="action" onclick="resetAll()">Reset</button><button class="action" onclick="copyProgress()">Copy Progress</button><button class="action" onclick="openRoadmap()">🗺 ROADMAP</button></div>
 <div class="actions"><button class="action primary" onclick="finalReview()">🤖 FINAL REVIEW — All 54</button></div>
-<div class="small" style="margin:7px 0">Final Review sends the 54 core submissions plus the bonus recursion problem to the secure Vercel review endpoint.</div>
+<div class="small" style="margin:7px 0">Final Review sends the 54 core submissions plus the bonus recursion problem to the secure Vercel review endpoint.</div><div class="progress" style="margin-top:10px"><b>Placement path</b><div class="small" style="margin-top:5px">11 phases • 325 core problems • You have completed Phase 1.</div></div>
 <div class="list" id="list"></div>
 </aside>
 <main><div class="card" id="card"></div></main>
@@ -127,6 +157,22 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 </div></div>iv>
 
 <script>
+
+const ROADMAP=[
+  {level:1,title:"Python Fundamentals & Core Logic",time:"1.5–2 weeks",problems:54,status:"FOUNDATION",topics:["Input / Output","Variables & Operators","Conditions","Loops","Number Problems","Nested Loops","Functions","Built-ins","Strings","Recursion"],outcome:"Build reliable Python coding fundamentals and translate simple problem statements into working logic."},
+  {level:2,title:"Strings, Lists & Arrays",time:"2.5–3 weeks",problems:55,status:"CORE",topics:["String traversal","Frequency counting","Slicing","Two-dimensional lists","Array traversal","Min / max / second largest","Prefix basics"],outcome:"Become comfortable with the most common placement data structures and traversal problems."},
+  {level:2,title:"Tuples, Sets & Dictionaries",time:"1–1.5 weeks",problems:25,status:"CORE",topics:["Tuple operations","Set membership","Union / intersection","Dictionary counting","Hashing patterns","Frequency maps"],outcome:"Use Python collections and hashing to solve lookup and frequency problems quickly."},
+  {level:3,title:"Searching & Sorting",time:"1.5–2 weeks",problems:25,status:"ALGORITHMS",topics:["Linear search","Binary search","Sorting basics","Custom sorting","Search on answer","Time complexity"],outcome:"Recognize when to search, sort, or reduce a problem using ordering."},
+  {level:3,title:"Problem-Solving Patterns",time:"2.5–3 weeks",problems:35,status:"ALGORITHMS",topics:["Two pointers","Sliding window","Prefix sum","Hashing","Fast / slow pointers","Intervals","Matrix traversal"],outcome:"Move from topic-based questions to reusable placement problem-solving patterns."},
+  {level:4,title:"Stack & Queue",time:"1–1.5 weeks",problems:25,status:"DSA",topics:["Stack","Monotonic stack","Queue","Deque","Parentheses","Next greater element"],outcome:"Handle LIFO/FIFO problems and learn the common interview patterns built on them."},
+  {level:4,title:"Linked List",time:"1–1.5 weeks",problems:20,status:"DSA",topics:["Node traversal","Insert / delete","Reverse list","Middle node","Cycle detection","Merge lists"],outcome:"Build and manipulate pointer-based structures confidently."},
+  {level:4,title:"Trees, BST & Heap",time:"2–2.5 weeks",problems:25,status:"DSA",topics:["Binary tree","DFS","BFS","BST","Tree height","Lowest common ancestor","Heap / priority queue"],outcome:"Solve the core tree and heap patterns commonly used in interviews."},
+  {level:4,title:"Graphs",time:"1.5–2 weeks",problems:20,status:"DSA",topics:["Graph representation","BFS","DFS","Connected components","Shortest path basics","Topological sort"],outcome:"Understand graph traversal and the standard algorithms behind interview questions."},
+  {level:5,title:"Greedy, Backtracking & Dynamic Programming",time:"3–4 weeks",problems:30,status:"MASTERY",topics:["Greedy choice","Recursion patterns","Backtracking","1D DP","2D DP","Memoization","Tabulation"],outcome:"Handle harder optimization and search problems and build deeper problem-solving ability."},
+  {level:5,title:"Placement Sprint & Interview Mocks",time:"2–3 weeks",problems:36,status:"MASTERY",topics:["Mixed coding sets","Timed tests","Company-style questions","Debugging","Complexity review","Mock interviews"],outcome:"Turn your knowledge into speed, accuracy, explanation skills, and placement performance."}
+];
+const ROADMAP_TOTAL=325;
+
 const problems=[
 ["Input & Output","Print Your Name","Read a name and print it.","Saraswathy","Saraswathy"],
 ["Input & Output","Read and Print an Integer","Read an integer N and print the same value.","25","25"],
@@ -224,6 +270,40 @@ function esc(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").
 function markDone(){saveCode();done[current]=true;save();setStatus("✓ Marked completed.",true);renderList()}
 function prev(){saveCode();if(current>1){current--;render()}}
 function next(){saveCode();if(current<problems.length){current++;render()}}
+
+function getPhase1CompletedCount(){
+  return Object.keys(done).filter(function(id){return !BONUS_PROBLEM_IDS.has(Number(id)) && done[id]}).length;
+}
+function getRoadmapState(){
+  const p1=getPhase1CompletedCount();
+  return {p1:p1,complete:p1>=PHASE1_TOTAL?1:0};
+}
+function openRoadmap(){
+  document.getElementById("roadmapModal").style.display="block";
+  renderRoadmap();
+}
+function closeRoadmap(){document.getElementById("roadmapModal").style.display="none";}
+function renderRoadmap(){
+  const state=getRoadmapState();
+  const completedPhases=state.complete;
+  const completedProblems=Math.min(state.p1,PHASE1_TOTAL);
+  document.getElementById("roadmapPhaseCount").textContent=completedPhases+" / "+ROADMAP.length;
+  document.getElementById("roadmapProblemCount").textContent=completedProblems+" / "+ROADMAP_TOTAL;
+  document.getElementById("roadmapRemaining").textContent=String(Math.max(0,ROADMAP_TOTAL-completedProblems));
+  document.getElementById("rl1").className="roadmap-level "+(completedPhases>=1?"done":"");
+  document.querySelectorAll(".roadmap-level").forEach(function(el){if(el.id!=="rl1")el.className="roadmap-level";});
+  if(completedPhases===0)document.getElementById("rl1").classList.add("active");
+  else document.getElementById("rl2").classList.add("active");
+  document.getElementById("roadmapList").innerHTML=ROADMAP.map(function(p,i){
+    const isDone=i===0 && state.complete;
+    const isCurrent=i===1 && state.complete;
+    const cls=isDone?"done":isCurrent?"current":"";
+    const status=isDone?"✅ COMPLETED":isCurrent?"▶ NEXT PHASE":"UPCOMING";
+    const chips=p.topics.map(function(t){return '<span class="phase-chip">'+reviewEsc(t)+'</span>';}).join("");
+    return '<div class="roadmap-phase '+cls+'"><div class="phase-num">'+(i+1)+'</div><div class="phase-main"><h3>'+reviewEsc(p.title)+'</h3><div class="phase-meta">'+reviewEsc(p.time)+' • '+reviewEsc(p.problems)+' core problems • Level '+reviewEsc(p.level)+'</div><div class="phase-topics">'+chips+'</div><div class="roadmap-note" style="margin-top:9px"><b>Goal:</b> '+reviewEsc(p.outcome)+'</div></div><div class="phase-side"><div class="phase-status">'+status+'</div><small>'+reviewEsc(p.status)+'</small></div></div>';
+  }).join("");
+}
+
 function setStatus(t,ok=false){const s=document.getElementById("status");s.textContent=t;s.className="status "+(ok?"ok":"bad")}
 function setConsole(t,err=false){const c=document.getElementById("console");c.textContent=t;c.className="terminal"+(err?" err":"");localStorage.setItem("py_phase1_out_"+current,t)}
 let py=null;

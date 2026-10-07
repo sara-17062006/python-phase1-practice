@@ -78,8 +78,9 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
   <div class="review-top">
     <div><h2>🤖 Phase 1 Final Review</h2><div class="subtle">Visual assessment of 54 core problems + optional bonus</div></div>
     <div class="review-actions">
-      <button class="action" onclick="printReview()">⬇ Print / Save Report</button>
-      <button class="action" onclick="copyReview()">Copy Review</button>
+      <button class="action primary" onclick="downloadFullReport()">⬇ Download Full Report</button>
+      <button class="action" onclick="downloadReviewJson()">Export Review Data</button>
+      <button class="action" onclick="copyReview()">📋 Copy Full Review</button>
       <button class="action danger" onclick="closeReview()">Close</button>
     </div>
   </div>
@@ -379,13 +380,118 @@ async function finalReview(){
   }
 }
 function closeReview(){document.getElementById("modal").style.display="none";}
-function copyReview(){
-  if(!reviewData)return;
-  var lines=["Phase 1 Score: "+reviewData.score+"/100",reviewData.summary||"", "", "Problem Reviews:"];
-  (reviewData.problems||[]).forEach(function(p){var title=(problems[p.id-1]&&problems[p.id-1].title)||"Problem "+p.id;lines.push(p.id+". "+title+" — "+p.status);lines.push("Why: "+(p.why||""));lines.push("Logic: "+(p.correctLogic||""));lines.push("Fix: "+(p.howToFix||""));lines.push("");});
-  navigator.clipboard?.writeText(lines.join("\n"));
+function getReviewText(){
+  if(!reviewData)return "";
+  var lines=[
+    "PYTHON PHASE 1 — FINAL REVIEW",
+    "Score: "+reviewData.score+"/100",
+    "Readiness: "+(reviewData.readiness||""),
+    "Summary: "+(reviewData.summary||""),
+    "",
+    "RESULT BREAKDOWN",
+    "Correct: "+(reviewData.counts?.CORRECT||0),
+    "Partially Correct: "+(reviewData.counts?.PARTIALLY_CORRECT||0),
+    "Incorrect: "+(reviewData.counts?.INCORRECT||0),
+    "Missing: "+(reviewData.counts?.MISSING||0),
+    "",
+    "TOPIC PERFORMANCE"
+  ];
+  (reviewData.topicPerformance||[]).forEach(function(t){
+    lines.push((t.topic||"")+" — "+t.score+"/"+t.max+" ("+t.percent+"%)");
+  });
+  lines.push("","COMMON MISTAKES");
+  (reviewData.commonMistakes||[]).forEach(function(m,i){lines.push((i+1)+". "+(m.title||"")+" — "+(m.description||"")+" ["+(m.count||0)+" problems]");});
+  lines.push("","YOUR STRENGTHS");
+  (reviewData.strengths||[]).forEach(function(x){lines.push("• "+x);});
+  lines.push("","AREAS TO IMPROVE");
+  (reviewData.areasToImprove||[]).forEach(function(x){lines.push("• "+x);});
+  lines.push("","PROBLEM-BY-PROBLEM REVIEW");
+  (reviewData.problems||[]).forEach(function(p){
+    var title=(problems[p.id-1]&&problems[p.id-1].title)||"Problem "+p.id;
+    lines.push("\n"+p.id+". "+title+" — "+p.status);
+    lines.push("Why: "+(p.why||""));
+    lines.push("Correct Logic: "+(p.correctLogic||""));
+    lines.push("How to Fix: "+(p.howToFix||""));
+    lines.push("Edge Cases: "+(p.edgeCases||""));
+    if(p.correctedCode)lines.push("Suggested Code:\n"+p.correctedCode);
+  });
+  if(reviewData.bonus){
+    lines.push("\nBONUS PROBLEM 55 — "+(reviewData.bonus.status||""));
+    lines.push("Why: "+(reviewData.bonus.why||""));
+    lines.push("Correct Logic: "+(reviewData.bonus.correctLogic||""));
+    lines.push("How to Fix: "+(reviewData.bonus.howToFix||""));
+    if(reviewData.bonus.correctedCode)lines.push("Suggested Code:\n"+reviewData.bonus.correctedCode);
+  }
+  return lines.join("\n");
 }
-function printReview(){if(reviewData)window.print();}
+function copyReview(){
+  var text=getReviewText();
+  if(!text)return;
+  navigator.clipboard?.writeText(text);
+  alert("Full 54-problem review copied.");
+}
+function downloadBlob(filename,content,type){
+  var blob=new Blob([content],{type:type});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement("a");
+  a.href=url;a.download=filename;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(function(){URL.revokeObjectURL(url);},1000);
+}
+function downloadReviewJson(){
+  if(!reviewData)return;
+  var payload={
+    score:reviewData.score,
+    readiness:reviewData.readiness,
+    summary:reviewData.summary,
+    counts:reviewData.counts,
+    topicPerformance:reviewData.topicPerformance,
+    commonMistakes:reviewData.commonMistakes,
+    strengths:reviewData.strengths,
+    areasToImprove:reviewData.areasToImprove,
+    problems:reviewData.problems,
+    bonus:reviewData.bonus,
+    exportedAt:new Date().toISOString()
+  };
+  downloadBlob("python-phase1-final-review.json",JSON.stringify(payload,null,2),"application/json");
+}
+function downloadFullReport(){
+  if(!reviewData)return;
+  var esc=function(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")};
+  var rows=(reviewData.problems||[]).map(function(p){
+    var meta=problems[p.id-1]||{};
+    var cls=p.status==="CORRECT"?"ok":p.status==="PARTIALLY_CORRECT"?"partial":"bad";
+    var code=p.correctedCode?'<pre>'+esc(p.correctedCode)+'</pre>':'<div class="muted">See logic below.</div>';
+    return '<section class="problem '+cls+'"><div class="head"><h2>'+p.id+'. '+esc(meta.title||("Problem "+p.id))+'</h2><span class="pill">'+esc(p.status)+'</span></div>'+
+      '<div class="grid"><div><h3>Problem</h3><p>'+esc(meta.question||"")+'</p></div><div><h3>Expected Output</h3><pre>'+esc(meta.output||"")+'</pre></div></div>'+
+      '<div class="grid"><div><h3>Why</h3><p>'+esc(p.why||p.summary||"")+'</p></div><div><h3>Correct Logic</h3><p>'+esc(p.correctLogic||"")+'</p></div></div>'+
+      '<h3>How to Fix</h3><p>'+esc(p.howToFix||"")+'</p>'+
+      '<h3>Edge Cases</h3><p>'+esc(p.edgeCases||"")+'</p>'+
+      '<h3>Suggested Code</h3>'+code+'</section>';
+  }).join("");
+  var topic=(reviewData.topicPerformance||[]).map(function(t){
+    return '<div class="topic"><b>'+esc(t.topic)+'</b><div class="track"><span style="width:'+Math.max(0,Math.min(100,Number(t.percent)||0))+'%"></span></div><small>'+esc(t.score)+'/'+esc(t.max)+' ('+esc(t.percent)+'%)</small></div>';
+  }).join("");
+  var mistakes=(reviewData.commonMistakes||[]).map(function(m,i){return '<li><b>'+(i+1)+'. '+esc(m.title||"")+'</b> — '+esc(m.description||"")+'</li>';}).join("");
+  var strengths=(reviewData.strengths||[]).map(function(x){return '<li>'+esc(x)+'</li>';}).join("");
+  var improve=(reviewData.areasToImprove||[]).map(function(x){return '<li>'+esc(x)+'</li>';}).join("");
+  var b=reviewData.bonus||{};
+  var bonus='<section class="bonus"><h2>⭐ Bonus Problem 55 — Recursive Digit Sum</h2><div class="pill">'+esc(b.status||"")+'</div><p>'+esc(b.summary||b.why||"")+'</p><h3>Correct Logic</h3><p>'+esc(b.correctLogic||"")+'</p><h3>How to Fix</h3><p>'+esc(b.howToFix||"")+'</p></section>';
+  var report='<!doctype html><html><head><meta charset="utf-8"><title>Python Phase 1 Final Review</title><style>'+
+    'body{font-family:Arial,system-ui,sans-serif;background:#f4f7fb;color:#15223b;max-width:1100px;margin:0 auto;padding:28px}'+
+    'h1{margin-bottom:4px}.muted{color:#6f7f99}.hero{background:#fff;border:1px solid #d7dfec;border-radius:16px;padding:22px;margin-bottom:18px}'+
+    '.score{font-size:48px;font-weight:800}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#e9eef8;font-weight:700;font-size:12px}.ok .pill{background:#d9f7eb;color:#147650}.partial .pill{background:#fff2bf;color:#7a5c00}.bad .pill{background:#ffdfe6;color:#a32643}'+
+    '.topic{margin:9px 0}.track{height:8px;background:#e3e9f3;border-radius:99px;overflow:hidden;margin:4px 0}.track span{display:block;height:100%;background:#31c998}.summary{background:#f0f5ff;border:1px solid #d9e5fb;border-radius:12px;padding:12px}'+
+    '.problem,.bonus{background:#fff;border:1px solid #d7dfec;border-left:6px solid #9aa9c1;border-radius:14px;padding:18px;margin:14px 0}.problem.ok{border-left-color:#31c998}.problem.partial{border-left-color:#e9ba32}.problem.bad{border-left-color:#e45772}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.problem pre{background:#0c1424;color:#eaf1ff;padding:12px;border-radius:9px;overflow:auto}.problem h3{font-size:13px;color:#50617c;margin-bottom:5px}.bonus{border-left-color:#8055df;background:#faf7ff}li{margin:7px 0}@media(max-width:750px){.grid{grid-template-columns:1fr}}'+
+    '</style></head><body>'+
+    '<div class="hero"><h1>🐍 Python Phase 1 — Final Review</h1><div class="score">'+esc(reviewData.score)+'/100</div><div>'+esc(reviewData.readiness||"")+'</div><p>'+esc(reviewData.summary||"")+'</p><div class="summary"><b>Result:</b> '+esc(reviewData.counts?.CORRECT||0)+' correct • '+esc(reviewData.counts?.PARTIALLY_CORRECT||0)+' partial • '+esc(reviewData.counts?.INCORRECT||0)+' incorrect • '+esc(reviewData.counts?.MISSING||0)+' missing</div></div>'+
+    '<div class="hero"><h2>Topic-wise Performance</h2>'+topic+'</div>'+
+    '<div class="hero"><h2>Common Mistakes</h2><ol>'+mistakes+'</ol><h2>Your Strengths</h2><ul>'+strengths+'</ul><h2>Areas to Improve</h2><ul>'+improve+'</ul></div>'+
+    rows+bonus+
+    '</body></html>';
+  downloadBlob("python-phase1-final-review.html",report,"text/html");
+}
+
 render();
 </script>
 <script type="module">

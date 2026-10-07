@@ -25,14 +25,14 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 </style>
 </head>
 <body>
-<header><h1>🐍 Python Phase 1 — Placement Practice</h1><div class="sub">54 problems • compiler-style execution • custom input • autosave • AI final review</div></header>
+<header><h1>🐍 Python Phase 1 — Placement Practice</h1><div class="sub">54 core problems + 1 bonus • compiler-style execution • custom input • autosave • AI final review</div></header>
 <div class="layout">
 <aside>
 <input id="search" class="search" placeholder="Search problems" oninput="renderList()">
 <div class="progress"><b id="progressText">0 / 54 completed</b><div class="bar"><div id="fill" class="fill"></div></div><div class="small" style="margin-top:6px">Code, inputs and progress are saved in this browser.</div></div>
 <div class="actions"><button class="action" onclick="resetAll()">Reset</button><button class="action" onclick="copyProgress()">Copy Progress</button></div>
 <div class="actions"><button class="action primary" onclick="finalReview()">🤖 FINAL REVIEW — All 54</button></div>
-<div class="small" style="margin:7px 0">Final Review sends all 54 submissions to the secure Vercel review endpoint.</div>
+<div class="small" style="margin:7px 0">Final Review sends the 54 core submissions plus the bonus recursion problem to the secure Vercel review endpoint.</div>
 <div class="list" id="list"></div>
 </aside>
 <main><div class="card" id="card"></div></main>
@@ -101,6 +101,9 @@ const problems=[
 ["Recursion","Recursive Factorial","Define factorial(n) recursively and print factorial(5).","5","120"],
 ["Recursion","Recursive Digit Sum","Define digit_sum(n) recursively and print the digit sum.","5837","23"]
 ].map((x,i)=>({id:i+1,topic:x[0],title:x[1],question:x[2],input:x[3],output:x[4]}));
+const BONUS_PROBLEM_IDS = new Set([55]);
+const coreProblems = problems.filter(p=>!BONUS_PROBLEM_IDS.has(p.id));
+const PHASE1_TOTAL = coreProblems.length;
 
 let current=1;
 let saved=JSON.parse(localStorage.getItem("py_phase1_code")||"{}");
@@ -114,12 +117,12 @@ function renderList(){
  problems.filter(p=>(p.title+" "+p.topic).toLowerCase().includes(q)).forEach(p=>{
   const b=document.createElement("button");b.textContent=(done[p.id]?"✓ ":"")+p.id+". "+p.title;b.className=(p.id===current?"active ":"")+(done[p.id]?"done":"");b.onclick=()=>{saveCode();current=p.id;render()};box.appendChild(b)
  })
- const n=Object.keys(done).length;document.getElementById("progressText").textContent=`${n} / 54 completed`;document.getElementById("fill").style.width=(n/54*100)+"%";
+ const n=Object.keys(done).filter(id=>!BONUS_PROBLEM_IDS.has(Number(id))).length;document.getElementById("progressText").textContent=`${n} / ${PHASE1_TOTAL} completed`;document.getElementById("fill").style.width=(Math.min(n/PHASE1_TOTAL,1)*100)+"%";
 }
 function render(){
  const p=problems[current-1];const code=saved[current]||"";
  document.getElementById("card").innerHTML=`
- <span class="badge">${p.topic} • Problem ${p.id}/54</span><h2>${p.title}</h2><div class="question">${p.question}</div>
+ <span class="badge">${p.topic} • Problem ${p.id}${BONUS_PROBLEM_IDS.has(p.id)?" • BONUS":""}</span><h2>${p.title}</h2><div class="question">${p.question}</div>
  <div class="section">Sample Input</div><pre>${esc(p.input)}</pre>
  <div class="section">Expected Output</div><pre>${esc(p.output)}</pre>
  <div class="section">Program Input</div><textarea id="input" class="inputbox" spellcheck="false">${esc(currentInput())}</textarea>
@@ -137,7 +140,7 @@ function render(){
 function esc(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
 function markDone(){saveCode();done[current]=true;save();setStatus("✓ Marked completed.",true);renderList()}
 function prev(){saveCode();if(current>1){current--;render()}}
-function next(){saveCode();if(current<54){current++;render()}}
+function next(){saveCode();if(current<problems.length){current++;render()}}
 function setStatus(t,ok=false){const s=document.getElementById("status");s.textContent=t;s.className="status "+(ok?"ok":"bad")}
 function setConsole(t,err=false){const c=document.getElementById("console");c.textContent=t;c.className="terminal"+(err?" err":"");localStorage.setItem("py_phase1_out_"+current,t)}
 let py=null;
@@ -161,15 +164,16 @@ finally:
   if(error){setConsole((actual?actual+"\n":"")+error,true);setStatus("Program error. Read the console and fix it.");return}
   setConsole(actual||"(no output)");
   const expected=problems[current-1].output.trimEnd();
-  if(actual.trim()===expected.trim()){done[current]=true;save();setStatus("✓ Correct — output matches.",true);renderList()}
+  const normalizeOutput=s=>String(s??"").replace(/\r\n?/g,"\n").split("\n").map(line=>line.replace(/[ \t]+$/,"")).join("\n").trim();
+  if(normalizeOutput(actual)===normalizeOutput(expected)){done[current]=true;save();setStatus("✓ Correct — output matches.",true);renderList()}
   else setStatus("Output does not match the expected sample.\n\nExpected:\n"+expected+"\n\nCheck your logic, input format and spacing.")
  }catch(e){setConsole(String(e),true);setStatus("Python runtime could not start. Check internet access.")}
 }
-function resetAll(){if(confirm("Reset all code, inputs and completion status?")){saved={};done={};for(let i=1;i<=54;i++)localStorage.removeItem("py_phase1_in_"+i);save();current=1;render()}}
-function copyProgress(){const n=Object.keys(done).length;const t=`Python Phase 1 Progress: ${n}/54 (${Math.round(n/54*100)}%)`;navigator.clipboard?.writeText(t);alert(t)}
+function resetAll(){if(confirm("Reset all code, inputs and completion status?")){saved={};done={};problems.forEach(p=>localStorage.removeItem("py_phase1_in_"+p.id));save();current=1;render()}}
+function copyProgress(){const n=Object.keys(done).filter(id=>!BONUS_PROBLEM_IDS.has(Number(id))).length;const t=`Python Phase 1 Progress: ${n}/${PHASE1_TOTAL} (${Math.round(n/PHASE1_TOTAL*100)}%)`;navigator.clipboard?.writeText(t);alert(t)}
 async function finalReview(){
- saveCode();const submissions=problems.map(p=>({id:p.id,topic:p.topic,title:p.title,question:p.question,expectedOutput:p.output,programInput:localStorage.getItem("py_phase1_in_"+p.id)??p.input,code:saved[p.id]||"",completed:!!done[p.id]}));
- const modal=document.getElementById("modal"),load=document.getElementById("loading"),review=document.getElementById("review");modal.style.display="block";load.style.display="block";review.style.display="none";load.className="status";load.textContent="Reviewing all 54 solutions…";
+ saveCode();const submissions=problems.map(p=>({id:p.id,topic:p.topic,title:p.title,question:p.question,expectedOutput:p.output,programInput:localStorage.getItem("py_phase1_in_"+p.id)??p.input,code:saved[p.id]||"",completed:!!done[p.id],bonus:BONUS_PROBLEM_IDS.has(p.id)}));
+ const modal=document.getElementById("modal"),load=document.getElementById("loading"),review=document.getElementById("review");modal.style.display="block";load.style.display="block";review.style.display="none";load.className="status";load.textContent="Reviewing 54 core solutions + 1 bonus…";
  try{
   const r=await fetch("/api/review",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({submissions})});const data=await r.json();if(!r.ok)throw Error(data.error||"Review failed");
   review.textContent=data.review||"No review returned.";load.style.display="none";review.style.display="block";localStorage.setItem("py_phase1_last_review",review.textContent)

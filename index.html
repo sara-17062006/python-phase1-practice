@@ -22,6 +22,41 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 .nav{display:flex;gap:8px;margin-top:12px}.nav button{flex:1}.small{color:var(--muted);font-size:12px}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;z-index:50;padding:20px;overflow:auto}.modalbox{max-width:1100px;margin:20px auto;background:#11192c;border:1px solid #334566;border-radius:15px;padding:18px}.review{white-space:pre-wrap;max-height:70vh;overflow:auto;background:#070c16;border:1px solid #334566;border-radius:10px;padding:14px;font:13px/1.55 Consolas,monospace}
 @media(max-width:850px){.layout{grid-template-columns:1fr}aside{position:relative;top:0;height:auto;max-height:280px;border-right:0;border-bottom:1px solid var(--border)}main{padding:12px}}
+
+/* Visual Final Review Dashboard */
+.review-modal{max-width:1500px!important;padding:20px!important;background:#0a1224!important}
+.review-dashboard{color:#eef4ff;font-family:Inter,system-ui,Arial,sans-serif}
+.review-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.review-top h2{margin:0;font-size:22px}.subtle{color:#8ea0c0;font-size:12px}
+.review-actions{display:flex;gap:8px;flex-wrap:wrap}
+.review-grid{display:grid;grid-template-columns:240px minmax(0,1fr) 300px;gap:14px;align-items:start}
+.review-panel{background:#0f1930;border:1px solid #26385f;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.review-sidebar{max-height:calc(100vh - 150px);overflow:auto;padding:12px;position:sticky;top:0}
+.review-search{width:100%;padding:10px 11px;border-radius:9px;border:1px solid #31456f;background:#081123;color:#eef4ff}
+.review-filters{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:10px 0}
+.review-filter{border:1px solid #2b3f68;border-radius:8px;background:#101c35;color:#d9e5ff;padding:8px;cursor:pointer;font-size:12px}
+.review-filter.active{outline:2px solid #6a7cff}
+.review-list button{width:100%;display:flex;justify-content:space-between;gap:7px;align-items:center;text-align:left;border:1px solid transparent;background:transparent;color:#b9c6df;border-radius:8px;padding:8px 9px;margin:2px 0;cursor:pointer;font-size:12px}
+.review-list button:hover{background:#132141}.review-list button.active{background:#183164;border-color:#35579a;color:#fff}
+.review-list button .rmark{min-width:18px;text-align:center}.r-ok{color:#2fe0a0}.r-part{color:#ffd25a}.r-bad{color:#ff6d81}.r-miss{color:#a7b2ca}
+.review-main{min-width:0}.score-card{padding:16px}.score-layout{display:grid;grid-template-columns:180px minmax(0,1fr) 310px;gap:14px;align-items:center}
+.score-ring{width:150px;height:150px;border-radius:50%;background:conic-gradient(#36e0a2 0deg,#36e0a2 var(--scoredeg),#223555 var(--scoredeg),#223555 360deg);display:grid;place-items:center;position:relative}
+.score-ring::before{content:"";position:absolute;inset:11px;border-radius:50%;background:#0d1730}.score-ring>div{position:relative;text-align:center}.score-num{font-size:42px;font-weight:800}.score-den{font-size:12px;color:#8da0bf}
+.pass-badge{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;background:#153c35;color:#67efba;font-weight:800;margin-top:7px}
+.result-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.metric{padding:11px;border-radius:10px;border:1px solid #29406d;background:#0b152b}.metric b{display:block;font-size:22px}.metric span{color:#8ea0c0;font-size:11px}.metric.ok{border-color:#1d7154}.metric.part{border-color:#6a5720}.metric.bad{border-color:#6c2940}
+.score-bar{margin-top:12px;height:10px;background:#1d2c49;border-radius:999px;display:flex;overflow:hidden}.score-bar .ok{background:#36e0a2}.score-bar .part{background:#ffd25a}.score-bar .bad{background:#ff6078}
+.summary-note{margin-top:12px;padding:10px 12px;border-radius:9px;background:#0b152b;color:#c6d5f1;border:1px solid #25395e}
+.problem-card{margin-top:14px;padding:15px}.problem-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.problem-head h3{margin:2px 0;font-size:19px}
+.status-pill{padding:6px 9px;border-radius:999px;font-size:11px;font-weight:800}.pill-ok{background:#123c34;color:#65edb8}.pill-part{background:#4a3d13;color:#ffd864}.pill-bad{background:#4a1b28;color:#ff8597}.pill-miss{background:#252d40;color:#aab6cf}
+.problem-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.mini-card{background:#091326;border:1px solid #26385d;border-radius:10px;padding:12px}.mini-card h4{margin:0 0 8px;font-size:12px;color:#bcd0f2}.mini-card p{margin:0;color:#d5e0f4;font-size:12px;line-height:1.55;white-space:pre-wrap}
+.code-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.codebox{background:#050a13;border:1px solid #304466;border-radius:10px;overflow:auto}.codebox .code-head{padding:8px 10px;font-size:11px;font-weight:800;border-bottom:1px solid #223352}.codebox.your{border-color:#713149}.codebox.correct{border-color:#216e55}.codebox pre{margin:0;border:0;border-radius:0;background:transparent;min-height:120px;font-size:11px;color:#d9e5fb}
+.explain-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.explain.bad{border-color:#713149}.explain.good{border-color:#216e55}
+.right-stack{display:flex;flex-direction:column;gap:12px}.side-card{padding:13px}.side-card h3{margin:0 0 9px;font-size:14px}.topic-row{display:grid;grid-template-columns:1fr 70px;gap:7px;align-items:center;margin:7px 0}.topic-row .topic-name{font-size:11px;color:#b8c6df}.topic-track{height:7px;background:#203250;border-radius:999px;overflow:hidden}.topic-fill{height:100%;border-radius:999px;background:#36e0a2}
+.mistake-item{display:flex;gap:8px;align-items:flex-start;margin:8px 0;font-size:11px;color:#d3def0}.mistake-num{width:20px;height:20px;border-radius:6px;background:#253658;display:grid;place-items:center;color:#fff;font-weight:700}
+.strength-item,.improve-item{font-size:11px;margin:7px 0;color:#cdd9ec}.bonus-card{border-color:#5945ac;background:linear-gradient(180deg,#15113a,#10152f)}.bonus-card .bonus-title{color:#be9cff}.review-footer-note{margin-top:12px;color:#8193b3;font-size:11px}
+@media print{body{background:#fff!important;color:#111!important}.modal{position:static!important;background:#fff!important}.review-modal{max-width:none!important;background:#fff!important;color:#111!important}.review-sidebar,.review-top .review-actions{display:none!important}.review-grid{grid-template-columns:1fr!important}.right-stack{display:grid!important;grid-template-columns:1fr 1fr}.review-panel{box-shadow:none!important;background:#fff!important;color:#111!important;border:1px solid #bbb!important}.mini-card,.codebox,.summary-note{background:#fff!important;color:#111!important}}
+@media(max-width:1150px){.review-grid{grid-template-columns:220px minmax(0,1fr)}.right-stack{grid-column:2}.score-layout{grid-template-columns:160px 1fr}.score-layout>div:last-child{grid-column:1 / -1}}
+@media(max-width:800px){.review-grid{grid-template-columns:1fr}.review-sidebar{position:relative;max-height:300px}.right-stack{grid-column:1}.score-layout,.problem-cols,.code-cols,.explain-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -38,10 +73,57 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 <main><div class="card" id="card"></div></main>
 </div>
 
-<div class="modal" id="modal"><div class="modalbox">
-<div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><div><h2 style="margin:0">🤖 Phase 1 Final Review</h2><div class="small">All 54 solutions</div></div><div class="actions"><button class="action" onclick="copyReview()">Copy Review</button><button class="action danger" onclick="closeReview()">Close</button></div></div>
-<div id="loading" class="status" style="display:none"></div><pre id="review" class="review" style="display:none"></pre>
-</div></div>
+<div class="modal" id="modal"><div class="modalbox review-modal">
+<div class="review-dashboard" id="reviewDashboard">
+  <div class="review-top">
+    <div><h2>🤖 Phase 1 Final Review</h2><div class="subtle">Visual assessment of 54 core problems + optional bonus</div></div>
+    <div class="review-actions">
+      <button class="action" onclick="printReview()">⬇ Print / Save Report</button>
+      <button class="action" onclick="copyReview()">Copy Review</button>
+      <button class="action danger" onclick="closeReview()">Close</button>
+    </div>
+  </div>
+  <div id="reviewLoading" class="status" style="display:none"></div>
+  <div id="reviewApp" style="display:none">
+    <div class="review-grid">
+      <aside class="review-panel review-sidebar">
+        <div style="font-weight:800;margin-bottom:8px">All Problems (54)</div>
+        <input id="reviewSearch" class="review-search" placeholder="Search problem..." oninput="renderReviewProblemList()">
+        <div class="review-filters">
+          <button class="review-filter active" data-filter="ALL" onclick="setReviewFilter('ALL')">All <span id="rfAll">54</span></button>
+          <button class="review-filter" data-filter="CORRECT" onclick="setReviewFilter('CORRECT')">✅ <span id="rfCorrect">0</span></button>
+          <button class="review-filter" data-filter="PARTIALLY_CORRECT" onclick="setReviewFilter('PARTIALLY_CORRECT')">🟡 <span id="rfPartial">0</span></button>
+          <button class="review-filter" data-filter="INCORRECT" onclick="setReviewFilter('INCORRECT')">❌ <span id="rfWrong">0</span></button>
+        </div>
+        <div class="review-list" id="reviewProblemList"></div>
+      </aside>
+      <section class="review-main">
+        <div class="review-panel score-card">
+          <div class="score-layout">
+            <div style="display:flex;flex-direction:column;align-items:center">
+              <div class="score-ring" id="scoreRing"><div><div class="score-num" id="scoreNum">--</div><div class="score-den">out of 100</div></div></div>
+              <div class="pass-badge" id="readinessBadge">⏳ Reviewing</div>
+            </div>
+            <div>
+              <div style="color:#8da0bf;font-size:11px">RESULT BREAKDOWN <span>(out of 54)</span></div>
+              <div class="result-breakdown" style="margin-top:8px">
+                <div class="metric ok"><b id="countCorrect">0</b><span>Correct</span></div>
+                <div class="metric part"><b id="countPartial">0</b><span>Partially Correct</span></div>
+                <div class="metric bad"><b id="countWrong">0</b><span>Incorrect / Missing</span></div>
+              </div>
+              <div class="score-bar"><div class="ok" id="barOk" style="width:0%"></div><div class="part" id="barPart" style="width:0%"></div><div class="bad" id="barBad" style="width:0%"></div></div>
+              <div id="summaryNote" class="summary-note">Review summary will appear here.</div>
+            </div>
+            <div id="topicPanel" style="padding:0"></div>
+          </div>
+        </div>
+        <div id="selectedProblem" class="review-panel problem-card"></div>
+      </section>
+      <aside class="right-stack" id="reviewRightStack"></aside>
+    </div>
+  </div>
+</div>
+</div></div>iv>
 
 <script>
 const problems=[
@@ -171,16 +253,139 @@ finally:
 }
 function resetAll(){if(confirm("Reset all code, inputs and completion status?")){saved={};done={};problems.forEach(p=>localStorage.removeItem("py_phase1_in_"+p.id));save();current=1;render()}}
 function copyProgress(){const n=Object.keys(done).filter(id=>!BONUS_PROBLEM_IDS.has(Number(id))).length;const t=`Python Phase 1 Progress: ${n}/${PHASE1_TOTAL} (${Math.round(n/PHASE1_TOTAL*100)}%)`;navigator.clipboard?.writeText(t);alert(t)}
-async function finalReview(){
- saveCode();const submissions=problems.map(p=>({id:p.id,topic:p.topic,title:p.title,question:p.question,expectedOutput:p.output,programInput:localStorage.getItem("py_phase1_in_"+p.id)??p.input,code:saved[p.id]||"",completed:!!done[p.id],bonus:BONUS_PROBLEM_IDS.has(p.id)}));
- const modal=document.getElementById("modal"),load=document.getElementById("loading"),review=document.getElementById("review");modal.style.display="block";load.style.display="block";review.style.display="none";load.className="status";load.textContent="Reviewing 54 core solutions + 1 bonus…";
- try{
-  const r=await fetch("/api/review",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({submissions})});const raw=await r.text();let data;try{data=JSON.parse(raw)}catch{throw Error(raw.slice(0,800)||"Review endpoint returned a non-JSON error.")}if(!r.ok)throw Error(data.error||"Review failed");
-  review.textContent=data.review||"No review returned.";load.style.display="none";review.style.display="block";localStorage.setItem("py_phase1_last_review",review.textContent)
- }catch(e){load.className="status bad";load.textContent="Final review failed: "+e.message+"\n\nCheck Vercel environment variables OPENAI_API_KEY and OPENAI_MODEL."}
+
+let reviewData=null;
+let reviewFilter="ALL";
+let reviewSelectedId=1;
+
+function reviewEsc(s){
+  return String(s ?? "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
 }
-function closeReview(){document.getElementById("modal").style.display="none"}
-function copyReview(){const t=document.getElementById("review").textContent;if(t)navigator.clipboard?.writeText(t)}
+function reviewStatusClass(status){
+  return status==="CORRECT"?"pill-ok":status==="PARTIALLY_CORRECT"?"pill-part":status==="INCORRECT"?"pill-bad":"pill-miss";
+}
+function reviewStatusLabel(status){
+  return status==="PARTIALLY_CORRECT"?"PARTIAL":status;
+}
+function setReviewFilter(filter){
+  reviewFilter=filter;
+  document.querySelectorAll(".review-filter").forEach(function(b){b.classList.toggle("active",b.dataset.filter===filter);});
+  renderReviewProblemList();
+}
+function renderReviewProblemList(){
+  if(!reviewData)return;
+  var q=(document.getElementById("reviewSearch").value||"").toLowerCase();
+  var list=document.getElementById("reviewProblemList");
+  var rows=(reviewData.problems||[]).filter(function(p){
+    var title=(problems[p.id-1]&&problems[p.id-1].title)||("Problem "+p.id);
+    var text=(p.id+". "+title).toLowerCase();
+    return (reviewFilter==="ALL"||p.status===reviewFilter)&&text.includes(q);
+  });
+  list.innerHTML=rows.map(function(p){
+    var title=(problems[p.id-1]&&problems[p.id-1].title)||("Problem "+p.id);
+    var icon=p.status==="CORRECT"?"✓":p.status==="PARTIALLY_CORRECT"?"◐":"✕";
+    var cls=p.status==="CORRECT"?"r-ok":p.status==="PARTIALLY_CORRECT"?"r-part":p.status==="INCORRECT"?"r-bad":"r-miss";
+    return '<button class="'+(p.id===reviewSelectedId?"active":"")+'" onclick="selectReviewProblem('+p.id+')"><span>'+p.id+". "+reviewEsc(title)+'</span><span class="rmark '+cls+'">'+icon+"</span></button>";
+  }).join("");
+}
+function selectReviewProblem(id){
+  reviewSelectedId=id;
+  renderReviewProblem();
+  renderReviewProblemList();
+}
+function renderReviewProblem(){
+  if(!reviewData)return;
+  var p=reviewData.problems.find(function(x){return Number(x.id)===Number(reviewSelectedId);})||reviewData.problems[0];
+  if(!p)return;
+  var meta=problems[p.id-1]||{};
+  var savedNow=JSON.parse(localStorage.getItem("py_phase1_code")||"{}");
+  var savedCode=savedNow[p.id]||"";
+  var actual=localStorage.getItem("py_phase1_out_"+p.id)||"";
+  var input=localStorage.getItem("py_phase1_in_"+p.id)??meta.input??"";
+  var status=reviewStatusLabel(p.status);
+  var title=(meta.title||("Problem "+p.id));
+  var htmlParts=[];
+  htmlParts.push('<div class="problem-head"><div><div class="subtle">'+reviewEsc(meta.topic||"")+' • Problem '+p.id+'</div><h3>'+reviewEsc(title)+'</h3></div>');
+  htmlParts.push('<div class="review-actions"><button class="action" onclick="selectReviewProblem('+Math.max(1,p.id-1)+')" '+(p.id<=1?"disabled":"")+'">← Previous</button><button class="action" onclick="selectReviewProblem('+Math.min(54,p.id+1)+')" '+(p.id>=54?"disabled":"")+'">Next →</button><span class="status-pill '+reviewStatusClass(p.status)+'">'+reviewEsc(status)+'</span></div></div>');
+  htmlParts.push('<div class="problem-cols"><div class="mini-card"><h4>Problem Statement</h4><p>'+reviewEsc(meta.question||"")+'</p></div><div class="mini-card"><h4>Sample Input / Output</h4><p>Input: '+reviewEsc(input)+'\n\nExpected:\n'+reviewEsc(meta.output||"")+'\n\nYour Output:\n'+reviewEsc(actual||"(not run)")+'</p></div></div>');
+  htmlParts.push('<div class="code-cols"><div class="codebox your"><div class="code-head">Your Code</div><pre>'+reviewEsc(savedCode||"(no code saved)")+'</pre></div><div class="codebox correct"><div class="code-head">Correct Logic / Suggested Code</div><pre>'+reviewEsc(p.correctedCode||"Use the logic described below.")+'</pre></div></div>');
+  htmlParts.push('<div class="explain-grid"><div class="mini-card explain bad"><h4>🔴 Why Your Code Is '+(p.status==="CORRECT"?"Correct":"Not Fully Correct")+'</h4><p>'+reviewEsc(p.why||p.summary||"")+'</p></div><div class="mini-card explain good"><h4>🟢 Correct Logic</h4><p>'+reviewEsc(p.correctLogic||"")+'\n\nHow to Fix: '+reviewEsc(p.howToFix||"")+'\n\nEdge Cases: '+reviewEsc(p.edgeCases||"")+'</p></div></div>');
+  document.getElementById("selectedProblem").innerHTML=htmlParts.join("");
+}
+function renderTopicPanel(){
+  var rows=reviewData.topicPerformance||[];
+  var html='<div class="side-card"><h3>Topic-wise Performance</h3>';
+  rows.forEach(function(x){
+    var pct=Math.max(0,Math.min(100,Number(x.percent)||0));
+    html+='<div class="topic-row"><div><div class="topic-name">'+reviewEsc(x.topic)+'</div><div class="topic-track"><div class="topic-fill" style="width:'+pct+'%"></div></div></div><div style="font-size:10px;text-align:right;color:#b9c7df">'+reviewEsc(x.score)+'/'+reviewEsc(x.max)+'</div></div>';
+  });
+  html+='</div>';
+  document.getElementById("topicPanel").innerHTML=html;
+}
+function renderRightStack(){
+  var html="";
+  var mistakes=(reviewData.commonMistakes||[]).slice(0,6);
+  html+='<div class="review-panel side-card"><h3>⚠ Common Mistakes You Made</h3>';
+  if(mistakes.length){mistakes.forEach(function(m,i){html+='<div class="mistake-item"><span class="mistake-num">'+(i+1)+'</span><div><b>'+reviewEsc(m.title||"")+'</b><div>'+reviewEsc(m.description||"")+(m.count?' <span style="color:#7f91b0">('+m.count+' problems)</span>':"")+'</div></div></div>';});}else html+='<div class="small">None reported.</div>';
+  html+='</div>';
+  html+='<div class="review-panel side-card"><h3>✅ Your Strengths</h3>';
+  (reviewData.strengths||[]).forEach(function(x){html+='<div class="strength-item">• '+reviewEsc(x)+'</div>';});
+  html+='</div>';
+  html+='<div class="review-panel side-card"><h3>📈 Areas to Improve</h3>';
+  (reviewData.areasToImprove||[]).forEach(function(x){html+='<div class="improve-item">• '+reviewEsc(x)+'</div>';});
+  html+='</div>';
+  var b=reviewData.bonus||{};
+  html+='<div class="review-panel side-card bonus-card"><h3 class="bonus-title">⭐ Bonus Problem (55)</h3><div style="font-weight:800">'+reviewEsc((problems[54]&&problems[54].title)||"Recursive Digit Sum")+' <span class="status-pill '+reviewStatusClass(b.status||"MISSING")+'" style="float:right">'+reviewEsc(reviewStatusLabel(b.status||"MISSING"))+'</span></div><div class="review-footer-note">'+reviewEsc(b.summary||b.why||"Bonus review unavailable.")+'</div></div>';
+  document.getElementById("reviewRightStack").innerHTML=html;
+}
+function renderReviewDashboard(){
+  var score=Number(reviewData.score)||0;
+  var c=reviewData.counts||{};
+  var wrong=(Number(c.INCORRECT)||0)+(Number(c.MISSING)||0);
+  document.getElementById("scoreNum").textContent=score;
+  document.getElementById("scoreRing").style.setProperty("--scoredeg",(score*3.6)+"deg");
+  document.getElementById("readinessBadge").textContent=reviewData.readiness==="READY"?"✅ READY":reviewData.readiness==="NEARLY READY"?"✅ NEARLY READY":"⚠ NEEDS REVISION";
+  document.getElementById("countCorrect").textContent=c.CORRECT||0;
+  document.getElementById("countPartial").textContent=c.PARTIALLY_CORRECT||0;
+  document.getElementById("countWrong").textContent=wrong;
+  document.getElementById("rfAll").textContent="54";
+  document.getElementById("rfCorrect").textContent=c.CORRECT||0;
+  document.getElementById("rfPartial").textContent=c.PARTIALLY_CORRECT||0;
+  document.getElementById("rfWrong").textContent=wrong;
+  document.getElementById("summaryNote").textContent=reviewData.summary||"Assessment completed.";
+  document.getElementById("barOk").style.width=((Number(c.CORRECT)||0)/54*100)+"%";
+  document.getElementById("barPart").style.width=((Number(c.PARTIALLY_CORRECT)||0)/54*100)+"%";
+  document.getElementById("barBad").style.width=(wrong/54*100)+"%";
+  renderTopicPanel();
+  renderRightStack();
+  renderReviewProblemList();
+  renderReviewProblem();
+}
+async function finalReview(){
+  saveCode();
+  var savedNow=JSON.parse(localStorage.getItem("py_phase1_code")||"{}");
+  var submissions=problems.map(function(p){return {id:p.id,topic:p.topic,title:p.title,question:p.question,expectedOutput:p.output,programInput:localStorage.getItem("py_phase1_in_"+p.id)??p.input,actualOutput:localStorage.getItem("py_phase1_out_"+p.id)||"",code:savedNow[p.id]||"",completed:!!done[p.id],bonus:BONUS_PROBLEM_IDS.has(p.id)};});
+  var modal=document.getElementById("modal"),load=document.getElementById("reviewLoading"),app=document.getElementById("reviewApp");
+  modal.style.display="block";load.style.display="block";app.style.display="none";load.className="status";load.textContent="Reviewing 54 core solutions + 1 bonus…";
+  try{
+    var r=await fetch("/api/review",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({submissions:submissions})});
+    var raw=await r.text();var data;try{data=JSON.parse(raw);}catch(_){throw Error(raw.slice(0,800)||"Review endpoint returned a non-JSON error.");}
+    if(!r.ok)throw Error(data.error||"Review failed");
+    reviewData=data.review;
+    localStorage.setItem("py_phase1_last_review",JSON.stringify(reviewData));
+    load.style.display="none";app.style.display="block";reviewSelectedId=1;reviewFilter="ALL";document.getElementById("reviewSearch").value="";renderReviewDashboard();
+  }catch(e){
+    load.className="status bad";load.style.display="block";load.textContent="Final review failed: "+e.message+"\n\nCheck Vercel environment variables OPENAI_API_KEY and OPENAI_MODEL.";
+  }
+}
+function closeReview(){document.getElementById("modal").style.display="none";}
+function copyReview(){
+  if(!reviewData)return;
+  var lines=["Phase 1 Score: "+reviewData.score+"/100",reviewData.summary||"", "", "Problem Reviews:"];
+  (reviewData.problems||[]).forEach(function(p){var title=(problems[p.id-1]&&problems[p.id-1].title)||"Problem "+p.id;lines.push(p.id+". "+title+" — "+p.status);lines.push("Why: "+(p.why||""));lines.push("Logic: "+(p.correctLogic||""));lines.push("Fix: "+(p.howToFix||""));lines.push("");});
+  navigator.clipboard?.writeText(lines.join("\n"));
+}
+function printReview(){if(reviewData)window.print();}
 render();
 </script>
 <script type="module">

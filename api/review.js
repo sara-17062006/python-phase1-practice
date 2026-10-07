@@ -39,7 +39,9 @@ export default async function handler(req, res) {
       body:JSON.stringify({
         model:process.env.OPENAI_MODEL,
         instructions,
-        input
+        input,
+        reasoning:{effort:"low"},
+        max_output_tokens:8000
       })
     });
 

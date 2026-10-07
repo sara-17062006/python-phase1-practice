@@ -17,13 +17,13 @@ export default async function handler(req, res) {
 
     const compact = core.map(s => ({
       id:s.id, topic:s.topic, title:s.title, question:s.question,
-      expectedOutput:s.expectedOutput, programInput:s.programInput,
+      expectedOutput:s.expectedOutput, programInput:s.programInput, actualOutput:s.actualOutput || "",
       code:s.code, completed:!!s.completed
     }));
 
     const bonusCompact = bonus.map(s => ({
       id:s.id, topic:s.topic, title:s.title, question:s.question,
-      expectedOutput:s.expectedOutput, programInput:s.programInput,
+      expectedOutput:s.expectedOutput, programInput:s.programInput, actualOutput:s.actualOutput || "",
       code:s.code, completed:!!s.completed
     }));
 

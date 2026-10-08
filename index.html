@@ -87,6 +87,26 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 @media print{body{background:#fff!important;color:#111!important}.modal{position:static!important;background:#fff!important}.review-modal{max-width:none!important;background:#fff!important;color:#111!important}.review-sidebar,.review-top .review-actions{display:none!important}.review-grid{grid-template-columns:1fr!important}.right-stack{display:grid!important;grid-template-columns:1fr 1fr}.review-panel{box-shadow:none!important;background:#fff!important;color:#111!important;border:1px solid #bbb!important}.mini-card,.codebox,.summary-note{background:#fff!important;color:#111!important}}
 @media(max-width:1150px){.review-grid{grid-template-columns:220px minmax(0,1fr)}.right-stack{grid-column:2}.score-layout{grid-template-columns:160px 1fr}.score-layout>div:last-child{grid-column:1 / -1}}
 @media(max-width:800px){.review-grid{grid-template-columns:1fr}.review-sidebar{position:relative;max-height:300px}.right-stack{grid-column:1}.score-layout,.problem-cols,.code-cols,.explain-grid{grid-template-columns:1fr}}
+
+/* Python Cheat Sheet */
+.cheat-modal{max-width:1250px!important;background:#0a1224!important}
+.cheat-dashboard{color:#eef4ff}
+.cheat-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:14px}
+.cheat-top h2{margin:0;font-size:24px}.cheat-sub{color:#92a4c2;font-size:12px;margin-top:5px}
+.cheat-actions{display:flex;gap:7px;flex-wrap:wrap}
+.cheat-search{width:100%;padding:11px 12px;border-radius:10px;border:1px solid #31466f;background:#081123;color:#eef4ff;margin-bottom:12px}
+.cheat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.cheat-section{padding:14px;border:1px solid #26385f;border-radius:13px;background:#0f1930}
+.cheat-section h3{margin:0 0 8px;font-size:15px;color:#dce7ff}
+.cheat-section .desc{color:#91a4c3;font-size:11px;line-height:1.5;margin-bottom:8px}
+.cheat-code{margin:7px 0 0;background:#050a13;border:1px solid #26385c;border-radius:9px;padding:10px;color:#d9e6ff;font:12px/1.55 Consolas,monospace;white-space:pre-wrap;overflow:auto}
+.cheat-chip{display:inline-block;padding:4px 7px;border-radius:999px;background:#182744;border:1px solid #2b426d;color:#cad7ee;font-size:10px;margin:2px}
+.cheat-table{width:100%;border-collapse:collapse;font-size:11px}
+.cheat-table th,.cheat-table td{border:1px solid #26385f;padding:7px;text-align:left;vertical-align:top}
+.cheat-table th{background:#182744;color:#dce7ff}.cheat-table td{color:#c6d4ea}
+.cheat-callout{padding:11px 12px;border-radius:10px;border:1px solid #3a4e7c;background:#0b152b;color:#c7d7ef;font-size:11px;line-height:1.6;margin-top:10px}
+@media(max-width:800px){.cheat-grid{grid-template-columns:1fr}.cheat-top{flex-direction:column}}
+
 </style>
 </head>
 <body>
@@ -95,7 +115,7 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 <aside>
 <input id="search" class="search" placeholder="Search problems" oninput="renderList()">
 <div class="progress"><b id="progressText">0 / 54 completed</b><div class="bar"><div id="fill" class="fill"></div></div><div class="small" style="margin-top:6px">Code, inputs and progress are saved in this browser.</div></div>
-<div class="actions"><button class="action" onclick="resetAll()">Reset</button><button class="action" onclick="copyProgress()">Copy Progress</button><button class="action" onclick="openRoadmap()">🗺 ROADMAP</button></div>
+<div class="actions"><button class="action" onclick="resetAll()">Reset</button><button class="action" onclick="copyProgress()">Copy Progress</button><button class="action" onclick="openRoadmap()">🗺 ROADMAP</button><button class="action" onclick="openCheatSheet()">📘 CHEAT SHEET</button></div>
 <div class="actions"><button class="action primary" onclick="finalReview()">🤖 FINAL REVIEW — All 54</button></div>
 <div class="small" style="margin:7px 0">Final Review sends the 54 core submissions plus the bonus recursion problem to the secure Vercel review endpoint.</div><div class="progress" style="margin-top:10px"><b>Placement path</b><div class="small" style="margin-top:5px">11 phases • 350 core problems • Your Phase 1 foundation is complete.</div></div>
 <div class="list" id="list"></div>
@@ -103,6 +123,502 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 <main><div class="card" id="card"></div></main>
 </div>
 
+
+<div class="modal" id="cheatModal">
+  <div class="modalbox cheat-modal">
+    <div class="cheat-dashboard">
+      <div class="cheat-top">
+        <div>
+          <h2>📘 Python Placement Cheat Sheet</h2>
+          <div class="cheat-sub">Fast revision for syntax, built-ins, collections, problem-solving patterns, DSA basics and placement coding.</div>
+        </div>
+        <div class="cheat-actions">
+          <button type="button" class="action primary" onclick="copyCheatSheet()">📋 Copy</button>
+          <button type="button" class="action" onclick="window.print()">🖨 Print</button>
+          <button type="button" class="action danger" onclick="closeCheatSheet()">Close</button>
+        </div>
+      </div>
+
+      <input id="cheatSearch" class="cheat-search" placeholder="Search cheat sheet: list, dictionary, recursion, binary search..." oninput="filterCheatSheet()">
+
+      <div id="cheatSections" class="cheat-grid">
+
+        <section class="cheat-section" data-cheat="basics input output print variables comments">
+          <h3>1. Basics, Input & Output</h3>
+          <div class="desc">The minimum syntax you should be able to write without thinking.</div>
+          <div class="cheat-code"># comment
+name = "Saraswathy"
+n = 25
+x, y = 10, 20
+
+print("Hello")
+print(n)
+print(x, y)
+print("A", end=" ")
+print("B")
+
+s = input()
+n = int(input())
+a, b = map(int, input().split())
+arr = list(map(int, input().split()))</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="types conversion string int float bool list tuple set dict">
+          <h3>2. Data Types & Conversion</h3>
+          <table class="cheat-table">
+            <tr><th>Type</th><th>Example</th><th>Convert</th></tr>
+            <tr><td>int</td><td>10</td><td>int("10")</td></tr>
+            <tr><td>float</td><td>3.14</td><td>float("3.14")</td></tr>
+            <tr><td>str</td><td>"hello"</td><td>str(25)</td></tr>
+            <tr><td>bool</td><td>True</td><td>bool(x)</td></tr>
+            <tr><td>list</td><td>[1,2,3]</td><td>list(iterable)</td></tr>
+            <tr><td>tuple</td><td>(1,2,3)</td><td>tuple(iterable)</td></tr>
+            <tr><td>set</td><td>{1,2,3}</td><td>set(iterable)</td></tr>
+            <tr><td>dict</td><td>{"a":1}</td><td>dict(...)</td></tr>
+          </table>
+          <div class="cheat-code">type(x)
+len(x)
+str(x)
+int(x)
+float(x)
+list(x)
+tuple(x)
+set(x)</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="operators arithmetic comparison logical modulo floor division exponent">
+          <h3>3. Operators</h3>
+          <div><span class="cheat-chip">+</span><span class="cheat-chip">-</span><span class="cheat-chip">*</span><span class="cheat-chip">/</span><span class="cheat-chip">//</span><span class="cheat-chip">%</span><span class="cheat-chip">**</span><span class="cheat-chip">==</span><span class="cheat-chip">!=</span><span class="cheat-chip">&gt;</span><span class="cheat-chip">&lt;</span><span class="cheat-chip">and</span><span class="cheat-chip">or</span><span class="cheat-chip">not</span></div>
+          <div class="cheat-code">a + b
+a - b
+a * b
+a / b      # normal division
+a // b     # floor division
+a % b      # remainder
+a ** b     # power
+
+# useful
+n % 2 == 0
+n % 5 == 0
+a == b
+a != b
+x >= 10 and x <= 20</div>
+          <div class="cheat-callout"><b>Placement habit:</b> For averages use parentheses: (a+b+c)/3. Use // when an integer quotient is required.</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="if elif else condition">
+          <h3>4. Conditions</h3>
+          <div class="cheat-code">if condition:
+    ...
+elif condition:
+    ...
+else:
+    ...
+
+# ternary
+result = "YES" if n % 2 == 0 else "NO"</div>
+          <div class="cheat-code"># max of three without max()
+if a >= b and a >= c:
+    ans = a
+elif b >= a and b >= c:
+    ans = b
+else:
+    ans = c</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="for while loops range enumerate break continue nested">
+          <h3>5. Loops</h3>
+          <div class="cheat-code">for i in range(5):        # 0..4
+    print(i)
+
+for i in range(1, 6):     # 1..5
+    print(i)
+
+for i in range(5, 0, -1): # 5..1
+    print(i)
+
+i = 1
+while i <= 5:
+    print(i)
+    i += 1
+
+for i in range(3):
+    for j in range(4):
+        print("*", end="")
+    print()
+
+break
+continue</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="strings indexing slicing methods find replace split join strip upper lower count startswith endswith">
+          <h3>6. Strings ⭐ Phase 2 Core</h3>
+          <div class="cheat-code">s = "Python"
+
+s[0]       # P
+s[-1]      # n
+s[1:4]     # yth
+s[::-1]    # reverse
+
+len(s)
+s.lower()
+s.upper()
+s.strip()
+s.replace("Py", "My")
+s.split()
+" ".join(["Python", "is", "easy"])
+s.count("o")
+s.find("th")
+s.startswith("Py")
+s.endswith("on")
+s.isalpha()
+s.isdigit()
+s.isalnum()</div>
+          <div class="cheat-callout"><b>Important:</b> Strings are immutable. Build a new string or convert to a list when you need character-by-character modification.</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="string traversal frequency palindrome vowels duplicates">
+          <h3>7. Common String Logic</h3>
+          <div class="cheat-code"># traverse
+for ch in s:
+    print(ch)
+
+# count vowels
+count = 0
+for ch in s.lower():
+    if ch in "aeiou":
+        count += 1
+
+# reverse
+rev = s[::-1]
+
+# palindrome
+if s == s[::-1]:
+    print("PALINDROME")
+
+# frequency
+freq = {}
+for ch in s:
+    freq[ch] = freq.get(ch, 0) + 1</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="lists arrays list methods append insert remove pop sort reverse index slicing">
+          <h3>8. Lists / Arrays ⭐ Phase 2 Core</h3>
+          <div class="cheat-code">arr = [10, 20, 30, 40]
+
+arr[0]
+arr[-1]
+arr[1:3]
+
+arr.append(50)
+arr.insert(1, 15)
+arr.remove(20)
+x = arr.pop()
+arr.sort()
+arr.reverse()
+
+len(arr)
+sum(arr)
+min(arr)
+max(arr)
+arr.count(10)
+arr.index(30)</div>
+          <div class="cheat-callout"><b>Traversal:</b> use <code>for x in arr</code> when you need values, and <code>for i in range(len(arr))</code> when you need indices.</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="list comprehension">
+          <h3>9. List Comprehension</h3>
+          <div class="cheat-code">squares = [x*x for x in range(1, 6)]
+evens = [x for x in arr if x % 2 == 0]
+chars = [ch.lower() for ch in s]</div>
+          <div class="desc">Learn normal loops first. Use comprehensions when they improve clarity.</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="tuple">
+          <h3>10. Tuples</h3>
+          <div class="cheat-code">t = (10, 20, 30)
+a, b, c = t
+print(t[0])
+print(len(t))</div>
+          <div class="desc">Tuples are ordered and immutable. They are useful for fixed groups of values and unpacking.</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="set unique union intersection difference membership">
+          <h3>11. Sets</h3>
+          <div class="cheat-code">s = {1, 2, 3, 3}
+print(s)                 # unique values
+
+s.add(4)
+s.remove(2)              # error if absent
+s.discard(9)             # safe if absent
+
+a | b    # union
+a & b    # intersection
+a - b    # difference
+x in s</div>
+          <div class="desc">Think “fast membership + unique values” when you see a set problem.</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="dictionary dict hashmap frequency get keys values items">
+          <h3>12. Dictionaries / Hash Maps ⭐</h3>
+          <div class="cheat-code">d = {"a": 1, "b": 2}
+
+d["a"]
+d["c"] = 3
+d.get("x", 0)
+
+for key in d:
+    print(key)
+
+for key, value in d.items():
+    print(key, value)
+
+# frequency map
+freq = {}
+for x in arr:
+    freq[x] = freq.get(x, 0) + 1
+
+# sort by key
+for k in sorted(freq):
+    print(k, freq[k])</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="functions def return parameters arguments scope">
+          <h3>13. Functions</h3>
+          <div class="cheat-code">def add(a, b):
+    return a + b
+
+def greet(name):
+    return "Hello " + name
+
+x = add(7, 9)
+print(greet("Saraswathy"))</div>
+          <div class="cheat-callout"><b>Remember:</b> <code>return</code> gives a value back and immediately exits the function.</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="recursion base case recursive call factorial">
+          <h3>14. Recursion</h3>
+          <div class="cheat-code">def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)
+
+print(factorial(5))</div>
+          <div class="desc">Every recursive solution needs a base case and a recursive step that moves toward it.</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="builtins max min sum abs sorted reversed enumerate zip any all">
+          <h3>15. Must-Know Built-ins</h3>
+          <div class="cheat-code">max(arr)
+min(arr)
+sum(arr)
+abs(n)
+sorted(arr)
+reversed(arr)
+len(arr)
+enumerate(arr)
+zip(a, b)
+any(condition_list)
+all(condition_list)
+
+# useful
+max(a, b, c)
+min(a, b, c)</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="input parsing placement fast input split map">
+          <h3>16. Placement Input Patterns</h3>
+          <div class="cheat-code"># one integer
+n = int(input())
+
+# one line, many integers
+a, b, c = map(int, input().split())
+
+# list of integers
+arr = list(map(int, input().split()))
+
+# many values as strings
+words = input().split()
+
+# all lines until EOF
+import sys
+data = sys.stdin.read().split()
+
+# character string
+s = input().strip()</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="search linear binary complexity">
+          <h3>17. Searching</h3>
+          <div class="cheat-code"># linear search
+found = False
+for x in arr:
+    if x == target:
+        found = True
+        break
+
+# binary search on sorted array
+l, r = 0, len(arr) - 1
+while l <= r:
+    m = (l + r) // 2
+    if arr[m] == target:
+        break
+    elif arr[m] < target:
+        l = m + 1
+    else:
+        r = m - 1</div>
+          <div class="cheat-callout">Linear search: O(n). Binary search: O(log n), but the data must be ordered or the search condition must be monotonic.</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="sorting sorted sort key reverse">
+          <h3>18. Sorting</h3>
+          <div class="cheat-code">arr.sort()                 # in-place
+sorted_arr = sorted(arr) # new list
+
+arr.sort(reverse=True)
+
+# custom key
+names.sort(key=len)
+pairs.sort(key=lambda x: x[1])</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="two pointers sliding window prefix sum hashing patterns">
+          <h3>19. Placement Patterns ⭐</h3>
+          <div class="cheat-code"># two pointers
+l, r = 0, len(arr) - 1
+while l < r:
+    ...
+
+# sliding window
+left = 0
+current = 0
+for right in range(len(arr)):
+    current += arr[right]
+    while current > target:
+        current -= arr[left]
+        left += 1
+
+# prefix sum
+prefix = [0]
+for x in arr:
+    prefix.append(prefix[-1] + x)
+
+# hash / frequency
+freq = {}
+for x in arr:
+    freq[x] = freq.get(x, 0) + 1</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="stack queue deque">
+          <h3>20. Stack & Queue</h3>
+          <div class="cheat-code"># stack
+stack = []
+stack.append(x)
+top = stack.pop()
+
+# queue
+from collections import deque
+q = deque()
+q.append(x)
+front = q.popleft()
+
+# deque
+dq.appendleft(x)
+dq.append(x)
+dq.popleft()
+dq.pop()</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="heap priority queue heapq">
+          <h3>21. Heap / Priority Queue</h3>
+          <div class="cheat-code">import heapq
+
+heap = []
+heapq.heappush(heap, 5)
+heapq.heappush(heap, 2)
+
+smallest = heapq.heappop(heap)
+
+# max heap trick
+heapq.heappush(heap, -value)
+largest = -heapq.heappop(heap)</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="linked list node tree graph dsa">
+          <h3>22. DSA Templates</h3>
+          <div class="cheat-code"># linked-list node
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+# DFS
+def dfs(node):
+    if node is None:
+        return
+    dfs(node.left)
+    dfs(node.right)
+
+# BFS skeleton
+from collections import deque
+q = deque([start])
+while q:
+    node = q.popleft()
+    for nxt in graph[node]:
+        q.append(nxt)</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="complexity time space big o">
+          <h3>23. Complexity Cheat Sheet</h3>
+          <table class="cheat-table">
+            <tr><th>Operation / Algorithm</th><th>Typical Time</th></tr>
+            <tr><td>List index access</td><td>O(1)</td></tr>
+            <tr><td>List scan</td><td>O(n)</td></tr>
+            <tr><td>Dictionary average lookup</td><td>O(1)</td></tr>
+            <tr><td>Set average membership</td><td>O(1)</td></tr>
+            <tr><td>Sorting</td><td>O(n log n)</td></tr>
+            <tr><td>Binary search</td><td>O(log n)</td></tr>
+            <tr><td>Nested n × n loops</td><td>O(n²)</td></tr>
+            <tr><td>DFS / BFS</td><td>O(V + E)</td></tr>
+          </table>
+          <div class="cheat-callout"><b>Placement rule:</b> First make the logic correct. Then ask whether a slower O(n²) approach can be improved to O(n log n) or O(n).</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="edge cases debugging">
+          <h3>24. Edge Cases & Debugging Checklist</h3>
+          <div class="cheat-code">Before submitting, test:
+1. Smallest valid input
+2. Largest valid input
+3. 0
+4. Negative values (when allowed)
+5. Duplicate values
+6. Equal values
+7. Empty string / empty list (when allowed)
+8. One-element input
+9. Boundary values like 1, 2, 99, 100
+10. Sample + one custom case</div>
+          <div class="cheat-callout"><b>Your personal focus from Phase 1:</b> boundary conditions, zero-handling, and checking whether your logic matches the English requirement—not only the sample.</div>
+        </section>
+
+        <section class="cheat-section" data-cheat="placement mindset problem solving approach">
+          <h3>25. Placement Problem-Solving Method</h3>
+          <div class="cheat-code">STEP 1 → Understand the input
+STEP 2 → Identify what must be printed
+STEP 3 → Write 1–2 manual examples
+STEP 4 → Find the repeating logic
+STEP 5 → Choose the simplest data structure
+STEP 6 → Code
+STEP 7 → Dry run with a new input
+STEP 8 → Check edge cases
+STEP 9 → Think about time / space
+STEP 10 → Explain your solution aloud</div>
+          <div class="cheat-callout">Do not memorize only the final code. Train yourself to explain: <b>input → idea → steps → complexity → edge cases → output.</b></div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>
 <div class="modal" id="modal"><div class="modalbox review-modal">
 <div class="review-dashboard" id="reviewDashboard">
   <div class="review-top">
@@ -199,6 +715,25 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 </div>
 
 <script>
+
+function openCheatSheet(){
+  document.getElementById("cheatModal").style.display="block";
+  document.getElementById("cheatSearch").value="";
+  filterCheatSheet();
+}
+function closeCheatSheet(){document.getElementById("cheatModal").style.display="none";}
+function filterCheatSheet(){
+  const q=(document.getElementById("cheatSearch").value||"").toLowerCase().trim();
+  document.querySelectorAll("#cheatSections .cheat-section").forEach(function(sec){
+    sec.style.display=(!q || sec.textContent.toLowerCase().includes(q) || (sec.dataset.cheat||"").includes(q)) ? "" : "none";
+  });
+}
+function copyCheatSheet(){
+  const el=document.getElementById("cheatSections");
+  const text=el.innerText;
+  navigator.clipboard?.writeText("PYTHON PLACEMENT CHEAT SHEET\n\n"+text);
+  alert("Cheat sheet copied.");
+}
 
 const ROADMAP=[
   {level:1,title:"Python Fundamentals & Core Logic",time:"1.5–2 weeks",problems:54,status:"FOUNDATION",topics:["Input / Output","Variables & Operators","Conditions","Loops","Number Problems","Nested Loops","Functions","Built-ins","Strings","Recursion"],outcome:"Build reliable Python coding fundamentals and translate simple problem statements into working logic."},

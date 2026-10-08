@@ -109,13 +109,14 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 
 
 
-/* Strings Visual Lesson Player — readable code + synchronized dry run */
-.lesson-modal{max-width:1360px!important;background:#081122!important}
+
+/* Strings Visual Lesson Player — Python-Visualizer style */
+.lesson-modal{max-width:1400px!important;background:#071022!important}
 .lesson-shell{color:#eef4ff}
 .lesson-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:14px}
 .lesson-top h2{margin:0;font-size:24px}.lesson-sub{color:#94a7c6;font-size:12px;margin-top:5px}
 .lesson-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:12px}
-.lesson-chapters{max-height:680px;overflow:auto;padding:10px}
+.lesson-chapters{max-height:720px;overflow:auto;padding:10px}
 .lesson-chapters button{width:100%;text-align:left;border:1px solid transparent;background:transparent;color:#b9c7df;border-radius:8px;padding:9px;margin:2px 0;cursor:pointer;font-size:11px}
 .lesson-chapters button.active{background:#183164;border-color:#35579a;color:#fff}
 .lesson-stage{min-width:0}
@@ -123,35 +124,47 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 .lesson-title{font-size:23px;font-weight:800}.lesson-caption{font-size:11px;color:#91a4c3;margin-top:5px}
 .lesson-progress{height:8px;background:#1e2f4d;border-radius:999px;overflow:hidden;margin:10px 0 12px}
 .lesson-progress>div{height:100%;background:#6f84f5;width:0;transition:width .2s ease}
-.lesson-learning-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:stretch}
+.lesson-learning-grid{display:grid;grid-template-columns:minmax(360px,1.03fr) minmax(440px,1.27fr);gap:12px;align-items:stretch}
 .lesson-panel{min-width:0;border:1px solid #293d67;border-radius:12px;background:#0d1830;overflow:hidden}
 .lesson-panel-title{padding:10px 12px;background:#121f3a;border-bottom:1px solid #283b61;font-size:12px;font-weight:800;color:#dbe6fb}
-.lesson-code-area{padding:12px;min-height:365px;overflow:auto}
-.lesson-code-line{display:grid;grid-template-columns:38px minmax(0,1fr);gap:8px;align-items:start;padding:5px 7px;border-radius:7px;font:16px/1.55 Consolas,monospace}
+.lesson-code-area{padding:10px;min-height:510px;max-height:510px;overflow:auto}
+.lesson-code-line{display:grid;grid-template-columns:42px minmax(0,1fr);gap:8px;align-items:start;padding:6px 8px;border-radius:7px;font:17px/1.62 Consolas,monospace}
 .lesson-code-line .ln{color:#6f83a6;text-align:right;user-select:none}
-.lesson-code-line .src{white-space:pre;color:#e9f0ff;overflow-wrap:anywhere}
-.lesson-code-line.active{background:#273762;outline:1px solid #657cf1}
+.lesson-code-line .src{white-space:pre-wrap;color:#e9f0ff;overflow-wrap:anywhere}
+.lesson-code-line.active{background:#2a3b6e;outline:1px solid #657cf1}
 .lesson-code-line.active .ln{color:#fff}.lesson-code-line.active .src{color:#fff36f}
-.lesson-result{padding:12px;border-top:1px solid #26385c;background:#091426}
-.lesson-result-label{font-size:10px;color:#8fa3c2;text-transform:uppercase;letter-spacing:.06em}
-.lesson-result-value{margin-top:5px;font:16px/1.55 Consolas,monospace;color:#78efbf;white-space:pre-wrap;min-height:26px}
-.lesson-visual{padding:12px;min-height:365px;display:flex;align-items:center;justify-content:center}
-.lesson-card{width:100%;border:1px solid #2d416c;border-radius:12px;background:#0a152b;padding:18px}
+.lesson-right-stack{display:flex;flex-direction:column;gap:10px;min-width:0}
+.lesson-io-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lesson-io-card{border:1px solid #293d67;border-radius:10px;background:#0d1830;overflow:hidden}
+.lesson-io-title{padding:8px 10px;background:#121f3a;font-size:10px;font-weight:800;color:#bfcff0;text-transform:uppercase;letter-spacing:.04em}
+.lesson-io-value{padding:10px;min-height:62px;background:#050a13;color:#79efbf;font:14px/1.55 Consolas,monospace;white-space:pre-wrap}
+.lesson-memory{border:1px solid #293d67;border-radius:10px;background:#0d1830;padding:10px}
+.lesson-memory-title{font-size:11px;font-weight:800;color:#dbe6fb;margin-bottom:8px}
+.lesson-memory-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.lesson-var{border:1px solid #2a416b;border-radius:8px;background:#091426;padding:8px;min-width:0}
+.lesson-var-name{font:700 11px Consolas,monospace;color:#7f94b8}
+.lesson-var-value{margin-top:4px;font:13px/1.4 Consolas,monospace;color:#f7cb5c;white-space:pre-wrap;overflow-wrap:anywhere}
+.lesson-visual-panel{border:1px solid #293d67;border-radius:10px;background:#0d1830;overflow:hidden}
+.lesson-visual{min-height:180px;padding:12px;display:flex;align-items:center;justify-content:center}
+.lesson-card{width:100%;border:1px solid #2d416c;border-radius:12px;background:#0a152b;padding:16px}
 .lesson-string{font:700 28px/1.5 Consolas,monospace;color:#4adca4;text-align:center}
-.lesson-row{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:12px 0}
+.lesson-row{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:11px 0}
 .lesson-char{min-width:48px;padding:10px;border-radius:9px;background:#172743;border:1px solid #2c416b;text-align:center;font:700 21px Consolas,monospace}
+.lesson-char.active{background:#2c5d4d;outline:2px solid #55e6ac}
 .lesson-index{color:#f7cb5c;font:12px Consolas,monospace;text-align:center;margin-top:4px}
-.lesson-pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#182744;border:1px solid #2c426d;color:#cbd8ef;font-size:11px;margin:3px}
-.lesson-explain{color:#c9d6ea;font-size:12px;line-height:1.6;margin-top:12px}
-.lesson-dryrun{margin-top:10px;padding:11px 12px;border:1px solid #2a416b;border-radius:10px;background:#0b172d}
+.lesson-pill{display:inline-block;padding:6px 9px;border-radius:999px;background:#182744;border:1px solid #2c426d;color:#cbd8ef;font-size:11px;margin:3px}
+.lesson-explain{color:#c9d6ea;font-size:12px;line-height:1.6;margin-top:10px}
+.lesson-dryrun{border:1px solid #293d67;border-radius:10px;background:#0d1830;padding:10px}
 .lesson-step-head{display:flex;justify-content:space-between;gap:8px;align-items:center}
 .lesson-step-title{font-weight:800;color:#dfe9ff;font-size:13px}.lesson-step-count{font-size:10px;color:#8da1c0}
 .lesson-step-action{margin-top:6px;color:#f7cb5c;font-size:12px;font-weight:700}
-.lesson-state{margin-top:8px;color:#cbd8ec;font-size:12px;line-height:1.55;white-space:pre-wrap}
-.lesson-transcript{margin-top:10px;border:1px solid #26395f;border-radius:10px;background:#0b152b;padding:11px;color:#afc0dc;font-size:11px;line-height:1.55;max-height:95px;overflow:auto}
+.lesson-state{margin-top:6px;color:#cbd8ec;font-size:12px;line-height:1.55;white-space:pre-wrap}
+.lesson-transcript{margin-top:10px;border:1px solid #26395f;border-radius:10px;background:#0b152b;padding:11px;color:#afc0dc;font-size:11px;line-height:1.55;max-height:90px;overflow:auto}
 .lesson-controls{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-@media(max-width:980px){.lesson-layout{grid-template-columns:190px minmax(0,1fr)}.lesson-learning-grid{grid-template-columns:1fr}}
-@media(max-width:800px){.lesson-layout{grid-template-columns:1fr}.lesson-chapters{max-height:220px}.lesson-code-area,.lesson-visual{min-height:300px}.lesson-code-line{font-size:14px}.lesson-title{font-size:20px}}
+@media(max-width:1100px){.lesson-learning-grid{grid-template-columns:1fr}.lesson-code-area{min-height:360px;max-height:360px}}
+@media(max-width:800px){.lesson-layout{grid-template-columns:1fr}.lesson-chapters{max-height:220px}.lesson-memory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lesson-code-area{min-height:300px;max-height:300px}.lesson-code-line{font-size:14px}}
+
+.lesson-chapters{max-height:220px}.lesson-code-area,.lesson-visual{min-height:300px}.lesson-code-line{font-size:14px}.lesson-title{font-size:20px}}
 .lesson-chapters{max-height:220px}.lesson-screen{min-height:420px}}
 
 </style>
@@ -673,7 +686,7 @@ STEP 10 → Explain your solution aloud</div>
       <div class="lesson-top">
         <div>
           <h2>🎥 Python Strings — Complete Visual Lesson</h2>
-          <div class="lesson-sub">In-site revision player for the Strings lesson. Use chapters and voice playback whenever you revise.</div>
+          <div class="lesson-sub">In-site Python Visualizer for Strings. Watch input → code → memory → visual state → output step by step, with voice explanations.</div>
         </div>
         <button type="button" class="action danger" onclick="closeStringsLesson()">Close</button>
       </div>
@@ -955,61 +968,103 @@ function getLessonTrace(item){
 function openStringsLesson(){document.getElementById("stringsLessonModal").style.display="block";lessonIndex=0;lessonPlaying=false;lessonStep=0;lessonBuildList();renderLesson();}
 function closeStringsLesson(){lessonStop();document.getElementById("stringsLessonModal").style.display="none";}
 function lessonBuildList(){document.getElementById("lessonChapterList").innerHTML=STRING_LESSON.map(function(item,i){return '<button type="button" onclick="lessonGo('+i+')">'+(i+1)+". "+lessonEscapeHtml(item[0])+'</button>';}).join("");}
-function lessonGetVisual(item,step){
-  var title=item[0], s=item[2]||"";
-  if(title==="Positive Indexing" || title==="Negative Indexing"){
-    var negative=title==="Negative Indexing",chars="PYTHON".split(""),active=(lessonTrace.stepInfo&&lessonTrace.stepInfo.line)||0;
-    var idxs=chars.map(function(ch,i){return '<div><div class="lesson-char '+((negative?i-6:i)===(lessonTrace.selectedIndex||999)?'active':'')+'">'+ch+'</div><div class="lesson-index">'+(negative?i-6:i)+'</div></div>';}).join("");
-    return '<div class="lesson-card"><div class="lesson-string">"PYTHON"</div><div class="lesson-row">'+idxs+'</div><div class="lesson-explain">The highlighted character is the one the current code line reads.</div></div>';
+
+function lessonGetInput(item){
+  var map={
+    "Positive Indexing":"Python",
+    "Negative Indexing":"Python",
+    "len() & Index Rule":"Python",
+    "Slicing":"Python",
+    "String Traversal":"cat",
+    "Case & Cleaning Methods":"  Python  ",
+    "Searching & Counting":"banana",
+    "split(), join(), partition()":"I love Python",
+    "Character Classification":"123",
+    "replace() & Prefix/Suffix Removal":"python.py",
+    "Core Placement Patterns":"education",
+    "Frequency Dictionary":"banana",
+    "Two Pointers & Sliding Window":"level",
+    "Regex Awareness":"abc123",
+    "Common Mistakes & Edge Cases":"education"
+  };
+  return map[item[0]] || "No input() used in this example";
+}
+function lessonGetOutput(item,step){
+  var t=getLessonTrace(item);
+  var s=t.steps[Math.max(0,Math.min(step,t.steps.length-1))]||{};
+  return s.result||"—";
+}
+function lessonGetMemory(item,step){
+  var title=item[0], t=getLessonTrace(item), s=t.steps[Math.max(0,Math.min(step,t.steps.length-1))]||{};
+  var vars=[];
+  function add(n,v){vars.push([n,v]);}
+  if(title==="Positive Indexing"||title==="Negative Indexing"){add("s",'"Python"');add(title==="Positive Indexing"?"index":"index",String((s.line>=2?(title==="Positive Indexing"?([0,0,2,5][step]||0):([-1,-1,-2,-6][step]||-1)):"—")));add("current",s.result||"—");}
+  else if(title==="len() & Index Rule"){add("s",'"Python"');add("n",step>=1?"6":"—");add("last",step>=2?"5":"—");}
+  else if(title==="Slicing"){add("s",'"Python"');add("expression",step===1?"s[1:4]":step===2?"s[:3]":step===3?"s[3:]":step===4?"s[::-1]":"—");add("result",s.result||"—");}
+  else if(title==="String Traversal"){add("s",'"cat"');add("ch",["—","—","c","a","t"][Math.min(step,4)]||"—");add("iteration",step<2?"—":String(Math.max(1,step-1)));}
+  else if(title==="Case & Cleaning Methods"){add("s",'"  Python  "');add("operation",step===1?"lower()":step===2?"upper()":step===3?"strip()":"—");add("value",s.result||"—");}
+  else if(title==="Searching & Counting"){add("s",'"banana"');add("method",step===1?"find":step===2?"count":step===3?"startswith":"—");add("value",s.result||"—");}
+  else if(title==="split(), join(), partition()"){add("s",'"I love Python"');add("words",step>=1?"['I', 'love', 'Python']":"—");add("result",step>=4?""I love Python"":"—");}
+  else if(title==="Character Classification"){add("s",'"123"');add("method",step===1?"isalpha":step===2?"isdigit":step===3?"isspace":"—");add("value",s.result||"—");}
+  else if(title==="replace() & Prefix/Suffix Removal"){add("s",'"python.py"');add("method",step===1?"replace":step===2?"removeprefix":step===3?"removesuffix":"—");add("result",s.result||"—");}
+  else if(title==="Immutability"){add("s",step===0||step===1?'"cat"':'"bat"');add("operation",step===1?"s[0] = "b"":step>=2?"new string":"—");add("status",step===1?"TypeError":step>=3?"updated":"—");}
+  else if(title==="ord() & chr()"){add("char",step===0?"A":"—");add("code",step===0?"65":"—");add("result",s.result||"—");}
+  else if(title==="String Formatting"){add("name",'"Sara"');add("age","20");add("output",s.result||"—");}
+  else if(title==="Padding & Alignment"){add("value",step===0?"cat":step===3?"7":"—");add("method",step===0?"center":step===1?"ljust":step===2?"rjust":"zfill");add("output",s.result||"—");}
+  else if(title==="Advanced Text Tools"){add("table",step>=0?"a→1, b→2, c→3":"—");add("translation",step>=1?"312":"—");add("bytes",step>=2?"b'hi'":"—");}
+  else if(title==="Core Placement Patterns"){add("s",'"education"');add("ch",step>=3?"e":"—");add("count",String([0,0,0,1,1,5][Math.min(step,5)]||0));}
+  else if(title==="Frequency Dictionary"){var f=[{b:0,a:0,n:0},{b:1,a:0,n:0},{b:1,a:1,n:0},{b:1,a:1,n:1},{b:1,a:2,n:1},{b:1,a:2,n:2},{b:1,a:3,n:2}][Math.min(step,6)]||{b:0,a:0,n:0};add("s",'"banana"');add("current",step>=2?["b","a","n","a","n","a"][Math.min(step-2,5)]:"—");add("freq",JSON.stringify(f));}
+  else if(title==="Two Pointers & Sliding Window"){var p=[[0,4],[0,4],[0,4],[0,4],[1,3],[1,3],[1,3],[2,2],[2,2],[2,2]][Math.min(step,9)];add("s",'"level"');add("left",String(p[0]));add("right",String(p[1]));add("compare",step>=3?"match":"—");}
+  else if(title==="Regex Awareness"){add("s",'"abc123"');add("pattern",'r"\\d+"');add("match",step>=3?"123":"—");}
+  else if(title==="Common Mistakes & Edge Cases"){add("ch",["—","e","e","e"][Math.min(step,3)]);add("isVowel",step>=2?"True":"False");add("output",s.result||"—");}
+  else if(title==="Final Mental Map"){add("need",s.action||"—");add("tool",s.result||"—");}
+  else {add("example",item[2]||"—");add("step",String(step+1));add("value",s.result||"—");}
+  return vars;
+}
+function lessonRenderMemory(item){
+  var vars=lessonGetMemory(item,lessonStep);
+  return '<div class="lesson-memory"><div class="lesson-memory-title">🧠 Variables / Memory — current state</div><div class="lesson-memory-grid">'+vars.map(function(v){return '<div class="lesson-var"><div class="lesson-var-name">'+lessonEscapeHtml(v[0])+'</div><div class="lesson-var-value">'+lessonEscapeHtml(v[1])+'</div></div>';}).join("")+'</div></div>';
+}
+function lessonRenderIO(item){
+  var input=lessonGetInput(item), output=lessonGetOutput(item,lessonStep);
+  return '<div class="lesson-io-grid"><div class="lesson-io-card"><div class="lesson-io-title">⌨ Input / stdin</div><div class="lesson-io-value">'+lessonEscapeHtml(input)+'</div></div><div class="lesson-io-card"><div class="lesson-io-title">🖥 Output / stdout</div><div class="lesson-io-value">'+lessonEscapeHtml(output)+'</div></div></div>';
+}
+function lessonVisualCard(item){
+  var title=item[0], t=getLessonTrace(item), s=t.steps[Math.max(0,Math.min(lessonStep,t.steps.length-1))]||{};
+  if(title==="Positive Indexing"||title==="Negative Indexing"){
+    var negative=title==="Negative Indexing",chars="PYTHON".split(""),sel=999;
+    if(lessonStep>=1)sel=negative?([-1,-2,-6][Math.min(lessonStep-1,2)]):([0,2,5][Math.min(lessonStep-1,2)]);
+    return '<div class="lesson-card"><div class="lesson-string">"PYTHON"</div><div class="lesson-row">'+chars.map(function(ch,i){var idx=negative?i-6:i;return '<div><div class="lesson-char '+(idx===sel?'active':'')+'">'+ch+'</div><div class="lesson-index">'+idx+'</div></div>';}).join("")+'</div><div class="lesson-explain">The highlighted character is exactly what the current code line reads.</div></div>';
   }
-  if(title==="Slicing")return '<div class="lesson-card"><div class="lesson-string">P Y T H O N</div><div class="lesson-row"><span class="lesson-pill">start included</span><span class="lesson-pill">end excluded</span><span class="lesson-pill">step = '+(lessonTrace.sliceStep||1)+'</span></div><div class="lesson-row">'+(lessonTrace.sliceResult?'<span class="lesson-pill" style="font-size:16px;color:#78efbf">'+lessonEscapeHtml(lessonTrace.sliceResult)+'</span>':'Run a step to see the selected section.')+'</div></div>';
-  if(title==="split(), join(), partition()")return '<div class="lesson-card"><div class="lesson-string">'+(lessonTrace.splitStage||"I love Python")+'</div><div class="lesson-row"><span class="lesson-pill">STRING</span><span>→</span><span class="lesson-pill">'+(lessonTrace.splitDone?'LIST':'split()')+'</span><span>→</span><span class="lesson-pill">'+(lessonTrace.joinDone?'STRING':'join()')+'</span></div><div class="lesson-explain">'+(lessonTrace.splitVisual||'Step through the code to watch the transformation.')+'</div></div>';
-  if(title==="Frequency Dictionary")return '<div class="lesson-card"><div class="lesson-string">banana</div><div class="lesson-row"><span class="lesson-pill">b: '+(lessonTrace.freq&&lessonTrace.freq.b||0)+'</span><span class="lesson-pill">a: '+(lessonTrace.freq&&lessonTrace.freq.a||0)+'</span><span class="lesson-pill">n: '+(lessonTrace.freq&&lessonTrace.freq.n||0)+'</span></div><div class="lesson-explain">Each loop iteration updates one dictionary entry.</div></div>';
-  if(title==="Two Pointers & Sliding Window")return '<div class="lesson-card"><div class="lesson-string">L E V E L</div><div class="lesson-row"><span class="lesson-pill">left = '+(lessonTrace.left==null?0:lessonTrace.left)+'</span><span class="lesson-pill">right = '+(lessonTrace.right==null?4:lessonTrace.right)+'</span></div><div class="lesson-explain">'+lessonEscapeHtml(lessonTrace.pointerState||'Move the pointers toward the middle.')+'</div></div>';
-  if(title==="String Traversal")return '<div class="lesson-card"><div class="lesson-string">c a t</div><div class="lesson-row"><span class="lesson-pill">current ch = '+lessonEscapeHtml(lessonTrace.currentChar||'?')+'</span><span class="lesson-pill">iteration = '+(lessonStep+1)+'</span></div><div class="lesson-explain">The loop takes one character at a time.</div></div>';
-  if(title==="Core Placement Patterns")return '<div class="lesson-card"><div class="lesson-string">education</div><div class="lesson-row"><span class="lesson-pill">current = '+lessonEscapeHtml(lessonTrace.currentChar||'?')+'</span><span class="lesson-pill">count = '+(lessonTrace.count==null?0:lessonTrace.count)+'</span></div><div class="lesson-explain">The visual counter changes exactly when the highlighted condition is true.</div></div>';
-  if(title==="Common Mistakes & Edge Cases")return '<div class="lesson-card"><div class="lesson-row"><span class="lesson-pill" style="font-size:18px;background:#163b31">current char = '+lessonEscapeHtml(lessonTrace.currentChar||'?')+'</span></div><div class="lesson-row"><span class="lesson-pill">vowel test → '+(lessonTrace.isVowel?'True':'False')+'</span></div><div class="lesson-explain">This visual shows why <b>in</b> is used for membership testing.</div></div>';
-  return '<div class="lesson-card"><div class="lesson-code">'+lessonEscapeHtml(s)+'</div><div class="lesson-explain">'+lessonEscapeHtml(item[3]||"Step through the code to connect each line to the result.")+'</div></div>';
+  if(title==="String Traversal"){var c=["—","—","c","a","t"][Math.min(lessonStep,4)];return '<div class="lesson-card"><div class="lesson-string">c  a  t</div><div class="lesson-row"><span class="lesson-pill">current ch = '+lessonEscapeHtml(c)+'</span><span class="lesson-pill">iteration = '+(lessonStep<2?"—":String(lessonStep-1))+'</span></div><div class="lesson-explain">Each loop pass takes exactly one character from left to right.</div></div>';}
+  if(title==="Core Placement Patterns"){var c=["—","—","—","e","e","o"][Math.min(lessonStep,5)],count=[0,0,0,1,1,5][Math.min(lessonStep,5)];return '<div class="lesson-card"><div class="lesson-string">education</div><div class="lesson-row"><span class="lesson-pill">current char = '+c+'</span><span class="lesson-pill">vowel? '+(lessonStep>=3&&lessonStep!==4?'True':'—')+'</span><span class="lesson-pill">count = '+count+'</span></div><div class="lesson-explain">The counter changes only when the membership condition is true.</div></div>';}
+  if(title==="Frequency Dictionary"){var f=lessonGetMemory(item,lessonStep).find(function(x){return x[0]==="freq"});return '<div class="lesson-card"><div class="lesson-string">banana</div><div class="lesson-row">'+String(f?f[1]:"{}").replace(/[{}]/g,"").split(",").filter(Boolean).map(function(x){return '<span class="lesson-pill">'+lessonEscapeHtml(x.replaceAll('"',''))+'</span>';}).join("")+'</div><div class="lesson-explain">Watch the dictionary grow after each character is processed.</div></div>';}
+  if(title==="Two Pointers & Sliding Window"){var m=lessonGetMemory(item,lessonStep),l=m.find(function(x){return x[0]==="left"}),r=m.find(function(x){return x[0]==="right"});return '<div class="lesson-card"><div class="lesson-string">L E V E L</div><div class="lesson-row"><span class="lesson-pill">left = '+(l?l[1]:"0")+'</span><span class="lesson-pill">right = '+(r?r[1]:"4")+'</span></div><div class="lesson-explain">'+lessonEscapeHtml(s.state||"Compare the mirrored characters and move the pointers inward.")+'</div></div>';}
+  if(title==="split(), join(), partition()")return '<div class="lesson-card"><div class="lesson-row"><span class="lesson-pill">'+(lessonStep>=1?'STRING':'I love Python')+'</span><span>→</span><span class="lesson-pill">'+(lessonStep>=1?"['I', 'love', 'Python']":"split()")+'</span><span>→</span><span class="lesson-pill">'+(lessonStep>=4?'"I love Python"':"join()")+'</span></div><div class="lesson-explain">'+(lessonStep>=4?"The list has been converted back into one string.":"split() creates list elements from the sentence.")+'</div></div>';
+  if(title==="Slicing")return '<div class="lesson-card"><div class="lesson-string">P Y T H O N</div><div class="lesson-row"><span class="lesson-pill">expression = '+(lessonStep===1?"s[1:4]":lessonStep===2?"s[:3]":lessonStep===3?"s[3:]":lessonStep===4?"s[::-1]":"—")+'</span><span class="lesson-pill">result = '+(s.result||"—")+'</span></div><div class="lesson-explain">End index is excluded. Negative step reverses the direction.</div></div>';
+  return '<div class="lesson-card"><div class="lesson-code">'+lessonEscapeHtml(item[2]||"")+'</div><div class="lesson-explain">'+lessonEscapeHtml(item[3]||"")+'</div></div>';
 }
-var lessonTrace={};
-function lessonApplyTrace(item,stepIndex){
-  var title=item[0], t=getLessonTrace(item);
-  var step=t.steps[Math.max(0,Math.min(stepIndex,t.steps.length-1))]||{line:1,action:"Step",state:"",result:""};
-  lessonTrace={stepInfo:step,selectedIndex:999,sliceResult:"",sliceStep:1,splitStage:"I love Python",splitDone:false,joinDone:false,freq:{b:0,a:0,n:0},left:0,right:4,currentChar:"?",count:0,isVowel:false,pointerState:"Move the pointers toward the middle."};
-  if(title==="Positive Indexing" && step.line>=2)lessonTrace.selectedIndex=[null,0,2,5][Math.min(stepIndex,3)]||999;
-  if(title==="Negative Indexing" && step.line>=2){lessonTrace.selectedIndex=[null,-1,-2,-6][Math.min(stepIndex,3)]||999;}
-  if(title==="Slicing"){var vals=["","YTH","PYT","HON","NOHTYP"];lessonTrace.sliceResult=vals[Math.min(stepIndex,4)]||"";lessonTrace.sliceStep=stepIndex===4?-1:1;}
-  if(title==="split(), join(), partition()"){lessonTrace.splitDone=stepIndex>=1;lessonTrace.joinDone=stepIndex>=3;lessonTrace.splitStage=stepIndex>=1?"['I', 'love', 'Python']":"I love Python";lessonTrace.splitVisual=stepIndex<3?"split() creates a list of words.":"join() rebuilds one string with spaces.";}
-  if(title==="Frequency Dictionary"){var f=[{b:0,a:0,n:0},{b:1,a:0,n:0},{b:1,a:1,n:0},{b:1,a:1,n:1},{b:1,a:2,n:1},{b:1,a:2,n:2},{b:1,a:3,n:2}][Math.min(stepIndex,6)];lessonTrace.freq=f||lessonTrace.freq;}
-  if(title==="String Traversal"){lessonTrace.currentChar=["?","?","c","a","t"][Math.min(stepIndex,4)];}
-  if(title==="Core Placement Patterns"){var cs=["?","?","?","e","e","5"];lessonTrace.currentChar=cs[Math.min(stepIndex,5)];lessonTrace.count=[0,0,0,1,1,5][Math.min(stepIndex,5)];}
-  if(title==="Common Mistakes & Edge Cases"){var chars=["?","e","e","e"];lessonTrace.currentChar=chars[Math.min(stepIndex,3)];lessonTrace.isVowel=stepIndex>=2;}
-  if(title==="Two Pointers & Sliding Window"){var pairs=[[0,4],[0,4],[0,4],[0,4],[1,3],[1,3],[1,3],[2,2],[2,2],[2,2]];var p=pairs[Math.min(stepIndex,pairs.length-1)];lessonTrace.left=p[0];lessonTrace.right=p[1];lessonTrace.pointerState=stepIndex>=9?"All mirrored characters matched.":"Compare the characters at the two pointer positions.";}
-  renderLesson();
-}
+function lessonGetVisual(item){return '<div style="width:100%">'+lessonRenderIO(item)+lessonRenderMemory(item)+'<div class="lesson-visual-panel"><div class="lesson-panel-title">🎨 Visual state — changes with the running line</div><div class="lesson-visual">'+lessonVisualCard(item)+'</div></div></div>';}
 function lessonRenderCode(item){
-  var t=getLessonTrace(item), active=(t.steps[lessonStep]||{}).line||0;
+  var t=getLessonTrace(item),active=(t.steps[lessonStep]||{}).line||0;
   return t.code.map(function(line,i){return '<div class="lesson-code-line '+((i+1)===active?'active':'')+'"><div class="ln">'+(i+1)+'</div><div class="src">'+lessonEscapeHtml(line)+'</div></div>';}).join("");
 }
 function lessonRenderStepPanel(item){
-  var t=getLessonTrace(item), step=t.steps[Math.max(0,Math.min(lessonStep,t.steps.length-1))]||{line:1,action:"Step",state:"",result:""}, count=t.steps.length;
-  return '<div class="lesson-dryrun"><div class="lesson-step-head"><div class="lesson-step-title">Dry Run — '+lessonEscapeHtml(step.action)+'</div><div class="lesson-step-count">Step '+(Math.min(lessonStep+1,count))+' / '+count+'</div></div><div class="lesson-step-action">What happens now?</div><div class="lesson-state">'+lessonEscapeHtml(step.state)+'</div><div class="lesson-result" style="margin-top:8px;border:1px solid #26385c;border-radius:8px"><div class="lesson-result-label">Current output / value</div><div class="lesson-result-value">'+lessonEscapeHtml(step.result||"—")+'</div></div></div>';
+  var t=getLessonTrace(item),step=t.steps[Math.max(0,Math.min(lessonStep,t.steps.length-1))]||{line:1,action:"Step",state:"",result:""},count=t.steps.length;
+  return '<div class="lesson-dryrun"><div class="lesson-step-head"><div class="lesson-step-title">▶ Dry Run — '+lessonEscapeHtml(step.action)+'</div><div class="lesson-step-count">Step '+Math.min(lessonStep+1,count)+' / '+count+'</div></div><div class="lesson-step-action">What Python is doing now</div><div class="lesson-state">'+lessonEscapeHtml(step.state)+'</div></div>';
 }
 function renderLesson(){
-  var item=STRING_LESSON[lessonIndex], trace=getLessonTrace(item);
+  var item=STRING_LESSON[lessonIndex],trace=getLessonTrace(item);
   lessonStep=Math.max(0,Math.min(lessonStep,(trace.steps.length||1)-1));
   document.getElementById("lessonTitle").textContent=item[0];
-  document.getElementById("lessonCount").textContent="Chapter "+(lessonIndex+1)+" of "+STRING_LESSON.length+" • Step-by-step code + dry run";
+  document.getElementById("lessonCount").textContent="Chapter "+(lessonIndex+1)+" of "+STRING_LESSON.length+" • Python Visualizer + synchronized dry run";
   document.getElementById("lessonBar").style.width=((lessonIndex+1)/STRING_LESSON.length*100)+"%";
-  document.getElementById("lessonVisual").innerHTML='<div style="width:100%">'+
-    '<div class="lesson-learning-grid">'+
-      '<div class="lesson-panel"><div class="lesson-panel-title">💻 Code — line highlighted as it runs</div><div class="lesson-code-area">'+lessonRenderCode(item)+'</div></div>'+
-      '<div class="lesson-panel"><div class="lesson-panel-title">👀 Visual + Dry Run — matches the highlighted line</div><div class="lesson-visual">'+lessonGetVisual(item,lessonStep)+'</div>'+lessonRenderStepPanel(item)+'</div>'+
-    '</div></div>';
+  document.getElementById("lessonVisual").innerHTML='<div style="width:100%"><div class="lesson-learning-grid"><div class="lesson-panel"><div class="lesson-panel-title">💻 Python Code — highlighted line is executing</div><div class="lesson-code-area">'+lessonRenderCode(item)+'</div></div><div class="lesson-right-stack">'+lessonGetVisual(item)+lessonRenderStepPanel(item)+'</div></div></div>';
   document.getElementById("lessonTranscript").textContent=item[1];
   document.querySelectorAll("#lessonChapterList button").forEach(function(b,i){b.classList.toggle("active",i===lessonIndex);});
   document.getElementById("lessonPlayBtn").textContent=lessonPlaying?"⏸ Pause Auto Run":"▶ Auto Run";
 }
+
 function lessonBuildList(){document.getElementById("lessonChapterList").innerHTML=STRING_LESSON.map(function(item,i){return '<button type="button" onclick="lessonGo('+i+')">'+(i+1)+". "+lessonEscapeHtml(item[0])+'</button>';}).join("");}
 function lessonSpeak(){if("speechSynthesis" in window){speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(STRING_LESSON[lessonIndex][1]);u.rate=.92;u.pitch=1;u.onend=function(){if(lessonPlaying){lessonStartAuto();}};speechSynthesis.speak(u);}else alert("Voice playback is not supported by this browser. The visual lesson and dry-run controls are still available.");}
 function lessonTogglePlay(){if(lessonPlaying){lessonStop();renderLesson();}else{lessonPlaying=true;renderLesson();lessonStartAuto();}}

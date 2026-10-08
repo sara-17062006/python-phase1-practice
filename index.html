@@ -99,6 +99,13 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 .cheat-section{padding:14px;border:1px solid #26385f;border-radius:13px;background:#0f1930}
 .cheat-section h3{margin:0 0 8px;font-size:15px;color:#dce7ff}
 .cheat-section .desc{color:#91a4c3;font-size:11px;line-height:1.5;margin-bottom:8px}
+.string-video-board{grid-column:1/-1;padding:16px;border:1px solid #36507c;border-radius:15px;background:linear-gradient(135deg,#0c1730,#101d38);box-shadow:0 10px 28px rgba(0,0,0,.16)}
+.string-video-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}.string-video-head h3{margin:0;font-size:18px}
+.string-video-note{color:#9eb0cd;font-size:11px;line-height:1.5;margin-top:4px}.string-video-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.string-video-tag{padding:5px 8px;border-radius:999px;background:#1b2b50;border:1px solid #385486;color:#d5e4ff;font-size:10px;font-weight:800}
+.string-video-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}.string-video-col{border:1px solid #2d4368;border-radius:11px;background:#0b1428;overflow:hidden}.string-video-col h4{margin:0;padding:8px 9px;background:#bfe8f5;color:#122137;font-size:12px;text-align:center}.string-video-col .sv-body{padding:9px}.sv-label{font-size:9px;color:#8297b9;text-transform:uppercase;letter-spacing:.08em;margin:7px 0 4px}.sv-item{padding:7px 8px;margin:5px 0;border:1px solid #3c506e;border-radius:8px;background:#091223;color:#edf4ff;font:12px/1.35 Consolas,monospace;white-space:pre-wrap}
+.string-video-operator{margin-top:10px;padding:10px 11px;border-radius:10px;border:1px solid #725d11;background:#231f08;color:#fff0a1;font:12px/1.55 Consolas,monospace}.string-video-foot{margin-top:10px;padding:10px 11px;border-radius:10px;border:1px dashed #35517d;background:#0a1326;color:#bfd0ea;font-size:11px;line-height:1.55}
+@media(max-width:1050px){.string-video-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.string-video-head{flex-direction:column}.string-video-tags{justify-content:flex-start}.string-video-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .cheat-code{margin:7px 0 0;background:#050a13;border:1px solid #26385c;border-radius:9px;padding:10px;color:#d9e6ff;font:12px/1.55 Consolas,monospace;white-space:pre-wrap;overflow:auto}
 .cheat-chip{display:inline-block;padding:4px 7px;border-radius:999px;background:#182744;border:1px solid #2b426d;color:#cad7ee;font-size:10px;margin:2px}
 .cheat-table{width:100%;border-collapse:collapse;font-size:11px}
@@ -148,6 +155,86 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
       <input id="cheatSearch" class="cheat-search" placeholder="Search cheat sheet: list, dictionary, recursion, binary search..." oninput="filterCheatSheet()">
 
       <div id="cheatSections" class="cheat-grid">
+<section class="string-video-board" data-cheat="strings string cheat sheet built-in functions methods str class operators types math transformations cleaning search validation type str len count replace split lstrip rstrip strip lower upper startswith endswith find isalpha isnumeric concatenation repetition membership extraction slicing">
+  <div class="string-video-head">
+    <div>
+      <h3>🧵 String — Video Cheat Sheet</h3>
+      <div class="string-video-note">Based directly on the four String screenshots you supplied. The wording, categories and examples below follow the screenshots.</div>
+    </div>
+    <div class="string-video-tags">
+      <span class="string-video-tag">Built-in Functions</span>
+      <span class="string-video-tag">Methods of &lt;str-class&gt;</span>
+      <span class="string-video-tag">Operators</span>
+    </div>
+  </div>
+
+  <div class="string-video-grid">
+    <div class="string-video-col">
+      <h4>Types</h4>
+      <div class="sv-body">
+        <div class="sv-item">type()</div>
+        <div class="sv-item">str()</div>
+      </div>
+    </div>
+
+    <div class="string-video-col">
+      <h4>Math</h4>
+      <div class="sv-body">
+        <div class="sv-item">len()</div>
+        <div class="sv-item">count()</div>
+      </div>
+    </div>
+
+    <div class="string-video-col">
+      <h4>Transformations</h4>
+      <div class="sv-body">
+        <div class="sv-item">replace()</div>
+        <div class="sv-item">&#39;H&#39;+&#39;i&#39;</div>
+        <div class="sv-item">f{ }</div>
+        <div class="sv-item">split()</div>
+        <div class="sv-item">&#39;ha&#39; * 2</div>
+        <div class="sv-label">Extraction</div>
+        <div class="sv-item">&#39;cat&#39;[0]</div>
+        <div class="sv-item">&#39;cat&#39;[1:3]</div>
+      </div>
+    </div>
+
+    <div class="string-video-col">
+      <h4>Cleaning</h4>
+      <div class="sv-body">
+        <div class="sv-label">Clean Whitespace</div>
+        <div class="sv-item">lstrip()</div>
+        <div class="sv-item">rstrip()</div>
+        <div class="sv-item">strip()</div>
+        <div class="sv-label">Clean Cases</div>
+        <div class="sv-item">lower()</div>
+        <div class="sv-item">upper()</div>
+      </div>
+    </div>
+
+    <div class="string-video-col">
+      <h4>Search</h4>
+      <div class="sv-body">
+        <div class="sv-item">startswith()</div>
+        <div class="sv-item">endswith()</div>
+        <div class="sv-item">find()</div>
+        <div class="sv-item">&#39;a&#39; in &#39;cat&#39;</div>
+      </div>
+    </div>
+
+    <div class="string-video-col">
+      <h4>Validation</h4>
+      <div class="sv-body">
+        <div class="sv-item">isalpha()</div>
+        <div class="sv-item">isnumeric()</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="string-video-operator">Operators highlighted in the screenshots: &#39;H&#39;+&#39;i&#39; &nbsp; • &nbsp; &#39;ha&#39; * 2 &nbsp; • &nbsp; &#39;a&#39; in &#39;cat&#39;</div>
+  <div class="string-video-foot"><b>Video screenshot map:</b> Types/Math/Transformations/Cleaning/Search/Validation are the main categories. The supplied frames also explicitly highlight Built-in Functions, Methods of &lt;str-class&gt;, and Operators.</div>
+</section>
+
 
         <section class="cheat-section" data-cheat="basics input output print variables comments">
           <h3>1. Basics, Input & Output</h3>

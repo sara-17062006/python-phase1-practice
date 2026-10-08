@@ -107,6 +107,34 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 .cheat-callout{padding:11px 12px;border-radius:10px;border:1px solid #3a4e7c;background:#0b152b;color:#c7d7ef;font-size:11px;line-height:1.6;margin-top:10px}
 @media(max-width:800px){.cheat-grid{grid-template-columns:1fr}.cheat-top{flex-direction:column}}
 
+
+/* Strings Visual Lesson Player */
+.lesson-modal{max-width:1180px!important;background:#0a1224!important}
+.lesson-shell{color:#eef4ff}
+.lesson-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:14px}
+.lesson-top h2{margin:0;font-size:24px}.lesson-sub{color:#94a7c6;font-size:12px;margin-top:5px}
+.lesson-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:12px}
+.lesson-chapters{max-height:620px;overflow:auto;padding:10px}
+.lesson-chapters button{width:100%;text-align:left;border:1px solid transparent;background:transparent;color:#b9c7df;border-radius:8px;padding:8px;margin:2px 0;cursor:pointer;font-size:11px}
+.lesson-chapters button.active{background:#183164;border-color:#35579a;color:#fff}
+.lesson-stage{min-width:0}
+.lesson-screen{min-height:390px;border:1px solid #293b62;border-radius:15px;background:#071022;padding:18px;display:flex;flex-direction:column}
+.lesson-title{font-size:22px;font-weight:800}.lesson-caption{font-size:11px;color:#91a4c3;margin-top:5px}
+.lesson-visual{flex:1;display:grid;place-items:center;margin:14px 0}
+.lesson-card{width:min(760px,100%);border:1px solid #2d416c;border-radius:13px;background:#0f1a31;padding:20px}
+.lesson-string{font:700 28px/1.5 Consolas,monospace;color:#4adca4;text-align:center}
+.lesson-row{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:12px 0}
+.lesson-char{min-width:48px;padding:9px;border-radius:9px;background:#172743;border:1px solid #2c416b;text-align:center;font:700 21px Consolas,monospace}
+.lesson-index{color:#f7cb5c;font:12px Consolas,monospace;text-align:center;margin-top:4px}
+.lesson-code{white-space:pre-wrap;background:#050a13;border:1px solid #2c416b;border-radius:10px;padding:13px;font:12px/1.6 Consolas,monospace;color:#e6efff}
+.lesson-pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#182744;border:1px solid #2c426d;color:#cbd8ef;font-size:10px;margin:3px}
+.lesson-explain{color:#c9d6ea;font-size:12px;line-height:1.6;margin-top:12px}
+.lesson-controls{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.lesson-progress{height:8px;background:#1e2f4d;border-radius:999px;overflow:hidden;margin:9px 0}
+.lesson-progress>div{height:100%;background:#6f84f5;width:0}
+.lesson-transcript{margin-top:10px;border:1px solid #26395f;border-radius:10px;background:#0b152b;padding:11px;color:#afc0dc;font-size:11px;line-height:1.55;max-height:115px;overflow:auto}
+@media(max-width:800px){.lesson-layout{grid-template-columns:1fr}.lesson-chapters{max-height:220px}.lesson-screen{min-height:420px}}
+
 </style>
 </head>
 <body>
@@ -115,7 +143,7 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 <aside>
 <input id="search" class="search" placeholder="Search problems" oninput="renderList()">
 <div class="progress"><b id="progressText">0 / 54 completed</b><div class="bar"><div id="fill" class="fill"></div></div><div class="small" style="margin-top:6px">Code, inputs and progress are saved in this browser.</div></div>
-<div class="actions"><button class="action" onclick="resetAll()">Reset</button><button class="action" onclick="copyProgress()">Copy Progress</button><button class="action" onclick="openRoadmap()">🗺 ROADMAP</button><button class="action" onclick="openCheatSheet()">📘 CHEAT SHEET</button></div>
+<div class="actions"><button class="action" onclick="resetAll()">Reset</button><button class="action" onclick="copyProgress()">Copy Progress</button><button class="action" onclick="openRoadmap()">🗺 ROADMAP</button><button class="action" onclick="openCheatSheet()">📘 CHEAT SHEET</button><button class="action" onclick="openStringsLesson()">🎥 STRINGS LESSON</button></div>
 <div class="actions"><button class="action primary" onclick="finalReview()">🤖 FINAL REVIEW — All 54</button></div>
 <div class="small" style="margin:7px 0">Final Review sends the 54 core submissions plus the bonus recursion problem to the secure Vercel review endpoint.</div><div class="progress" style="margin-top:10px"><b>Placement path</b><div class="small" style="margin-top:5px">11 phases • 350 core problems • Your Phase 1 foundation is complete.</div></div>
 <div class="list" id="list"></div>
@@ -619,6 +647,44 @@ STEP 10 → Explain your solution aloud</div>
     </div>
   </div>
 </div>
+
+<div class="modal" id="stringsLessonModal">
+  <div class="modalbox lesson-modal">
+    <div class="lesson-shell">
+      <div class="lesson-top">
+        <div>
+          <h2>🎥 Python Strings — Complete Visual Lesson</h2>
+          <div class="lesson-sub">In-site revision player for the Strings lesson. Use chapters and voice playback whenever you revise.</div>
+        </div>
+        <button type="button" class="action danger" onclick="closeStringsLesson()">Close</button>
+      </div>
+      <div class="lesson-layout">
+        <aside class="review-panel lesson-chapters">
+          <div style="font-weight:800;margin-bottom:8px">Chapters</div>
+          <div id="lessonChapterList"></div>
+        </aside>
+        <section class="lesson-stage">
+          <div class="lesson-screen">
+            <div>
+              <div id="lessonTitle" class="lesson-title"></div>
+              <div id="lessonCount" class="lesson-caption"></div>
+            </div>
+            <div class="lesson-progress"><div id="lessonBar"></div></div>
+            <div id="lessonVisual" class="lesson-visual"></div>
+            <div id="lessonTranscript" class="lesson-transcript"></div>
+            <div class="lesson-controls">
+              <button type="button" class="action" onclick="lessonPrev()">← Previous</button>
+              <button type="button" class="action primary" id="lessonPlayBtn" onclick="lessonTogglePlay()">▶ Play Voice</button>
+              <button type="button" class="action" onclick="lessonNext()">Next →</button>
+              <button type="button" class="action" onclick="lessonSpeak()">🔊 Replay Voice</button>
+              <button type="button" class="action" onclick="lessonStop()">⏹ Stop</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="modal" id="modal"><div class="modalbox review-modal">
 <div class="review-dashboard" id="reviewDashboard">
   <div class="review-top">
@@ -715,6 +781,33 @@ STEP 10 → Explain your solution aloud</div>
 </div>
 
 <script>
+
+
+var STRING_LESSON=[["What is a String?","A string is text represented as a sequence of characters. In Python, strings are immutable sequences of Unicode code points.","s = \"Python\"","Each character is one element of the sequence."],["String Literals & Escapes","You can use single quotes, double quotes, and triple quotes. Escape sequences represent special characters such as new lines and tabs. Raw strings are useful when backslashes should remain mostly literal.","a = 'Python'\\nb = \"Python\"\\nc = \"A\\nB\"\\nd = r\"C:\\\\Users\"","\\\\n = newline   •   \\\\t = tab   •   \\\\\\\\ = backslash"],["Positive Indexing","Python starts indexing at zero. The first character is index 0 and the last valid positive index is length minus 1.","s[0]  # P\\ns[2]  # t\\ns[5]  # n","One character → s[i]"],["Negative Indexing","Negative indexes count from the end. Negative one is the last character, negative two is the second last, and so on.","s[-1]  # n\\ns[-2]  # o","Use this when you need characters from the end."],["len() & Index Rule","len() gives the number of characters. For length n, the valid positive indexes are 0 through n-1.","len(s)\\nlast_index = len(s) - 1","Avoid off-by-one errors."],["Slicing","Slicing extracts part of a string. The start is included and the end is excluded. A third value controls the step.","s[start:end:step]\\ns[1:4]\\ns[::-1]","End excluded • negative step moves backwards."],["String Operators","Strings support concatenation, repetition, comparison, and membership.","\"Py\" + \"thon\"\\n\"ha\" * 3\\n\"a\" in \"cat\"","Use in/not in for membership checks."],["Built-in Functions","Useful built-ins include len, str, ord, chr, enumerate, sorted, reversed, min, and max.","len(s)\\nord('A')\\nchr(65)","Know what each returns."],["String Traversal","Use for ch in s when you need characters. Use range(len(s)) when you need indexes. Use enumerate when you need both.","for ch in s:\\n    ...\\n\\nfor i, ch in enumerate(s):\\n    ...","Choose the loop based on the information you need."],["Case & Cleaning Methods","Important case methods include lower, upper, capitalize, title, swapcase, and casefold. Cleaning methods include strip, lstrip, and rstrip.","s.lower()\\ns.upper()\\ns.strip()","Methods return new strings because strings are immutable."],["Searching & Counting","Use find/rfind, index/rindex, startswith, endswith, and count. find returns -1 when absent; index raises ValueError when absent.","s.find(\"x\")\\ns.count(\"a\")","Know the difference between find and index."],["split(), join(), partition()","split changes a string into a list of pieces. join builds a string from an iterable of strings. partition splits once into three parts.","words = s.split()\\n\" \".join(words)","Mental model: STRING → split → LIST → join → STRING."],["Character Classification","Important is methods include isalpha, isdigit, isdecimal, isnumeric, isalnum, isspace, islower, isupper, istitle, isprintable, isascii, and isidentifier.","s.isalpha()\\ns.isdigit()\\ns.isspace()","Use the test that matches the exact requirement."],["replace() & Prefix/Suffix Removal","replace transforms matching text. removeprefix and removesuffix target exact boundaries.","s.replace(\"py\",\"Py\")\\ns.removeprefix(\"http://\")","They return new strings."],["Immutability","You cannot assign directly to one indexed character. Create a new string, use slicing, or use a list and join it back.","s = \"cat\"\\n# s[0] = \"b\"  ❌\\ns = \"b\" + s[1:]","This explains many string behaviors."],["ord() & chr()","ord converts a character to its Unicode code point. chr converts a code point back to a character.","ord('A')  # 65\\nchr(65)   # 'A'","Useful for alphabet math and character shifting."],["String Formatting","F-strings are the main modern formatting tool. format() is also important. Format specifications control precision, width, and alignment.","name = \"Sara\"\\nf\"Hello {name}\"\\nf\"{3.14159:.2f}\"","Formatting is mainly for clear, controlled output."],["Padding & Alignment","center, ljust, rjust, and zfill format text into fixed widths.","\"cat\".center(9)\\n\"7\".zfill(3)","Useful for formatted output."],["Advanced Text Tools","translate/maketrans, expandtabs, encode, partition, format_map, and repr are useful specialized tools.","str.maketrans(...)\\ns.translate(...)\\ns.encode()","Know the concept; memorize only when a problem needs it."],["Core Placement Patterns","Common patterns include counting, filtering, reversing, palindrome checking, word processing, duplicate detection, and anagrams.","count = 0\\nfor ch in s:\\n    if ch in \"aeiou\":\\n        count += 1","Choose loop, slice, method, or dictionary based on the requirement."],["Frequency Dictionary","A dictionary turns characters into keys and their counts into values. This is one of the most reusable placement patterns.","freq = {}\\nfor ch in s:\\n    freq[ch] = freq.get(ch, 0) + 1","Used for duplicates, anagrams, and first non-repeating character."],["Two Pointers & Sliding Window","Two pointers use left/right positions. Sliding window maintains a current substring while boundaries move.","l, r = 0, len(s)-1\\nwhile l < r:\\n    ...","This bridges basic strings to harder placement problems."],["Regex Awareness","Python's re module handles regular expressions. Learn normal string methods first, then use regex for complex text patterns.","import re\\nre.search(r\"\\\\d+\", s)","Regex is optional for now but useful to know."],["Common Mistakes & Edge Cases","Watch for character-versus-choice comparisons, invalid ranges, slicing boundaries, immutability, case differences, find/index behavior, and join type errors.","if ch in \"aeiou\":\\nfor i in range(len(s))","Test empty strings, one character, spaces, duplicates, mixed case, digits, punctuation, and boundaries."],["Final Mental Map","One character → indexing. Section → slicing. Every character → traversal. Length → len. Words → split. Build a string → join. Frequency → dictionary. Both ends → two pointers. Moving substring → sliding window. Complex text pattern → regex.","index → slice → loop → methods → dict → pointers","This is the decision map you will use in placement questions."]];
+var lessonIndex=0;
+var lessonPlaying=false;
+function lessonEsc(s){return String(s||"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");}
+function lessonVisualHtml(item){
+  var title=item[0].toLowerCase(), examples=item[2]||"", explain=item[3]||"", out='<div class="lesson-card">';
+  if(title.includes("index")){var chars="PYTHON".split("");out+='<div class="lesson-string">"PYTHON"</div><div class="lesson-row">'+chars.map(function(ch,i){return '<div><div class="lesson-char">'+ch+'</div><div class="lesson-index">'+(title.includes("negative")?String(i-6):String(i))+'</div></div>';}).join("")+'</div>';}
+  else if(title.includes("slicing"))out+='<div class="lesson-string">s[start:end:step]</div><div class="lesson-row"><span class="lesson-pill">start included</span><span class="lesson-pill">end excluded</span><span class="lesson-pill">step controls movement</span></div>';
+  else if(title.includes("split"))out+='<div class="lesson-row"><span class="lesson-pill">STRING</span><span>→</span><span class="lesson-pill">split()</span><span>→</span><span class="lesson-pill">LIST</span><span>→</span><span class="lesson-pill">join()</span><span>→</span><span class="lesson-pill">STRING</span></div>';
+  else if(title.includes("frequency"))out+='<div class="lesson-string">"banana"</div><div class="lesson-row"><span class="lesson-pill">b : 1</span><span class="lesson-pill">a : 3</span><span class="lesson-pill">n : 2</span></div>';
+  else if(title.includes("two pointers"))out+='<div class="lesson-string">P Y T H O N</div><div class="lesson-row"><span class="lesson-pill">LEFT →</span><span class="lesson-pill">characters</span><span class="lesson-pill">← RIGHT</span></div>';
+  else if(title.includes("common mistakes"))out+='<div class="lesson-row"><span class="lesson-pill" style="background:#4a1b28">❌ ch == "aeiou"</span><span class="lesson-pill">✅ ch in "aeiou"</span></div>';
+  else out+='<div class="lesson-code">'+lessonEsc(examples)+'</div>';
+  out+='<div class="lesson-explain">'+lessonEsc(explain)+'</div></div>';return out;
+}
+function openStringsLesson(){document.getElementById("stringsLessonModal").style.display="block";lessonIndex=0;lessonPlaying=false;lessonBuildList();renderLesson();}
+function closeStringsLesson(){lessonStop();document.getElementById("stringsLessonModal").style.display="none";}
+function lessonBuildList(){document.getElementById("lessonChapterList").innerHTML=STRING_LESSON.map(function(item,i){return '<button type="button" onclick="lessonGo('+i+')">'+(i+1)+". "+lessonEsc(item[0])+'</button>';}).join("");}
+function renderLesson(){var item=STRING_LESSON[lessonIndex];document.getElementById("lessonTitle").textContent=item[0];document.getElementById("lessonCount").textContent="Chapter "+(lessonIndex+1)+" of "+STRING_LESSON.length;document.getElementById("lessonBar").style.width=((lessonIndex+1)/STRING_LESSON.length*100)+"%";document.getElementById("lessonVisual").innerHTML=lessonVisualHtml(item);document.getElementById("lessonTranscript").textContent=item[1];document.querySelectorAll("#lessonChapterList button").forEach(function(b,i){b.classList.toggle("active",i===lessonIndex);});document.getElementById("lessonPlayBtn").textContent=lessonPlaying?"⏸ Pause Voice":"▶ Play Voice";}
+function lessonSpeak(){if("speechSynthesis" in window){speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(STRING_LESSON[lessonIndex][1]);u.rate=.92;u.pitch=1;u.onend=function(){if(lessonPlaying){lessonNext(true);}};speechSynthesis.speak(u);}else alert("Voice playback is not supported by this browser. The visual lesson and transcript are still available.");}
+function lessonTogglePlay(){if(lessonPlaying){lessonStop();renderLesson();}else{lessonPlaying=true;renderLesson();lessonSpeak();}}
+function lessonStop(){if("speechSynthesis" in window)speechSynthesis.cancel();lessonPlaying=false;}
+function lessonNext(fromVoice){lessonIndex=Math.min(STRING_LESSON.length-1,lessonIndex+1);renderLesson();if(lessonPlaying||fromVoice)lessonSpeak();}
+function lessonPrev(){lessonStop();lessonIndex=Math.max(0,lessonIndex-1);renderLesson();}
+function lessonGo(i){lessonStop();lessonIndex=i;renderLesson();}
 
 function openCheatSheet(){
   document.getElementById("cheatModal").style.display="block";

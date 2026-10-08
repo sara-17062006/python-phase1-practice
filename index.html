@@ -108,32 +108,51 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 @media(max-width:800px){.cheat-grid{grid-template-columns:1fr}.cheat-top{flex-direction:column}}
 
 
-/* Strings Visual Lesson Player */
-.lesson-modal{max-width:1180px!important;background:#0a1224!important}
+
+/* Strings Visual Lesson Player — readable code + synchronized dry run */
+.lesson-modal{max-width:1360px!important;background:#081122!important}
 .lesson-shell{color:#eef4ff}
 .lesson-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:14px}
 .lesson-top h2{margin:0;font-size:24px}.lesson-sub{color:#94a7c6;font-size:12px;margin-top:5px}
-.lesson-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:12px}
-.lesson-chapters{max-height:620px;overflow:auto;padding:10px}
-.lesson-chapters button{width:100%;text-align:left;border:1px solid transparent;background:transparent;color:#b9c7df;border-radius:8px;padding:8px;margin:2px 0;cursor:pointer;font-size:11px}
+.lesson-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:12px}
+.lesson-chapters{max-height:680px;overflow:auto;padding:10px}
+.lesson-chapters button{width:100%;text-align:left;border:1px solid transparent;background:transparent;color:#b9c7df;border-radius:8px;padding:9px;margin:2px 0;cursor:pointer;font-size:11px}
 .lesson-chapters button.active{background:#183164;border-color:#35579a;color:#fff}
 .lesson-stage{min-width:0}
-.lesson-screen{min-height:390px;border:1px solid #293b62;border-radius:15px;background:#071022;padding:18px;display:flex;flex-direction:column}
-.lesson-title{font-size:22px;font-weight:800}.lesson-caption{font-size:11px;color:#91a4c3;margin-top:5px}
-.lesson-visual{flex:1;display:grid;place-items:center;margin:14px 0}
-.lesson-card{width:min(760px,100%);border:1px solid #2d416c;border-radius:13px;background:#0f1a31;padding:20px}
+.lesson-screen{border:1px solid #293b62;border-radius:15px;background:#061022;padding:16px}
+.lesson-title{font-size:23px;font-weight:800}.lesson-caption{font-size:11px;color:#91a4c3;margin-top:5px}
+.lesson-progress{height:8px;background:#1e2f4d;border-radius:999px;overflow:hidden;margin:10px 0 12px}
+.lesson-progress>div{height:100%;background:#6f84f5;width:0;transition:width .2s ease}
+.lesson-learning-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:stretch}
+.lesson-panel{min-width:0;border:1px solid #293d67;border-radius:12px;background:#0d1830;overflow:hidden}
+.lesson-panel-title{padding:10px 12px;background:#121f3a;border-bottom:1px solid #283b61;font-size:12px;font-weight:800;color:#dbe6fb}
+.lesson-code-area{padding:12px;min-height:365px;overflow:auto}
+.lesson-code-line{display:grid;grid-template-columns:38px minmax(0,1fr);gap:8px;align-items:start;padding:5px 7px;border-radius:7px;font:16px/1.55 Consolas,monospace}
+.lesson-code-line .ln{color:#6f83a6;text-align:right;user-select:none}
+.lesson-code-line .src{white-space:pre;color:#e9f0ff;overflow-wrap:anywhere}
+.lesson-code-line.active{background:#273762;outline:1px solid #657cf1}
+.lesson-code-line.active .ln{color:#fff}.lesson-code-line.active .src{color:#fff36f}
+.lesson-result{padding:12px;border-top:1px solid #26385c;background:#091426}
+.lesson-result-label{font-size:10px;color:#8fa3c2;text-transform:uppercase;letter-spacing:.06em}
+.lesson-result-value{margin-top:5px;font:16px/1.55 Consolas,monospace;color:#78efbf;white-space:pre-wrap;min-height:26px}
+.lesson-visual{padding:12px;min-height:365px;display:flex;align-items:center;justify-content:center}
+.lesson-card{width:100%;border:1px solid #2d416c;border-radius:12px;background:#0a152b;padding:18px}
 .lesson-string{font:700 28px/1.5 Consolas,monospace;color:#4adca4;text-align:center}
 .lesson-row{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:12px 0}
-.lesson-char{min-width:48px;padding:9px;border-radius:9px;background:#172743;border:1px solid #2c416b;text-align:center;font:700 21px Consolas,monospace}
+.lesson-char{min-width:48px;padding:10px;border-radius:9px;background:#172743;border:1px solid #2c416b;text-align:center;font:700 21px Consolas,monospace}
 .lesson-index{color:#f7cb5c;font:12px Consolas,monospace;text-align:center;margin-top:4px}
-.lesson-code{white-space:pre-wrap;background:#050a13;border:1px solid #2c416b;border-radius:10px;padding:13px;font:12px/1.6 Consolas,monospace;color:#e6efff}
-.lesson-pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#182744;border:1px solid #2c426d;color:#cbd8ef;font-size:10px;margin:3px}
+.lesson-pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#182744;border:1px solid #2c426d;color:#cbd8ef;font-size:11px;margin:3px}
 .lesson-explain{color:#c9d6ea;font-size:12px;line-height:1.6;margin-top:12px}
+.lesson-dryrun{margin-top:10px;padding:11px 12px;border:1px solid #2a416b;border-radius:10px;background:#0b172d}
+.lesson-step-head{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.lesson-step-title{font-weight:800;color:#dfe9ff;font-size:13px}.lesson-step-count{font-size:10px;color:#8da1c0}
+.lesson-step-action{margin-top:6px;color:#f7cb5c;font-size:12px;font-weight:700}
+.lesson-state{margin-top:8px;color:#cbd8ec;font-size:12px;line-height:1.55;white-space:pre-wrap}
+.lesson-transcript{margin-top:10px;border:1px solid #26395f;border-radius:10px;background:#0b152b;padding:11px;color:#afc0dc;font-size:11px;line-height:1.55;max-height:95px;overflow:auto}
 .lesson-controls{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.lesson-progress{height:8px;background:#1e2f4d;border-radius:999px;overflow:hidden;margin:9px 0}
-.lesson-progress>div{height:100%;background:#6f84f5;width:0}
-.lesson-transcript{margin-top:10px;border:1px solid #26395f;border-radius:10px;background:#0b152b;padding:11px;color:#afc0dc;font-size:11px;line-height:1.55;max-height:115px;overflow:auto}
-@media(max-width:800px){.lesson-layout{grid-template-columns:1fr}.lesson-chapters{max-height:220px}.lesson-screen{min-height:420px}}
+@media(max-width:980px){.lesson-layout{grid-template-columns:190px minmax(0,1fr)}.lesson-learning-grid{grid-template-columns:1fr}}
+@media(max-width:800px){.lesson-layout{grid-template-columns:1fr}.lesson-chapters{max-height:220px}.lesson-code-area,.lesson-visual{min-height:300px}.lesson-code-line{font-size:14px}.lesson-title{font-size:20px}}
+.lesson-chapters{max-height:220px}.lesson-screen{min-height:420px}}
 
 </style>
 </head>
@@ -673,10 +692,10 @@ STEP 10 → Explain your solution aloud</div>
             <div id="lessonVisual" class="lesson-visual"></div>
             <div id="lessonTranscript" class="lesson-transcript"></div>
             <div class="lesson-controls">
-              <button type="button" class="action" onclick="lessonPrev()">← Previous</button>
-              <button type="button" class="action primary" id="lessonPlayBtn" onclick="lessonTogglePlay()">▶ Play Voice</button>
-              <button type="button" class="action" onclick="lessonNext()">Next →</button>
-              <button type="button" class="action" onclick="lessonSpeak()">🔊 Replay Voice</button>
+              <button type="button" class="action" onclick="lessonPrev()">← Previous Step</button>
+              <button type="button" class="action primary" id="lessonPlayBtn" onclick="lessonTogglePlay()">▶ Auto Run</button>
+              <button type="button" class="action" onclick="lessonNext()">Next Step →</button>
+              <button type="button" class="action" onclick="lessonSpeak()">🔊 Explanation</button>
               <button type="button" class="action" onclick="lessonStop()">⏹ Stop</button>
             </div>
           </div>
@@ -783,32 +802,223 @@ STEP 10 → Explain your solution aloud</div>
 <script>
 
 
-var STRING_LESSON=[["What is a String?","A string is text represented as a sequence of characters. In Python, strings are immutable sequences of Unicode code points.","s = \"Python\"","Each character is one element of the sequence."],["String Literals & Escapes","You can use single quotes, double quotes, and triple quotes. Escape sequences represent special characters such as new lines and tabs. Raw strings are useful when backslashes should remain mostly literal.","a = 'Python'\\nb = \"Python\"\\nc = \"A\\nB\"\\nd = r\"C:\\\\Users\"","\\\\n = newline   •   \\\\t = tab   •   \\\\\\\\ = backslash"],["Positive Indexing","Python starts indexing at zero. The first character is index 0 and the last valid positive index is length minus 1.","s[0]  # P\\ns[2]  # t\\ns[5]  # n","One character → s[i]"],["Negative Indexing","Negative indexes count from the end. Negative one is the last character, negative two is the second last, and so on.","s[-1]  # n\\ns[-2]  # o","Use this when you need characters from the end."],["len() & Index Rule","len() gives the number of characters. For length n, the valid positive indexes are 0 through n-1.","len(s)\\nlast_index = len(s) - 1","Avoid off-by-one errors."],["Slicing","Slicing extracts part of a string. The start is included and the end is excluded. A third value controls the step.","s[start:end:step]\\ns[1:4]\\ns[::-1]","End excluded • negative step moves backwards."],["String Operators","Strings support concatenation, repetition, comparison, and membership.","\"Py\" + \"thon\"\\n\"ha\" * 3\\n\"a\" in \"cat\"","Use in/not in for membership checks."],["Built-in Functions","Useful built-ins include len, str, ord, chr, enumerate, sorted, reversed, min, and max.","len(s)\\nord('A')\\nchr(65)","Know what each returns."],["String Traversal","Use for ch in s when you need characters. Use range(len(s)) when you need indexes. Use enumerate when you need both.","for ch in s:\\n    ...\\n\\nfor i, ch in enumerate(s):\\n    ...","Choose the loop based on the information you need."],["Case & Cleaning Methods","Important case methods include lower, upper, capitalize, title, swapcase, and casefold. Cleaning methods include strip, lstrip, and rstrip.","s.lower()\\ns.upper()\\ns.strip()","Methods return new strings because strings are immutable."],["Searching & Counting","Use find/rfind, index/rindex, startswith, endswith, and count. find returns -1 when absent; index raises ValueError when absent.","s.find(\"x\")\\ns.count(\"a\")","Know the difference between find and index."],["split(), join(), partition()","split changes a string into a list of pieces. join builds a string from an iterable of strings. partition splits once into three parts.","words = s.split()\\n\" \".join(words)","Mental model: STRING → split → LIST → join → STRING."],["Character Classification","Important is methods include isalpha, isdigit, isdecimal, isnumeric, isalnum, isspace, islower, isupper, istitle, isprintable, isascii, and isidentifier.","s.isalpha()\\ns.isdigit()\\ns.isspace()","Use the test that matches the exact requirement."],["replace() & Prefix/Suffix Removal","replace transforms matching text. removeprefix and removesuffix target exact boundaries.","s.replace(\"py\",\"Py\")\\ns.removeprefix(\"http://\")","They return new strings."],["Immutability","You cannot assign directly to one indexed character. Create a new string, use slicing, or use a list and join it back.","s = \"cat\"\\n# s[0] = \"b\"  ❌\\ns = \"b\" + s[1:]","This explains many string behaviors."],["ord() & chr()","ord converts a character to its Unicode code point. chr converts a code point back to a character.","ord('A')  # 65\\nchr(65)   # 'A'","Useful for alphabet math and character shifting."],["String Formatting","F-strings are the main modern formatting tool. format() is also important. Format specifications control precision, width, and alignment.","name = \"Sara\"\\nf\"Hello {name}\"\\nf\"{3.14159:.2f}\"","Formatting is mainly for clear, controlled output."],["Padding & Alignment","center, ljust, rjust, and zfill format text into fixed widths.","\"cat\".center(9)\\n\"7\".zfill(3)","Useful for formatted output."],["Advanced Text Tools","translate/maketrans, expandtabs, encode, partition, format_map, and repr are useful specialized tools.","str.maketrans(...)\\ns.translate(...)\\ns.encode()","Know the concept; memorize only when a problem needs it."],["Core Placement Patterns","Common patterns include counting, filtering, reversing, palindrome checking, word processing, duplicate detection, and anagrams.","count = 0\\nfor ch in s:\\n    if ch in \"aeiou\":\\n        count += 1","Choose loop, slice, method, or dictionary based on the requirement."],["Frequency Dictionary","A dictionary turns characters into keys and their counts into values. This is one of the most reusable placement patterns.","freq = {}\\nfor ch in s:\\n    freq[ch] = freq.get(ch, 0) + 1","Used for duplicates, anagrams, and first non-repeating character."],["Two Pointers & Sliding Window","Two pointers use left/right positions. Sliding window maintains a current substring while boundaries move.","l, r = 0, len(s)-1\\nwhile l < r:\\n    ...","This bridges basic strings to harder placement problems."],["Regex Awareness","Python's re module handles regular expressions. Learn normal string methods first, then use regex for complex text patterns.","import re\\nre.search(r\"\\\\d+\", s)","Regex is optional for now but useful to know."],["Common Mistakes & Edge Cases","Watch for character-versus-choice comparisons, invalid ranges, slicing boundaries, immutability, case differences, find/index behavior, and join type errors.","if ch in \"aeiou\":\\nfor i in range(len(s))","Test empty strings, one character, spaces, duplicates, mixed case, digits, punctuation, and boundaries."],["Final Mental Map","One character → indexing. Section → slicing. Every character → traversal. Length → len. Words → split. Build a string → join. Frequency → dictionary. Both ends → two pointers. Moving substring → sliding window. Complex text pattern → regex.","index → slice → loop → methods → dict → pointers","This is the decision map you will use in placement questions."]];
-var lessonIndex=0;
-var lessonPlaying=false;
-function lessonEsc(s){return String(s||"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");}
-function lessonVisualHtml(item){
-  var title=item[0].toLowerCase(), examples=item[2]||"", explain=item[3]||"", out='<div class="lesson-card">';
-  if(title.includes("index")){var chars="PYTHON".split("");out+='<div class="lesson-string">"PYTHON"</div><div class="lesson-row">'+chars.map(function(ch,i){return '<div><div class="lesson-char">'+ch+'</div><div class="lesson-index">'+(title.includes("negative")?String(i-6):String(i))+'</div></div>';}).join("")+'</div>';}
-  else if(title.includes("slicing"))out+='<div class="lesson-string">s[start:end:step]</div><div class="lesson-row"><span class="lesson-pill">start included</span><span class="lesson-pill">end excluded</span><span class="lesson-pill">step controls movement</span></div>';
-  else if(title.includes("split"))out+='<div class="lesson-row"><span class="lesson-pill">STRING</span><span>→</span><span class="lesson-pill">split()</span><span>→</span><span class="lesson-pill">LIST</span><span>→</span><span class="lesson-pill">join()</span><span>→</span><span class="lesson-pill">STRING</span></div>';
-  else if(title.includes("frequency"))out+='<div class="lesson-string">"banana"</div><div class="lesson-row"><span class="lesson-pill">b : 1</span><span class="lesson-pill">a : 3</span><span class="lesson-pill">n : 2</span></div>';
-  else if(title.includes("two pointers"))out+='<div class="lesson-string">P Y T H O N</div><div class="lesson-row"><span class="lesson-pill">LEFT →</span><span class="lesson-pill">characters</span><span class="lesson-pill">← RIGHT</span></div>';
-  else if(title.includes("common mistakes"))out+='<div class="lesson-row"><span class="lesson-pill" style="background:#4a1b28">❌ ch == "aeiou"</span><span class="lesson-pill">✅ ch in "aeiou"</span></div>';
-  else out+='<div class="lesson-code">'+lessonEsc(examples)+'</div>';
-  out+='<div class="lesson-explain">'+lessonEsc(explain)+'</div></div>';return out;
-}
-function openStringsLesson(){document.getElementById("stringsLessonModal").style.display="block";lessonIndex=0;lessonPlaying=false;lessonBuildList();renderLesson();}
-function closeStringsLesson(){lessonStop();document.getElementById("stringsLessonModal").style.display="none";}
-function lessonBuildList(){document.getElementById("lessonChapterList").innerHTML=STRING_LESSON.map(function(item,i){return '<button type="button" onclick="lessonGo('+i+')">'+(i+1)+". "+lessonEsc(item[0])+'</button>';}).join("");}
-function renderLesson(){var item=STRING_LESSON[lessonIndex];document.getElementById("lessonTitle").textContent=item[0];document.getElementById("lessonCount").textContent="Chapter "+(lessonIndex+1)+" of "+STRING_LESSON.length;document.getElementById("lessonBar").style.width=((lessonIndex+1)/STRING_LESSON.length*100)+"%";document.getElementById("lessonVisual").innerHTML=lessonVisualHtml(item);document.getElementById("lessonTranscript").textContent=item[1];document.querySelectorAll("#lessonChapterList button").forEach(function(b,i){b.classList.toggle("active",i===lessonIndex);});document.getElementById("lessonPlayBtn").textContent=lessonPlaying?"⏸ Pause Voice":"▶ Play Voice";}
-function lessonSpeak(){if("speechSynthesis" in window){speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(STRING_LESSON[lessonIndex][1]);u.rate=.92;u.pitch=1;u.onend=function(){if(lessonPlaying){lessonNext(true);}};speechSynthesis.speak(u);}else alert("Voice playback is not supported by this browser. The visual lesson and transcript are still available.");}
-function lessonTogglePlay(){if(lessonPlaying){lessonStop();renderLesson();}else{lessonPlaying=true;renderLesson();lessonSpeak();}}
-function lessonStop(){if("speechSynthesis" in window)speechSynthesis.cancel();lessonPlaying=false;}
-function lessonNext(fromVoice){lessonIndex=Math.min(STRING_LESSON.length-1,lessonIndex+1);renderLesson();if(lessonPlaying||fromVoice)lessonSpeak();}
-function lessonPrev(){lessonStop();lessonIndex=Math.max(0,lessonIndex-1);renderLesson();}
-function lessonGo(i){lessonStop();lessonIndex=i;renderLesson();}
 
+var STRING_LESSON=[["What is a String?","A string is text represented as a sequence of characters. In Python, strings are immutable sequences of Unicode code points.","s = \"Python\"","Each character is one element of the sequence."],["String Literals & Escapes","You can use single quotes, double quotes, and triple quotes. Escape sequences represent special characters such as new lines and tabs. Raw strings are useful when backslashes should remain mostly literal.","a = 'Python'\\nb = \"Python\"\\nc = \"A\\nB\"\\nd = r\"C:\\\\Users\"","\\\\n = newline   •   \\\\t = tab   •   \\\\\\\\ = backslash"],["Positive Indexing","Python starts indexing at zero. The first character is index 0 and the last valid positive index is length minus 1.","s[0]  # P\\ns[2]  # t\\ns[5]  # n","One character → s[i]"],["Negative Indexing","Negative indexes count from the end. Negative one is the last character, negative two is the second last, and so on.","s[-1]  # n\\ns[-2]  # o","Use this when you need characters from the end."],["len() & Index Rule","len() gives the number of characters. For length n, the valid positive indexes are 0 through n-1.","len(s)\\nlast_index = len(s) - 1","Avoid off-by-one errors."],["Slicing","Slicing extracts part of a string. The start is included and the end is excluded. A third value controls the step.","s[start:end:step]\\ns[1:4]\\ns[::-1]","End excluded • negative step moves backwards."],["String Operators","Strings support concatenation, repetition, comparison, and membership.","\"Py\" + \"thon\"\\n\"ha\" * 3\\n\"a\" in \"cat\"","Use in/not in for membership checks."],["Built-in Functions","Useful built-ins include len, str, ord, chr, enumerate, sorted, reversed, min, and max.","len(s)\\nord('A')\\nchr(65)","Know what each returns."],["String Traversal","Use for ch in s when you need characters. Use range(len(s)) when you need indexes. Use enumerate when you need both.","for ch in s:\\n    ...\\n\\nfor i, ch in enumerate(s):\\n    ...","Choose the loop based on the information you need."],["Case & Cleaning Methods","Important case methods include lower, upper, capitalize, title, swapcase, and casefold. Cleaning methods include strip, lstrip, and rstrip.","s.lower()\\ns.upper()\\ns.strip()","Methods return new strings because strings are immutable."],["Searching & Counting","Use find/rfind, index/rindex, startswith, endswith, and count. find returns -1 when absent; index raises ValueError when absent.","s.find(\"x\")\\ns.count(\"a\")","Know the difference between find and index."],["split(), join(), partition()","split changes a string into a list of pieces. join builds a string from an iterable of strings. partition splits once into three parts.","words = s.split()\\n\" \".join(words)","Mental model: STRING → split → LIST → join → STRING."],["Character Classification","Important is methods include isalpha, isdigit, isdecimal, isnumeric, isalnum, isspace, islower, isupper, istitle, isprintable, isascii, and isidentifier.","s.isalpha()\\ns.isdigit()\\ns.isspace()","Use the test that matches the exact requirement."],["replace() & Prefix/Suffix Removal","replace transforms matching text. removeprefix and removesuffix target exact boundaries.","s.replace(\"py\",\"Py\")\\ns.removeprefix(\"http://\")","They return new strings."],["Immutability","You cannot assign directly to one indexed character. Create a new string, use slicing, or use a list and join it back.","s = \"cat\"\\n# s[0] = \"b\"  ❌\\ns = \"b\" + s[1:]","This explains many string behaviors."],["ord() & chr()","ord converts a character to its Unicode code point. chr converts a code point back to a character.","ord('A')  # 65\\nchr(65)   # 'A'","Useful for alphabet math and character shifting."],["String Formatting","F-strings are the main modern formatting tool. format() is also important. Format specifications control precision, width, and alignment.","name = \"Sara\"\\nf\"Hello {name}\"\\nf\"{3.14159:.2f}\"","Formatting is mainly for clear, controlled output."],["Padding & Alignment","center, ljust, rjust, and zfill format text into fixed widths.","\"cat\".center(9)\\n\"7\".zfill(3)","Useful for formatted output."],["Advanced Text Tools","translate/maketrans, expandtabs, encode, partition, format_map, and repr are useful specialized tools.","str.maketrans(...)\\ns.translate(...)\\ns.encode()","Know the concept; memorize only when a problem needs it."],["Core Placement Patterns","Common patterns include counting, filtering, reversing, palindrome checking, word processing, duplicate detection, and anagrams.","count = 0\\nfor ch in s:\\n    if ch in \"aeiou\":\\n        count += 1","Choose loop, slice, method, or dictionary based on the requirement."],["Frequency Dictionary","A dictionary turns characters into keys and their counts into values. This is one of the most reusable placement patterns.","freq = {}\\nfor ch in s:\\n    freq[ch] = freq.get(ch, 0) + 1","Used for duplicates, anagrams, and first non-repeating character."],["Two Pointers & Sliding Window","Two pointers use left/right positions. Sliding window maintains a current substring while boundaries move.","l, r = 0, len(s)-1\\nwhile l < r:\\n    ...","This bridges basic strings to harder placement problems."],["Regex Awareness","Python's re module handles regular expressions. Learn normal string methods first, then use regex for complex text patterns.","import re\\nre.search(r\"\\\\d+\", s)","Regex is optional for now but useful to know."],["Common Mistakes & Edge Cases","Watch for character-versus-choice comparisons, invalid ranges, slicing boundaries, immutability, case differences, find/index behavior, and join type errors.","if ch in \"aeiou\":\\nfor i in range(len(s))","Test empty strings, one character, spaces, duplicates, mixed case, digits, punctuation, and boundaries."],["Final Mental Map","One character → indexing. Section → slicing. Every character → traversal. Length → len. Words → split. Build a string → join. Frequency → dictionary. Both ends → two pointers. Moving substring → sliding window. Complex text pattern → regex.","index → slice → loop → methods → dict → pointers","This is the decision map you will use in placement questions."]];
+;
+var lessonIndex=0, lessonPlaying=false, lessonStep=0, lessonTimer=null;
+
+var LESSON_TRACES={
+  "What is a String?":{code:['s = "Python"','print(s)'],steps:[
+    {line:1,action:'Create the string',state:'s now stores the sequence: P Y T H O N',result:''},
+    {line:2,action:'Print the value',state:'Python is sent to output.',result:'Python'}]},
+  "String Literals & Escapes":{code:["a = 'Python'",'b = "Python"','c = "A\\nB"','d = r"C:\\Users"','print(c)'],steps:[
+    {line:1,action:'Assign single-quoted text',state:'a → Python',result:''},
+    {line:2,action:'Assign double-quoted text',state:'b → Python',result:''},
+    {line:3,action:'Store an escape sequence',state:'c contains A + newline + B',result:''},
+    {line:4,action:'Store a raw string',state:'d keeps the backslash sequence visible.',result:''},
+    {line:5,action:'Print c',state:'The newline is interpreted when printing.',result:'A\nB'}]},
+  "Positive Indexing":{code:['s = "Python"','print(s[0])','print(s[2])','print(s[5])'],steps:[
+    {line:1,action:'Store the string',state:'Indexes are now 0 1 2 3 4 5.',result:''},
+    {line:2,action:'Read index 0',state:'Index 0 points to P.',result:'P'},
+    {line:3,action:'Read index 2',state:'Index 2 points to T.',result:'T'},
+    {line:4,action:'Read index 5',state:'Index 5 is the last valid positive index.',result:'N'}]},
+  "Negative Indexing":{code:['s = "Python"','print(s[-1])','print(s[-2])','print(s[-6])'],steps:[
+    {line:1,action:'Store the string',state:'Negative indexes count from the end.',result:''},
+    {line:2,action:'Read index -1',state:'-1 points to the last character N.',result:'N'},
+    {line:3,action:'Read index -2',state:'-2 points to O.',result:'O'},
+    {line:4,action:'Read index -6',state:'-6 reaches the first character P.',result:'P'}]},
+  "len() & Index Rule":{code:['s = "Python"','n = len(s)','last = n - 1','print(n)','print(last)'],steps:[
+    {line:1,action:'Store the string',state:'s has 6 characters.',result:''},
+    {line:2,action:'Call len(s)',state:'len("Python") counts P,Y,T,H,O,N → 6.',result:'6'},
+    {line:3,action:'Calculate the last index',state:'6 - 1 = 5.',result:'5'},
+    {line:4,action:'Print length',state:'The number of characters is 6.',result:'6'},
+    {line:5,action:'Print last index',state:'The final valid positive index is 5.',result:'5'}]},
+  "Slicing":{code:['s = "Python"','print(s[1:4])','print(s[:3])','print(s[3:])','print(s[::-1])'],steps:[
+    {line:1,action:'Store the string',state:'Positions: P0 Y1 T2 H3 O4 N5.',result:''},
+    {line:2,action:'Slice 1:4',state:'Take indexes 1,2,3. End 4 is excluded.',result:'YTH'},
+    {line:3,action:'Slice :3',state:'Start omitted → begin at 0. Take 0,1,2.',result:'PYT'},
+    {line:4,action:'Slice 3:',state:'End omitted → continue to the last character.',result:'HON'},
+    {line:5,action:'Reverse',state:'Step -1 moves from right to left.',result:'NOHTYP'}]},
+  "String Operators":{code:['print("Py" + "thon")','print("ha" * 3)','print("a" in "cat")'],steps:[
+    {line:1,action:'Concatenate',state:'Plus joins the two strings.',result:'Python'},
+    {line:2,action:'Repeat',state:'Asterisk repeats the string 3 times.',result:'hahaha'},
+    {line:3,action:'Membership',state:'The character a exists in cat.',result:'True'}]},
+  "Built-in Functions":{code:['s = "Python"','print(len(s))',"print(ord('A'))",'print(chr(65))'],steps:[
+    {line:1,action:'Store the string',state:'s is ready for built-in functions.',result:''},
+    {line:2,action:'len(s)',state:'Counts characters.',result:'6'},
+    {line:3,action:'ord("A")',state:'Converts character A to its Unicode code point.',result:'65'},
+    {line:4,action:'chr(65)',state:'Converts code point 65 back to a character.',result:'A'}]},
+  "String Traversal":{code:['s = "cat"','for ch in s:','    print(ch)'],steps:[
+    {line:1,action:'Store s',state:'s contains c, a, t.',result:''},
+    {line:2,action:'Start the loop',state:'Python takes the next character and assigns it to ch.',result:''},
+    {line:3,action:'Iteration 1',state:'ch = c',result:'c'},
+    {line:3,action:'Iteration 2',state:'ch = a',result:'a'},
+    {line:3,action:'Iteration 3',state:'ch = t',result:'t'}]},
+  "Case & Cleaning Methods":{code:['s = "  Python  "','print(s.lower())','print(s.upper())','print(s.strip())'],steps:[
+    {line:1,action:'Store s',state:'There are two spaces on each side.',result:''},
+    {line:2,action:'lower()',state:'Create a lowercase copy.',result:'  python  '},
+    {line:3,action:'upper()',state:'Create an uppercase copy.',result:'  PYTHON  '},
+    {line:4,action:'strip()',state:'Remove spaces from both outer sides.',result:'Python'}]},
+  "Searching & Counting":{code:['s = "banana"','print(s.find("x"))','print(s.count("a"))','print(s.startswith("ban"))'],steps:[
+    {line:1,action:'Store s',state:'b a n a n a',result:''},
+    {line:2,action:'find("x")',state:'x is not present, so find returns -1.',result:'-1'},
+    {line:3,action:'count("a")',state:'a appears three times.',result:'3'},
+    {line:4,action:'startswith("ban")',state:'The string begins with ban.',result:'True'}]},
+  "split(), join(), partition()":{code:['s = "I love Python"','words = s.split()','print(words)','result = " ".join(words)','print(result)'],steps:[
+    {line:1,action:'Store sentence',state:'One string containing three words.',result:''},
+    {line:2,action:'split()',state:'Whitespace separates the words into a list.',result:''},
+    {line:3,action:'Print the list',state:'words contains three string elements.',result:"['I', 'love', 'Python']"},
+    {line:4,action:'join()',state:'The separator space is inserted between list elements.',result:''},
+    {line:5,action:'Print result',state:'The original sentence is rebuilt.',result:'I love Python'}]},
+  "Character Classification":{code:['s = "123"','print(s.isalpha())','print(s.isdigit())','print(s.isspace())'],steps:[
+    {line:1,action:'Store s',state:'The string contains only digits.',result:''},
+    {line:2,action:'isalpha()',state:'123 contains no alphabetic characters.',result:'False'},
+    {line:3,action:'isdigit()',state:'Every character is a digit.',result:'True'},
+    {line:4,action:'isspace()',state:'The string is not whitespace.',result:'False'}]},
+  "replace() & Prefix/Suffix Removal":{code:['s = "python.py"','print(s.replace("py","Py"))','print(s.removeprefix("python"))','print(s.removesuffix(".py"))'],steps:[
+    {line:1,action:'Store s',state:'s = python.py',result:''},
+    {line:2,action:'replace()',state:'Every matching py is replaced with Py.',result:'Python.Py'},
+    {line:3,action:'removeprefix()',state:'The exact prefix python is removed once.',result:'.py'},
+    {line:4,action:'removesuffix()',state:'The exact suffix .py is removed once.',result:'python'}]},
+  "Immutability":{code:['s = "cat"','# s[0] = "b"','s = "b" + s[1:]','print(s)'],steps:[
+    {line:1,action:'Store s',state:'s = cat',result:''},
+    {line:2,action:'Attempt in-place change',state:'Strings cannot be changed by assigning to an index. This would raise TypeError.',result:'TypeError'},
+    {line:3,action:'Build a new string',state:'"b" + "at" creates a new string.',result:''},
+    {line:4,action:'Print the new value',state:'s now refers to the new string bat.',result:'bat'}]},
+  "ord() & chr()":{code:["print(ord('A'))",'print(chr(65))'],steps:[
+    {line:1,action:'ord("A")',state:'Character A → Unicode code point 65.',result:'65'},
+    {line:2,action:'chr(65)',state:'Code point 65 → character A.',result:'A'}]},
+  "String Formatting":{code:['name = "Sara"','age = 20','print(f"{name} is {age}")','print(f"{3.14159:.2f}")'],steps:[
+    {line:1,action:'Store name',state:'name = Sara',result:''},
+    {line:2,action:'Store age',state:'age = 20',result:''},
+    {line:3,action:'Evaluate f-string',state:'Python inserts name and age into the braces.',result:'Sara is 20'},
+    {line:4,action:'Apply precision .2f',state:'3.14159 is rounded to two decimal places.',result:'3.14'}]},
+  "Padding & Alignment":{code:['print("cat".center(9))','print("cat".ljust(9))','print("cat".rjust(9))','print("7".zfill(3))'],steps:[
+    {line:1,action:'center(9)',state:'cat is centered inside a width of 9.',result:'   cat   '},
+    {line:2,action:'ljust(9)',state:'cat stays on the left side.',result:'cat      '},
+    {line:3,action:'rjust(9)',state:'cat moves to the right side.',result:'      cat'},
+    {line:4,action:'zfill(3)',state:'Zeros are added to the left.',result:'007'}]},
+  "Advanced Text Tools":{code:['table = str.maketrans("abc","123")','print("cab".translate(table))','print("hi".encode())'],steps:[
+    {line:1,action:'Build translation table',state:'a→1, b→2, c→3',result:''},
+    {line:2,action:'translate()',state:'c becomes 3, a becomes 1, b becomes 2.',result:'312'},
+    {line:3,action:'encode()',state:'Text becomes a bytes object using the default encoding.',result:"b'hi'"}]},
+  "Core Placement Patterns":{code:['s = "education"','count = 0','for ch in s:','    if ch in "aeiou":','        count += 1','print(count)'],steps:[
+    {line:1,action:'Store input',state:'education contains 9 characters.',result:''},
+    {line:2,action:'Initialize count',state:'count = 0',result:''},
+    {line:3,action:'Start traversal',state:'Each character will be checked.',result:''},
+    {line:4,action:'Check each character',state:'e → vowel → count increases; repeat for every character.',result:''},
+    {line:5,action:'Update counter',state:'After all iterations, count becomes 5.',result:''},
+    {line:6,action:'Print answer',state:'There are five vowels in education.',result:'5'}]},
+  "Frequency Dictionary":{code:['s = "banana"','freq = {}','for ch in s:','    freq[ch] = freq.get(ch, 0) + 1','print(freq)'],steps:[
+    {line:1,action:'Store input',state:'banana',result:''},
+    {line:2,action:'Start empty dictionary',state:'freq = {}',result:'{}'},
+    {line:3,action:'Traverse characters',state:'Process b, a, n, a, n, a one by one.',result:''},
+    {line:4,action:'Update frequency',state:'b→1, a→3, n→2',result:''},
+    {line:5,action:'Print map',state:'The dictionary contains each unique character and its count.',result:"{'b': 1, 'a': 3, 'n': 2}"}]},
+  "Two Pointers & Sliding Window":{code:['s = "level"','l, r = 0, len(s)-1','while l < r:','    if s[l] != s[r]:','        print("NOT PALINDROME")','        break','    l += 1','    r -= 1','else:','    print("PALINDROME")'],steps:[
+    {line:1,action:'Store s',state:'l e v e l',result:''},
+    {line:2,action:'Set pointers',state:'l = 0 → l, r = 4 → l',result:''},
+    {line:3,action:'Enter while',state:'Compare outside characters first.',result:''},
+    {line:4,action:'Compare s[l] and s[r]',state:'l == l, so they match.',result:''},
+    {line:7,action:'Move l right',state:'l becomes 1.',result:''},
+    {line:8,action:'Move r left',state:'r becomes 3.',result:''},
+    {line:4,action:'Compare again',state:'e == e, so they match.',result:''},
+    {line:7,action:'Move l right',state:'l becomes 2.',result:''},
+    {line:8,action:'Move r left',state:'r becomes 2.',result:''},
+    {line:10,action:'Loop completed',state:'All mirrored characters matched. Python executes the else block of the while loop.',result:'PALINDROME'}]},
+  "Regex Awareness":{code:['import re','s = "abc123"','m = re.search(r"\\d+", s)','print(m.group())'],steps:[
+    {line:1,action:'Import regex module',state:'The re tools are now available.',result:''},
+    {line:2,action:'Store text',state:'abc123 contains a run of digits.',result:''},
+    {line:3,action:'Search for one or more digits',state:'The pattern \\d+ matches the substring 123.',result:''},
+    {line:4,action:'Read the match',state:'group() returns the matched text.',result:'123'}]},
+  "Common Mistakes & Edge Cases":{code:['s = "education"','for ch in s:','    if ch in "aeiou":','        print(ch)'],steps:[
+    {line:1,action:'Store input',state:'education',result:''},
+    {line:2,action:'Start traversal',state:'Each character gets checked.',result:''},
+    {line:3,action:'Membership test',state:'This checks whether one character belongs to the vowel string.',result:''},
+    {line:4,action:'Print matching character',state:'Only vowels reach this line.',result:'e\nu\na\u0069\no'}]},
+  "Final Mental Map":{code:['# one character  → s[i]','# a section       → s[start:end]','# every character → for ch in s','# frequency        → dictionary','# both ends        → two pointers','# moving window    → sliding window'],steps:[
+    {line:1,action:'Need one character?',state:'Use indexing.',result:'s[i]'},
+    {line:2,action:'Need part of a string?',state:'Use slicing.',result:'s[start:end]'},
+    {line:3,action:'Need every character?',state:'Traverse the string.',result:'for ch in s'},
+    {line:4,action:'Need frequency?',state:'Use a dictionary.',result:'freq[ch]'},
+    {line:5,action:'Need both ends?',state:'Use two pointers.',result:'left + right'},
+    {line:6,action:'Need a moving substring?',state:'Use a sliding window.',result:'left + right window'}]}
+};
+
+function lessonEscapeHtml(s){return String(s==null?"":s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");}
+function getLessonTrace(item){
+  var t=LESSON_TRACES[item[0]];
+  if(t)return t;
+  var code=(item[2]||"").split("\n");
+  return {code:code.length?code:["# Review this concept"],steps:code.map(function(line,i){return {line:i+1,action:"Understand this line",state:line||"Blank line",result:""};})};
+}
+function openStringsLesson(){document.getElementById("stringsLessonModal").style.display="block";lessonIndex=0;lessonPlaying=false;lessonStep=0;lessonBuildList();renderLesson();}
+function closeStringsLesson(){lessonStop();document.getElementById("stringsLessonModal").style.display="none";}
+function lessonBuildList(){document.getElementById("lessonChapterList").innerHTML=STRING_LESSON.map(function(item,i){return '<button type="button" onclick="lessonGo('+i+')">'+(i+1)+". "+lessonEscapeHtml(item[0])+'</button>';}).join("");}
+function lessonGetVisual(item,step){
+  var title=item[0], s=item[2]||"";
+  if(title==="Positive Indexing" || title==="Negative Indexing"){
+    var negative=title==="Negative Indexing",chars="PYTHON".split(""),active=(lessonTrace.stepInfo&&lessonTrace.stepInfo.line)||0;
+    var idxs=chars.map(function(ch,i){return '<div><div class="lesson-char '+((negative?i-6:i)===(lessonTrace.selectedIndex||999)?'active':'')+'">'+ch+'</div><div class="lesson-index">'+(negative?i-6:i)+'</div></div>';}).join("");
+    return '<div class="lesson-card"><div class="lesson-string">"PYTHON"</div><div class="lesson-row">'+idxs+'</div><div class="lesson-explain">The highlighted character is the one the current code line reads.</div></div>';
+  }
+  if(title==="Slicing")return '<div class="lesson-card"><div class="lesson-string">P Y T H O N</div><div class="lesson-row"><span class="lesson-pill">start included</span><span class="lesson-pill">end excluded</span><span class="lesson-pill">step = '+(lessonTrace.sliceStep||1)+'</span></div><div class="lesson-row">'+(lessonTrace.sliceResult?'<span class="lesson-pill" style="font-size:16px;color:#78efbf">'+lessonEscapeHtml(lessonTrace.sliceResult)+'</span>':'Run a step to see the selected section.')+'</div></div>';
+  if(title==="split(), join(), partition()")return '<div class="lesson-card"><div class="lesson-string">'+(lessonTrace.splitStage||"I love Python")+'</div><div class="lesson-row"><span class="lesson-pill">STRING</span><span>→</span><span class="lesson-pill">'+(lessonTrace.splitDone?'LIST':'split()')+'</span><span>→</span><span class="lesson-pill">'+(lessonTrace.joinDone?'STRING':'join()')+'</span></div><div class="lesson-explain">'+(lessonTrace.splitVisual||'Step through the code to watch the transformation.')+'</div></div>';
+  if(title==="Frequency Dictionary")return '<div class="lesson-card"><div class="lesson-string">banana</div><div class="lesson-row"><span class="lesson-pill">b: '+(lessonTrace.freq&&lessonTrace.freq.b||0)+'</span><span class="lesson-pill">a: '+(lessonTrace.freq&&lessonTrace.freq.a||0)+'</span><span class="lesson-pill">n: '+(lessonTrace.freq&&lessonTrace.freq.n||0)+'</span></div><div class="lesson-explain">Each loop iteration updates one dictionary entry.</div></div>';
+  if(title==="Two Pointers & Sliding Window")return '<div class="lesson-card"><div class="lesson-string">L E V E L</div><div class="lesson-row"><span class="lesson-pill">left = '+(lessonTrace.left==null?0:lessonTrace.left)+'</span><span class="lesson-pill">right = '+(lessonTrace.right==null?4:lessonTrace.right)+'</span></div><div class="lesson-explain">'+lessonEscapeHtml(lessonTrace.pointerState||'Move the pointers toward the middle.')+'</div></div>';
+  if(title==="String Traversal")return '<div class="lesson-card"><div class="lesson-string">c a t</div><div class="lesson-row"><span class="lesson-pill">current ch = '+lessonEscapeHtml(lessonTrace.currentChar||'?')+'</span><span class="lesson-pill">iteration = '+(lessonStep+1)+'</span></div><div class="lesson-explain">The loop takes one character at a time.</div></div>';
+  if(title==="Core Placement Patterns")return '<div class="lesson-card"><div class="lesson-string">education</div><div class="lesson-row"><span class="lesson-pill">current = '+lessonEscapeHtml(lessonTrace.currentChar||'?')+'</span><span class="lesson-pill">count = '+(lessonTrace.count==null?0:lessonTrace.count)+'</span></div><div class="lesson-explain">The visual counter changes exactly when the highlighted condition is true.</div></div>';
+  if(title==="Common Mistakes & Edge Cases")return '<div class="lesson-card"><div class="lesson-row"><span class="lesson-pill" style="font-size:18px;background:#163b31">current char = '+lessonEscapeHtml(lessonTrace.currentChar||'?')+'</span></div><div class="lesson-row"><span class="lesson-pill">vowel test → '+(lessonTrace.isVowel?'True':'False')+'</span></div><div class="lesson-explain">This visual shows why <b>in</b> is used for membership testing.</div></div>';
+  return '<div class="lesson-card"><div class="lesson-code">'+lessonEscapeHtml(s)+'</div><div class="lesson-explain">'+lessonEscapeHtml(item[3]||"Step through the code to connect each line to the result.")+'</div></div>';
+}
+var lessonTrace={};
+function lessonApplyTrace(item,stepIndex){
+  var title=item[0], t=getLessonTrace(item);
+  var step=t.steps[Math.max(0,Math.min(stepIndex,t.steps.length-1))]||{line:1,action:"Step",state:"",result:""};
+  lessonTrace={stepInfo:step,selectedIndex:999,sliceResult:"",sliceStep:1,splitStage:"I love Python",splitDone:false,joinDone:false,freq:{b:0,a:0,n:0},left:0,right:4,currentChar:"?",count:0,isVowel:false,pointerState:"Move the pointers toward the middle."};
+  if(title==="Positive Indexing" && step.line>=2)lessonTrace.selectedIndex=[null,0,2,5][Math.min(stepIndex,3)]||999;
+  if(title==="Negative Indexing" && step.line>=2){lessonTrace.selectedIndex=[null,-1,-2,-6][Math.min(stepIndex,3)]||999;}
+  if(title==="Slicing"){var vals=["","YTH","PYT","HON","NOHTYP"];lessonTrace.sliceResult=vals[Math.min(stepIndex,4)]||"";lessonTrace.sliceStep=stepIndex===4?-1:1;}
+  if(title==="split(), join(), partition()"){lessonTrace.splitDone=stepIndex>=1;lessonTrace.joinDone=stepIndex>=3;lessonTrace.splitStage=stepIndex>=1?"['I', 'love', 'Python']":"I love Python";lessonTrace.splitVisual=stepIndex<3?"split() creates a list of words.":"join() rebuilds one string with spaces.";}
+  if(title==="Frequency Dictionary"){var f=[{b:0,a:0,n:0},{b:1,a:0,n:0},{b:1,a:1,n:0},{b:1,a:1,n:1},{b:1,a:2,n:1},{b:1,a:2,n:2},{b:1,a:3,n:2}][Math.min(stepIndex,6)];lessonTrace.freq=f||lessonTrace.freq;}
+  if(title==="String Traversal"){lessonTrace.currentChar=["?","?","c","a","t"][Math.min(stepIndex,4)];}
+  if(title==="Core Placement Patterns"){var cs=["?","?","?","e","e","5"];lessonTrace.currentChar=cs[Math.min(stepIndex,5)];lessonTrace.count=[0,0,0,1,1,5][Math.min(stepIndex,5)];}
+  if(title==="Common Mistakes & Edge Cases"){var chars=["?","e","e","e"];lessonTrace.currentChar=chars[Math.min(stepIndex,3)];lessonTrace.isVowel=stepIndex>=2;}
+  if(title==="Two Pointers & Sliding Window"){var pairs=[[0,4],[0,4],[0,4],[0,4],[1,3],[1,3],[1,3],[2,2],[2,2],[2,2]];var p=pairs[Math.min(stepIndex,pairs.length-1)];lessonTrace.left=p[0];lessonTrace.right=p[1];lessonTrace.pointerState=stepIndex>=9?"All mirrored characters matched.":"Compare the characters at the two pointer positions.";}
+  renderLesson();
+}
+function lessonRenderCode(item){
+  var t=getLessonTrace(item), active=(t.steps[lessonStep]||{}).line||0;
+  return t.code.map(function(line,i){return '<div class="lesson-code-line '+((i+1)===active?'active':'')+'"><div class="ln">'+(i+1)+'</div><div class="src">'+lessonEscapeHtml(line)+'</div></div>';}).join("");
+}
+function lessonRenderStepPanel(item){
+  var t=getLessonTrace(item), step=t.steps[Math.max(0,Math.min(lessonStep,t.steps.length-1))]||{line:1,action:"Step",state:"",result:""}, count=t.steps.length;
+  return '<div class="lesson-dryrun"><div class="lesson-step-head"><div class="lesson-step-title">Dry Run — '+lessonEscapeHtml(step.action)+'</div><div class="lesson-step-count">Step '+(Math.min(lessonStep+1,count))+' / '+count+'</div></div><div class="lesson-step-action">What happens now?</div><div class="lesson-state">'+lessonEscapeHtml(step.state)+'</div><div class="lesson-result" style="margin-top:8px;border:1px solid #26385c;border-radius:8px"><div class="lesson-result-label">Current output / value</div><div class="lesson-result-value">'+lessonEscapeHtml(step.result||"—")+'</div></div></div>';
+}
+function renderLesson(){
+  var item=STRING_LESSON[lessonIndex], trace=getLessonTrace(item);
+  lessonStep=Math.max(0,Math.min(lessonStep,(trace.steps.length||1)-1));
+  document.getElementById("lessonTitle").textContent=item[0];
+  document.getElementById("lessonCount").textContent="Chapter "+(lessonIndex+1)+" of "+STRING_LESSON.length+" • Step-by-step code + dry run";
+  document.getElementById("lessonBar").style.width=((lessonIndex+1)/STRING_LESSON.length*100)+"%";
+  document.getElementById("lessonVisual").innerHTML='<div style="width:100%">'+
+    '<div class="lesson-learning-grid">'+
+      '<div class="lesson-panel"><div class="lesson-panel-title">💻 Code — line highlighted as it runs</div><div class="lesson-code-area">'+lessonRenderCode(item)+'</div></div>'+
+      '<div class="lesson-panel"><div class="lesson-panel-title">👀 Visual + Dry Run — matches the highlighted line</div><div class="lesson-visual">'+lessonGetVisual(item,lessonStep)+'</div>'+lessonRenderStepPanel(item)+'</div>'+
+    '</div></div>';
+  document.getElementById("lessonTranscript").textContent=item[1];
+  document.querySelectorAll("#lessonChapterList button").forEach(function(b,i){b.classList.toggle("active",i===lessonIndex);});
+  document.getElementById("lessonPlayBtn").textContent=lessonPlaying?"⏸ Pause Auto Run":"▶ Auto Run";
+}
+function lessonBuildList(){document.getElementById("lessonChapterList").innerHTML=STRING_LESSON.map(function(item,i){return '<button type="button" onclick="lessonGo('+i+')">'+(i+1)+". "+lessonEscapeHtml(item[0])+'</button>';}).join("");}
+function lessonSpeak(){if("speechSynthesis" in window){speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(STRING_LESSON[lessonIndex][1]);u.rate=.92;u.pitch=1;u.onend=function(){if(lessonPlaying){lessonStartAuto();}};speechSynthesis.speak(u);}else alert("Voice playback is not supported by this browser. The visual lesson and dry-run controls are still available.");}
+function lessonTogglePlay(){if(lessonPlaying){lessonStop();renderLesson();}else{lessonPlaying=true;renderLesson();lessonStartAuto();}}
+function lessonStartAuto(){lessonStopTimer();var t=getLessonTrace(STRING_LESSON[lessonIndex]);lessonApplyTrace(STRING_LESSON[lessonIndex],lessonStep);if(lessonStep>=t.steps.length-1){lessonPlaying=false;renderLesson();return;}lessonTimer=setInterval(function(){if(lessonStep<t.steps.length-1){lessonStep++;lessonApplyTrace(STRING_LESSON[lessonIndex],lessonStep);}else{lessonStopTimer();lessonPlaying=false;renderLesson();}},1300);}
+function lessonStopTimer(){if(lessonTimer){clearInterval(lessonTimer);lessonTimer=null;}}
+function lessonStop(){lessonStopTimer();lessonPlaying=false;if("speechSynthesis" in window)speechSynthesis.cancel();}
+function lessonNext(fromVoice){lessonStop();var t=getLessonTrace(STRING_LESSON[lessonIndex]);if(lessonStep<t.steps.length-1){lessonStep++;lessonApplyTrace(STRING_LESSON[lessonIndex],lessonStep);}else{lessonIndex=Math.min(STRING_LESSON.length-1,lessonIndex+1);lessonStep=0;renderLesson();}}
+function lessonPrev(){lessonStop();if(lessonStep>0){lessonStep--;lessonApplyTrace(STRING_LESSON[lessonIndex],lessonStep);}else{lessonIndex=Math.max(0,lessonIndex-1);lessonStep=0;renderLesson();}}
+function lessonGo(i){lessonStop();lessonIndex=i;lessonStep=0;renderLesson();}
 function openCheatSheet(){
   document.getElementById("cheatModal").style.display="block";
   document.getElementById("cheatSearch").value="";

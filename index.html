@@ -159,6 +159,22 @@ main{padding:20px;max-width:1100px;width:100%;margin:auto}.card{background:rgba(
 @media(max-width:1050px){#stringsLessonModal .frame-layout{grid-template-columns:1fr}}
 @media(max-height:820px){#stringsLessonModal .ref-line{font-size:15px;padding:4px}.frame-title{font-size:17px!important}.frame-desc{font-size:11px!important}.big-string{font-size:24px!important}}
 
+
+/* Embedded reference video */
+#stringsLessonModal .lesson-video-wrap{
+  position:fixed;inset:0;background:rgba(0,0,0,.84);z-index:50;
+  display:none;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;
+}
+#stringsLessonModal .lesson-video-card{
+  width:min(1100px,92vw);background:#081225;border:2px solid #2b5ee8;border-radius:14px;
+  padding:12px;box-sizing:border-box;box-shadow:0 20px 70px rgba(0,0,0,.6);
+}
+#stringsLessonModal .lesson-video-head{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:9px;
+}
+#stringsLessonModal .lesson-video-title{font-size:16px;font-weight:900;color:#eef4ff}
+#stringsLessonModal .lesson-video-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden}
+#stringsLessonModal .lesson-video-frame iframe{width:100%;height:100%;border:0;display:block}
 </style>
 </head>
 <body>
@@ -674,8 +690,22 @@ STEP 10 → Explain your solution aloud</div>
 
 
 <div class="modal" id="stringsLessonModal"><div class="modalbox lesson-modal"><div class="lesson-shell">
-<div class="lesson-top"><div><h2>🎥 Python Strings — Complete Visual Lesson</h2><div class="lesson-sub">Frame-by-frame: user input → code execution → memory → visual state → output → explanation + voice.</div></div><button type="button" class="action danger" onclick="closeStringsLesson()">Close</button></div>
-<div class="lesson-layout"><aside class="review-panel lesson-chapters"><div style="font-size:18px;font-weight:900;margin-bottom:6px">Chapters</div><div id="lessonChapterList"></div></aside>
+<div class="lesson-top"><div><h2>🎥 Python Strings — Complete Visual Lesson</h2><div class="lesson-sub">Frame-by-frame: user input → code execution → memory → visual state → output → explanation + voice.</div></div><button type="button" class="action primary" onclick="openStringsVideo()">🎬 Watch Video</button><button type="button" class="action danger" onclick="closeStringsLesson()">Close</button></div>
+<div id="lessonVideoWrap" class="lesson-video-wrap" onclick="if(event.target===this)closeStringsVideo()">
+    <div class="lesson-video-card">
+      <div class="lesson-video-head">
+        <div class="lesson-video-title">🎬 Python Strings — Recommended Video</div>
+        <button type="button" class="action danger" onclick="closeStringsVideo()">Close Video</button>
+      </div>
+      <div class="lesson-video-frame">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/Yveo5hCrGLE?rel=0"
+          title="Python Strings video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div><div class="lesson-layout"><aside class="review-panel lesson-chapters"><div style="font-size:18px;font-weight:900;margin-bottom:6px">Chapters</div><div id="lessonChapterList"></div></aside>
 <section class="lesson-stage"><div class="lesson-screen"><div id="lessonTitle" class="lesson-title"></div><div id="lessonCount" class="lesson-caption"></div><div class="lesson-progress"><div id="lessonBar"></div></div><div id="lessonFrameHeader"></div><div id="lessonFrameMain" class="frame-layout"></div><div id="lessonTranscript" class="lesson-transcript"></div>
 <div class="lesson-controls"><button type="button" class="action" onclick="lessonFirst()"><< First</button><button type="button" class="action" onclick="lessonPrev()">< Prev</button><div style="flex:1;min-width:150px"><input id="lessonSlider" type="range" min="0" max="1" value="0" style="width:100%" oninput="lessonSetFrame(Number(this.value))"><div id="lessonStepLabel" style="font-size:10px;color:#94a7c6;text-align:center">Frame 1 of 1</div></div><button type="button" class="action" onclick="lessonNext()">Next ></button><button type="button" class="action" onclick="lessonLast()">Last >></button><button type="button" class="action primary" id="lessonPlayBtn" onclick="lessonTogglePlay()">▶ Auto Run + Voice</button><button type="button" class="action" onclick="lessonSpeak()">🔊 Speak Frame</button><button type="button" class="action" onclick="lessonStop()">⏹ Stop</button></div>
 </div></section></div></div></div></div><div class="modal" id="modal"><div class="modalbox review-modal">
@@ -785,7 +815,7 @@ var lessonIndex=0,lessonFrame=0,lessonPlaying=false,lessonTimer=null;
 function lessonEsc(s){return String(s==null?"":s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");}
 function lessonRun(item){return LESSON_RUNS[item[0]]||{input:"(example)",code:(item[2]||"# Review this concept").split("\\n"),steps:[{line:0,action:"Start",state:item[3]||"",output:""}]};}
 function openStringsLesson(){document.getElementById("stringsLessonModal").style.display="flex";document.body.style.overflow="hidden";lessonIndex=0;lessonFrame=0;lessonPlaying=false;lessonBuildList();renderLesson();}
-function closeStringsLesson(){lessonStop();document.getElementById("stringsLessonModal").style.display="none";document.body.style.overflow="";}
+function closeStringsLesson(){lessonStop();closeStringsVideo();document.getElementById("stringsLessonModal").style.display="none";document.body.style.overflow="";}
 function lessonBuildList(){document.getElementById("lessonChapterList").innerHTML=STRING_LESSON.map(function(item,i){return '<button type="button" onclick="lessonGo('+i+')">'+(i+1)+". "+lessonEsc(item[0])+'</button>';}).join("");}
 function lessonVoice(item,run,step){if(item[0]==="What is a String?"){return ["The program is waiting for user input. Type Python and press Enter.","You entered Python. input returns that text and stores it in the variable s.","The variable s now contains Python. A string is a sequence of characters, each with a zero based index.","print of s is executing. Python reads the value stored in s and sends it to the output console.","Both statements have executed. The final output is Python.","Dry run summary. User input goes into input, the value is stored in s, print reads s, and the output is Python."][Math.min(lessonFrame,5)];}return step.action+". "+step.state+". Current output: "+(step.output||"nothing yet")+".";}
 function lessonCode(run){var step=run.steps[lessonFrame],execLine=step.line,nextLine=lessonFrame<run.steps.length-1?run.steps[lessonFrame+1].line:0;return run.code.map(function(line,i){var n=i+1,cls=execLine===n?"exec":nextLine===n?"next":"",arr=execLine===n?"➜":nextLine===n?"➤":"";return '<div class="ref-line '+cls+'"><div class="arr">'+arr+'</div><div class="ln">'+n+'</div><div class="src">'+lessonEsc(line)+'</div></div>';}).join("");}
@@ -803,6 +833,8 @@ function lessonPrev(){lessonStop();if(lessonFrame>0){lessonFrame--;renderLesson(
 function lessonNext(){lessonStop();var run=lessonRun(STRING_LESSON[lessonIndex]);if(lessonFrame<run.steps.length-1){lessonFrame++;renderLesson();}else if(lessonIndex<STRING_LESSON.length-1){lessonIndex++;lessonFrame=0;renderLesson();}}
 function lessonLast(){lessonStop();var run=lessonRun(STRING_LESSON[lessonIndex]);lessonFrame=run.steps.length-1;renderLesson();}
 function lessonGo(i){lessonStop();lessonIndex=i;lessonFrame=0;renderLesson();}
+function openStringsVideo(){var el=document.getElementById("lessonVideoWrap");if(el)el.style.display="flex";}
+function closeStringsVideo(){var el=document.getElementById("lessonVideoWrap");if(el)el.style.display="none";}
 function openCheatSheet(){
   document.getElementById("cheatModal").style.display="block";
   document.getElementById("cheatSearch").value="";

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🐍 Python Placement Mastery</title>
+<style>
+:root{--bg:#080d19;--panel:#11192c;--panel2:#0c1426;--text:#edf2ff;--muted:#91a0bd;--accent:#6f7ff5;--green:#24d39a;--border:#29385b}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 15% 0%,#18254a 0,#0a1020 38%,#080d19 75%);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif}
+header{padding:22px clamp(18px,5vw,64px);border-bottom:1px solid var(--border);background:rgba(8,13,25,.88);backdrop-filter:blur(12px)}
+.header-inner{max-width:1200px;margin:auto}h1{margin:0;font-size:28px}.sub{margin-top:7px;color:var(--muted);font-size:13px}
+main{max-width:1200px;margin:auto;padding:30px clamp(18px,5vw,64px) 50px}.eyebrow{font-size:12px;color:#9eafff;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.hero h2{font-size:32px;margin:8px 0}.hero p{max-width:720px;color:#aab8d3;line-height:1.6;margin:0}
+.progress-wrap{margin-top:20px;padding:14px 16px;background:rgba(17,25,44,.8);border:1px solid var(--border);border-radius:14px}.progress-top{display:flex;justify-content:space-between;gap:12px;font-size:12px}.progress-track{height:8px;background:#202c49;border-radius:99px;margin-top:9px;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--accent);border-radius:99px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:24px}.phase{position:relative;display:block;text-decoration:none;color:inherit;padding:22px;background:linear-gradient(145deg,rgba(17,25,44,.98),rgba(11,18,34,.98));border:1px solid var(--border);border-radius:18px;transition:.18s;min-height:260px}.phase:hover{transform:translateY(-3px);border-color:#6172d7;box-shadow:0 16px 45px rgba(0,0,0,.28)}.phase-num{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:14px;background:#202e55;font-weight:900}.phase:nth-child(2) .phase-num{background:#29305d;color:#cbd1ff}.phase h3{font-size:21px;margin:18px 0 6px}.phase p{color:#9eacc6;font-size:13px;line-height:1.55;min-height:43px}.topics{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}.chip{font-size:10px;padding:6px 9px;border:1px solid #2c406b;background:#101d37;border-radius:999px;color:#c6d4ef}.open{position:absolute;right:20px;bottom:20px;color:#aebaff;font-size:12px;font-weight:800}
+.note{margin-top:20px;padding:13px 15px;border:1px solid #29385b;background:#0c1426;border-radius:12px;color:#9eacc6;font-size:11px;line-height:1.55}.note b{color:#dbe4fb}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.hero h2{font-size:26px}}
+</style>
+</head>
+<body>
+<header><div class="header-inner"><h1>🐍 Python Placement Mastery</h1><div class="sub">Structured practice path — build your Python skills phase by phase</div></div></header>
+<main>
+<section class="hero"><div class="eyebrow">Placement Roadmap</div><h2>Choose your practice phase</h2><p>Complete one phase at a time. Your existing Phase 1 practice, saved code, and completion progress remain in the original practice page.</p></section>
+<div class="progress-wrap"><div class="progress-top"><span>Phase 1 progress</span><b id="p1Text">Checking...</b></div><div class="progress-track"><div class="progress-fill" id="p1Fill"></div></div></div>
+<section class="grid">
+<a class="phase" href="/index.html">
+  <span class="phase-num">01</span><h3>Input &amp; Python Fundamentals</h3><p>Continue the existing 54-problem Phase 1 practice exactly as before.</p><div class="topics"><span class="chip">Input / Output</span><span class="chip">Variables</span><span class="chip">Conditions</span><span class="chip">Loops</span><span class="chip">Functions</span><span class="chip">Recursion</span></div><span class="open">OPEN PRACTICE →</span>
+</a>
+<a class="phase" href="/strings-practice.html">
+  <span class="phase-num">02</span><h3>Strings</h3><p>Move to String concepts and directly start the 66 placement-level String practice questions.</p><div class="topics"><span class="chip">String Basics</span><span class="chip">Indexing</span><span class="chip">Slicing</span><span class="chip">Counting</span><span class="chip">Search</span><span class="chip">Character Programs</span><span class="chip">Word Programs</span><span class="chip">Placement Problems</span></div><span class="open">OPEN STRING PRACTICE →</span>
+</a>
+</section>
+<div class="note"><b>Important:</b> Phase 1 is not being replaced. This page is the new main roadmap UI; clicking Phase 1 opens your existing 54-problem practice, while clicking Phase 2 opens the String practice page.</div>
+</main>
+<script>
+(function(){try{const c=JSON.parse(localStorage.getItem('py_phase1_completed')||'{}');const done=Object.keys(c).filter(k=>c[k]).length;const total=54;document.getElementById('p1Text').textContent=done+' / '+total+' completed';document.getElementById('p1Fill').style.width=Math.min(100,done/total*100)+'%'}catch(e){document.getElementById('p1Text').textContent='Open Phase 1 to view progress'}})();
+</script>
+</body>
+</html>

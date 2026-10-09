@@ -4,6 +4,6 @@
     "api/review.js":{"maxDuration":300}
   },
   "rewrites":[
-    {"source":"/","destination":"/home.html"}
+    {"source":"/","destination":"/index.html"}
   ]
 }
